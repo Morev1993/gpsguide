@@ -1,0 +1,31 @@
+$bootstrap-sass-asset-helper: true;
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0;
+}
+
+/*ul {
+	list-style: none;
+	padding-left: 0;
+	width: 100%;
+	float: left;
+	li {
+		float: left;
+		margin-right: 30px;
+	}
+}*/
+
+.breadcrumb {
+	background: transparent;
+	padding: 0;
+}
+
+.typepage {
+	padding-top: 5rem;
+}
