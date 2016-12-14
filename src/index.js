@@ -8,10 +8,12 @@ import { Router, Route, IndexRoute, hashHistory, IndexRedirect } from 'react-rou
 
 import App from './containers/App'
 import Auth from './components/Auth/Auth'
-import Projects from './components/Projects/Projects'
-import Main from './components/Main/Main'
-import SceneList from './components/SceneList/SceneList'
-import Scene from './components/Scene/Scene'
+import Tours from './components/Tours/Tours'
+import Admin from './components/Admin/Admin'
+import Dashboard from './components/Dashboard/Dashboard'
+import Devices from './components/Devices/Devices'
+import Languages from './components/Languages/Languages'
+//import Scene from './components/Scene/Scene'
 import NotFound from './components/NotFound/NotFound'
 import store from './store'
 
@@ -19,14 +21,15 @@ render(
     <Provider store={store}>
         <Router history={hashHistory}>
             <Route path='/' component={App}>
-                <IndexRoute component={Main} />
-                <IndexRedirect to='/main/projects'/>
+                <IndexRoute component={Dashboard} />
+                <IndexRedirect to='/admin/dashboard'/>
                 <Route path='auth' component={Auth} />
-                <Route path='main' component={Main}>
-                    <IndexRoute component={Projects} />
-                    <Route path='projects' component={Projects}/>
-                    <Route path='projects/:projectId/scenes' component={SceneList} />
-                    <Route path='projects/:projectId/scenes/:sceneId' component={Scene} />
+                <Route path='admin' component={Admin}>
+                    <IndexRoute component={Dashboard} />
+                    <Route path='dashboard' component={Dashboard}/>
+                    <Route path='tours' component={Tours} />
+                    <Route path='devices' component={Devices} />
+                    <Route path='languages' component={Languages} />
                 </Route>
                 <Route path='*' component={NotFound} />
             </Route>

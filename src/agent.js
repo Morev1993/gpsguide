@@ -14,7 +14,7 @@ const requests = {
 
 const Projects = {
 	all: () =>
-		requests.get(`/api/projects.json`)
+		requests.get(`/server/projects.json`)
 }
 
 export default {

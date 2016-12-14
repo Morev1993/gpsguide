@@ -6,10 +6,19 @@ export default class Main extends Component {
         return <div>
             <ol className='breadcrumb'>
                 <li className='breadcrumb-item'>
-                    <Link to='/auth'>Login</Link>
+                    <Link to='/admin/dashboard'>Dashboard</Link>
                 </li>
                 <li className='breadcrumb-item'>
-                    <Link to='/main/projects'>Projects</Link>
+                    <Link to='/admin/tours'>Tours</Link>
+                </li>
+                <li className='breadcrumb-item'>
+                    <Link to='/admin/devices'>Devices</Link>
+                </li>
+                <li className='breadcrumb-item'>
+                    <Link to='/admin/languages'>Languages</Link>
+                </li>
+                <li className='breadcrumb-item'>
+                    <Link to='/auth'>Auth</Link>
                 </li>
             </ol>
         </div>

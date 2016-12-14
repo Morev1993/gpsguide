@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
-import UserMenu from '../UserMenu/UserMenu'
+//import UserMenu from '../UserMenu/UserMenu'
 import { connect } from 'react-redux'
 import agent from '../../agent'
 
@@ -24,13 +24,10 @@ class Main extends Component {
             <div className='typepage'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-sm-9'>
+                        <div className='col-sm-12'>
                             <h1>{this.props.appName}</h1>
                             <Breadcrumbs></Breadcrumbs>
                             {this.props.children}
-                        </div>
-                        <div className='col-sm-3'>
-                            <UserMenu/>
                         </div>
                     </div>
                 </div>

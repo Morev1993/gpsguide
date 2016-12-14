@@ -6,10 +6,10 @@ const mapStateToProps = state => ({
     appName: state.appName
 })
 
-class SceneList extends Component {
+class Devices extends Component {
     render() {
         return <div>
-            <h2>Projects name {this.props.params.projectId} - scenes</h2>
+            <h2>Devices</h2>
             <div className='row'>
                 <div className='col-sm-3 item'>
                     <p>
@@ -38,4 +38,4 @@ class SceneList extends Component {
     }
 }
 
-export default connect(mapStateToProps, () => ({}))(SceneList)
+export default connect(mapStateToProps, () => ({}))(Devices)
