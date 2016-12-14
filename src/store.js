@@ -1,19 +1,21 @@
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import { promiseMiddleware } from './middleware';
 
 const defaultState = {
-	appName: 'prototype',
-	projects: null
+	appName: 'GPSGuide',
+	projects: []
 }
 
 const reducer = function(state = defaultState, action) {
 	switch (action.type) {
-		case 'HOME_PAGE_LOADED':
-			console.log(state);
-			return { ...state, projects: action.payload.projects }
+		case 'MAIN_PAGE_LOADED':
+			return { ...state, projects: action.payload }
 	}
 	return state
 }
 
-const store = createStore(reducer)
+const middleware = applyMiddleware(promiseMiddleware)
+
+const store = createStore(reducer, middleware)
 
 export default store

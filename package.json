@@ -41,11 +41,16 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "babel-runtime": "^6.3.19",
-    "bootstrap-sass": "^3.3.7",
+    "bootstrap": "^4.0.0-alpha.5",
     "react": "^0.14.6",
+    "react-addons-css-transition-group": "^15.4.1",
+    "react-addons-transition-group": "^15.4.1",
     "react-dom": "^0.14.6",
     "react-redux": "^4.4.6",
     "react-router": "^2.8.1",
-    "redux": "^3.6.0"
+    "reactstrap": "^3.9.1",
+    "redux": "^3.6.0",
+    "superagent": "^3.0.0",
+    "superagent-promise": "^1.1.0"
   }
 }

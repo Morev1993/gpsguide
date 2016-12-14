@@ -1,5 +1,7 @@
-$bootstrap-sass-asset-helper: true;
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+//$bootstrap-sass-asset-helper: true;
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import '~bootstrap/scss/bootstrap.scss';
 
 body {
 	padding: 0;

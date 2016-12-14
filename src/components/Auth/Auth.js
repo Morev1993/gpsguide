@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
+import {Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './Auth.scss'
 
 export default class Auth extends Component {
-	render() {
-		return <div className='auth'>
-			<div className='row'>
-				<div className='col-sm-offset-1 col-sm-6'>
-					<h1>Login page</h1>
-					<form>
-						<div className='form-group'>
-							<input className='form-control'/>
-						</div>
-						<div className='form-group'>
-							<input className='form-control'/>
-						</div>
-						<div className='form-group'>
-							<button className='btn btn-success' type='submit'>Login</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	}
+    render() {
+        return (
+            <div className='auth'>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='offset-md-2 col-sm-6'>
+                            <h1>Sign in to baseLine</h1>
+                            <Form>
+                                <FormGroup>
+                                    <Label for='userEmail' hidden>Email</Label>
+                                    <Input type='email' name='email' id='userEmail' placeholder='Email' />
+                                </FormGroup>
+                                {' '}
+                                <FormGroup>
+                                    <Label for='userPassword' hidden>Password</Label>
+                                    <Input type='password' name='password' id='userPassword' placeholder='Password' />
+                                </FormGroup>
+                                {' '}
+                                <Button>Submit</Button>
+                            </Form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
