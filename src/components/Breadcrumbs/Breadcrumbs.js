@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
-export default class Main extends Component {
+const mapStateToProps = state => ({
+    appName: state.appName
+})
+
+class Main extends Component {
     render() {
         return <div>
+            {this.props.currentLocation}
             <ol className='breadcrumb'>
                 <li className='breadcrumb-item'>
-                    <Link to='/admin/dashboard'>Dashboard</Link>
+                    <Link to='/'>Dashboard</Link>
                 </li>
                 <li className='breadcrumb-item'>
-                    <Link to='/admin/tours'>Tours</Link>
+                    <Link to='/tours'>Tours</Link>
                 </li>
                 <li className='breadcrumb-item'>
-                    <Link to='/admin/devices'>Devices</Link>
+                    <Link to='/devices'>Devices</Link>
                 </li>
                 <li className='breadcrumb-item'>
-                    <Link to='/admin/languages'>Languages</Link>
+                    <Link to='/languages'>Languages</Link>
                 </li>
                 <li className='breadcrumb-item'>
                     <Link to='/auth'>Auth</Link>
@@ -24,3 +30,5 @@ export default class Main extends Component {
         </div>
     }
 }
+
+export default connect(mapStateToProps, () => ({}))(Main)

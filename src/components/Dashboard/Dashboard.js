@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
 class Dashboard extends Component {
 	render() {
 		return <div>
-			<h2>Dashboard</h2>
+				<h1>{this.props.appName}</h1>
+				<h2>Dashboard</h2>
 		</div>
 	}
 }
