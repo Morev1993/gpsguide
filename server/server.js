@@ -1,61 +1,37 @@
-var express     = require('express');
-var app         = express();
-var bodyParser  = require('body-parser');
-var morgan      = require('morgan');
-var mongoose    = require('mongoose');
-var passport	= require('passport');
-var config      = require('./config/database'); // get db config file
-var User        = require('./models/user'); // get the mongoose model
-var port        = process.env.PORT || 8080;
-var jwt         = require('jwt-simple');
+// Importing Node modules and initializing Express
+var express = require('express'),  
+    app = express(),
+    bodyParser = require('body-parser'),
+    logger = require('morgan'),
+    config = require('./config/main');
+    mongoose = require('mongoose'),
+    config = require('./config/main'),
+    router = require('./router');
 
-// get our request parameters
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// log to console
-app.use(morgan('dev'));
-
-// Use the passport package in our application
-app.use(passport.initialize());
-
-// demo Route (GET http://localhost:8080)
-app.get('/', function(req, res) {
-  res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
-
-// Start the server
-app.listen(port);
-console.log('There will be dragons: http://localhost:' + port);
-
-
-// connect to database
+// Database Setup
 mongoose.connect(config.database);
 
-// pass passport for configuration
-require('./config/passport')(passport);
+// Start the server
+const server = app.listen(config.port);  
+console.log('Your server is running on port ' + config.port + '.'); 
 
-// bundle our routes
-var apiRoutes = express.Router();
+// Setting up basic middleware for all Express requests
+app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+app.use(bodyParser.json()); // Send JSON responses
+app.use(logger('dev')); // Log requests to API using morgan
 
-// create a new user account (POST http://localhost:8080/api/signup)
-apiRoutes.post('/signup', function(req, res) {
-	if (!req.body.name || !req.body.password) {
-		res.json({success: false, msg: 'Please pass name and password.'});
-	} else {
-	var newUser = new User({
-		name: req.body.name,
-      	password: req.body.password
-    });
-    // save the user
-    newUser.save(function(err) {
-      	if (err) {
-        	return res.json({success: false, msg: 'Username already exists.'});
-      	}
-      		res.json({success: true, msg: 'Successful created new user.'});
-    	});
-  	}
+// Enable CORS from client-side
+app.use(function(req, res, next) {  
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
+    res.header("Access-Control-Allow-Credentials", "true");
+
+    next();
 });
 
-// connect the api routes under /api/*
-app.use('/api', apiRoutes);
+// Import routes to be served
+router(app);
+
+// necessary for testing
+module.exports = server;

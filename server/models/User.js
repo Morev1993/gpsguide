@@ -1,47 +1,56 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
+var mongoose = require('mongoose'),  
+    Schema = mongoose.Schema,
+    bcrypt = require('bcrypt-nodejs');
 
-// set up a mongoose model
-var UserSchema = new Schema({
-	name: {
-        type: String,
-        unique: true,
-        required: true
-	},
-	password: {
-        type: String,
-        required: true
-    }
+//================================
+// User Schema
+//================================
+var UserSchema = new Schema({  
+  email: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  role: {
+    type: String,
+    enum: ['Member', 'Client', 'Owner', 'Admin'],
+    default: 'Member'
+  }
+},
+{
+  timestamps: true
 });
 
-UserSchema.pre('save', function (next) {
-    var user = this;
-    if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, function (err, salt) {
-            if (err) {
-                return next(err);
-            }
-            bcrypt.hash(user.password, salt, function (err, hash) {
-                if (err) {
-                    return next(err);
-                }
-                user.password = hash;
-                next();
-            });
-        });
-    } else {
-        return next();
-    }
-});
+// Pre-save of user to database, hash password if password is modified or new
+UserSchema.pre('save', function(next) {  
+  var user = this,
+        SALT_FACTOR = 5;
 
-UserSchema.methods.comparePassword = function (passw, cb) {
-    bcrypt.compare(passw, this.password, function (err, isMatch) {
-        if (err) {
-            return cb(err);
-        }
-        cb(null, isMatch);
+  if (!user.isModified('password')) return next();
+
+  bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) return next(err);
+      user.password = hash;
+      next();
     });
-};
+  });
+});
 
-module.exports = mongoose.model('User', UserSchema);
+// Method to compare password for login
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {  
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if (err) { return cb(err); }
+
+    cb(null, isMatch);
+  });
+}
+
+module.exports = mongoose.model('User', UserSchema);  
