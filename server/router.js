@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
-var AuthenticationController = require('./controllers/authentication');
+var AuthCtrl = require('./controllers/userAuth');
+var DeviceAuthCtrl = require('./controllers/deviceAuth');
 
 var passportService = require('./config/passport');
 
@@ -17,12 +18,16 @@ module.exports = function (app) {
   // Auth Routes
   //= ========================
   // Registration route
-  authRoutes.post('/signup', AuthenticationController.register);
+  authRoutes.post('/user/signup', AuthCtrl.register);
 
   // Login route
-  authRoutes.post('/signin', AuthenticationController.login);
+  authRoutes.post('/user/signin', AuthCtrl.login);
 
-	apiRoutes.use('/', authRoutes);
+  //for device
+  authRoutes.post('/signin', DeviceAuthCtrl.login);
+  authRoutes.post('/add', DeviceAuthCtrl.add);
+
+  apiRoutes.use('/', authRoutes);
 
 
 
@@ -36,5 +41,5 @@ module.exports = function (app) {
   });
 
   // Set url for API group routes
-  app.use('/', apiRoutes);
+  app.use('/api', apiRoutes);
 };

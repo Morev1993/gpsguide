@@ -1,4 +1,4 @@
-var mongoose = require('mongoose'),  
+var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt-nodejs');
 
@@ -35,7 +35,7 @@ var UserSchema = new Schema({
 });
 
 // Pre-save of user to database, hash password if password is modified or new
-UserSchema.pre('save', function(next) {  
+UserSchema.pre('save', function(next) {
   var user = this,
         SALT_FACTOR = 5;
 
@@ -53,7 +53,7 @@ UserSchema.pre('save', function(next) {
 });
 
 // Method to compare password for login
-UserSchema.methods.comparePassword = function(candidatePassword, cb) {  
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if (err) { return cb(err); }
 
@@ -61,4 +61,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 }
 
-module.exports = mongoose.model('User', UserSchema);  
+module.exports = mongoose.model('User', UserSchema);
