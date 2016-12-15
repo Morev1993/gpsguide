@@ -2,7 +2,7 @@ var jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
   	User = require('../models/user'),
   	config = require('../config/main'),
-	setUserInfo = require('../helpers').setUserInfo;
+    setUserInfo = require('../helpers').setUserInfo;
 
 // Generate JWT
 // TO-DO Add issuer and audience
@@ -19,6 +19,7 @@ exports.login = function (req, res, next) {
   var userInfo = setUserInfo(req.user);
 
   res.status(200).json({
+    success: true,
     token: `JWT ${generateToken(userInfo)}`,
     user: userInfo
   });
@@ -30,8 +31,13 @@ exports.login = function (req, res, next) {
 //= =======================================
 exports.register = function (req, res, next) {
   // Check for registration errors
+  var name = req.body.name;
   var email = req.body.email;
   var password = req.body.password;
+
+  if (!name) {
+    return res.status(422).send({ error: 'You must enter an name.' });
+  }
 
   // Return error if no email provided
   if (!email) {
@@ -53,6 +59,7 @@ exports.register = function (req, res, next) {
 
       // If email is unique and password was provided, create account
     var user = new User({
+      name,
       email,
       password
     });
@@ -68,6 +75,7 @@ exports.register = function (req, res, next) {
       var userInfo = setUserInfo(user);
 
       res.status(201).json({
+        success: true,
         token: `JWT ${generateToken(userInfo)}`,
         user: userInfo
       });

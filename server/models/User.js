@@ -5,7 +5,11 @@ var mongoose = require('mongoose'),
 //================================
 // User Schema
 //================================
-var UserSchema = new Schema({  
+var UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     lowercase: true,
@@ -16,11 +20,15 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-  role: {
+  status: {
+    type: String,
+    default: 'enabled'
+  }
+  /*role: {
     type: String,
     enum: ['Member', 'Client', 'Owner', 'Admin'],
     default: 'Member'
-  }
+  }*/
 },
 {
   timestamps: true
