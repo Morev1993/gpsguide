@@ -2,7 +2,8 @@ var jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
   	User = require('../models/user'),
   	config = require('../config/main'),
-    setUserInfo = require('../helpers').setUserInfo;
+    setUserInfo = require('../helpers').setUserInfo,
+    passport = require('passport');
 
 // Generate JWT
 // TO-DO Add issuer and audience
@@ -16,13 +17,23 @@ function generateToken(user) {
 // Login Route
 //= =======================================
 exports.login = function (req, res, next) {
-  var userInfo = setUserInfo(req.user);
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { 
+      return next(err) 
+    }
 
-  res.status(200).json({
-    success: true,
-    token: `JWT ${generateToken(userInfo)}`,
-    user: userInfo
-  });
+    if (!user) { 
+      return res.json( { success: false, error: info.error }) 
+    }
+
+    var userInfo = setUserInfo(user);
+
+    res.status(200).json({
+      success: true,
+      token: `JWT ${generateToken(userInfo)}`,
+      user: userInfo
+    });
+  })(req, res, next); 
 };
 
 

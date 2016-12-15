@@ -20,7 +20,7 @@ module.exports = function (app) {
   authRoutes.post('/signup', AuthenticationController.register);
 
   // Login route
-  authRoutes.post('/signin', requireLogin, AuthenticationController.login);
+  authRoutes.post('/signin', AuthenticationController.login);
 
 	apiRoutes.use('/', authRoutes);
 
@@ -32,7 +32,7 @@ module.exports = function (app) {
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
-	res.send({ content: 'The protected test route is functional!' });
+	 res.send({ content: 'The protected test route is functional!' });
   });
 
   // Set url for API group routes
