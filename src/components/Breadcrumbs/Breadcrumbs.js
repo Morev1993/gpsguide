@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 class Main extends Component {
     render() {
-        return <div>
+        return <div className='container'>
             {this.props.currentLocation}
             <ol className='breadcrumb'>
                 <li className='breadcrumb-item'>

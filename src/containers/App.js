@@ -12,7 +12,9 @@ class App extends Component {
             <div>
                 {this.props.location.pathname !== '/auth' ?
                     <Breadcrumbs></Breadcrumbs> : ''}
-                {this.props.children}
+                <div className='container'>
+                    {this.props.children}
+                </div>
             </div>
         )
     }
