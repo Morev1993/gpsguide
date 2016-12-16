@@ -7,8 +7,8 @@ var jwt = require('jsonwebtoken'),
 
 // Generate JWT
 // TO-DO Add issuer and audience
-function generateToken(user) {
-	return jwt.sign(user, config.secret, {
+function generateToken(data) {
+	return jwt.sign(data, config.secret, {
 		expiresIn: 10080 // in seconds
 	});
 }
@@ -17,7 +17,7 @@ function generateToken(user) {
 // Login Route
 //= =======================================
 exports.login = function (req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('user', function(err, user, info) {
     if (err) {
       return next(err)
     }
@@ -31,7 +31,7 @@ exports.login = function (req, res, next) {
     res.status(200).json({
       success: true,
       token: `JWT ${generateToken(userInfo)}`,
-      user: userInfo
+      data: userInfo
     });
   })(req, res, next);
 };
@@ -88,7 +88,7 @@ exports.register = function (req, res, next) {
       res.status(201).json({
         success: true,
         token: `JWT ${generateToken(userInfo)}`,
-        user: userInfo
+        data: userInfo
       });
     });
   });

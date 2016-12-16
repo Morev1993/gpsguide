@@ -1,7 +1,8 @@
 var express = require('express');
 var passport = require('passport');
 var AuthCtrl = require('./controllers/userAuth');
-var DeviceAuthCtrl = require('./controllers/deviceAuth');
+var DeviceAuthCtrl = require('./controllers/device/deviceAuth');
+var DeviceCrudCtrl = require('./controllers/device/deviceCrud');
 
 var passportService = require('./config/passport');
 
@@ -12,10 +13,11 @@ var requireLogin = passport.authenticate('local', { session: false });
 module.exports = function (app) {
   // Initializing route groups
   var apiRoutes = express.Router(),
-	authRoutes = express.Router();
+	authRoutes = express.Router(),
+  devicesRoutes = express.Router();
 
   //= ========================
-  // Auth Routes
+  // User - Auth Routes
   //= ========================
   // Registration route
   authRoutes.post('/user/signup', AuthCtrl.register);
@@ -23,11 +25,15 @@ module.exports = function (app) {
   // Login route
   authRoutes.post('/user/signin', AuthCtrl.login);
 
-  //for device
-  authRoutes.post('/signin', DeviceAuthCtrl.login);
-  authRoutes.post('/add', DeviceAuthCtrl.add);
+  //Device routes
+  devicesRoutes.post('/signin', DeviceAuthCtrl.login);
+  devicesRoutes.post('/devices', requireAuth, DeviceCrudCtrl.create);
+  devicesRoutes.get('/devices', requireAuth, DeviceCrudCtrl.getAll);
+  devicesRoutes.get('/devices/:id', requireAuth, DeviceCrudCtrl.get);
+  devicesRoutes.put('/devices/:id', requireAuth, DeviceCrudCtrl.update);
+  devicesRoutes.delete('/devices/:id', requireAuth, DeviceCrudCtrl.delete);
 
-  apiRoutes.use('/', authRoutes);
+  apiRoutes.use('/', devicesRoutes);
 
 
 

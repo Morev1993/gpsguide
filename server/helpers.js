@@ -9,3 +9,18 @@ exports.setUserInfo = function setUserInfo(request) {
 
   return getUserInfo;
 };
+
+exports.setDeviceInfo = function setDeviceInfo(request) {
+  var getDeviceInfo = {
+	_id: request._id,
+	accountId: request.accountId,
+    name: request.name,
+    authCode: request.authCode,
+    device: request.device,
+    version: request.version,
+    orderBy: request.orderBy,
+    status: request.status
+  };
+
+  return getDeviceInfo;
+};

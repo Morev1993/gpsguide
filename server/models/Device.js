@@ -15,12 +15,13 @@ var DeviceSchema = new Schema({
         required: true
     },
     authCode: {
-        type: String,
+        type: Number,
         unique: true,
         required: true
     },
     token: {
-        type: String
+        type: String,
+        default: ''
     },
     device: {
         type: String,
