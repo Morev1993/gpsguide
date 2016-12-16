@@ -1,9 +1,7 @@
 var jwt = require('jsonwebtoken'),
-    crypto = require('crypto'),
   	Device = require('../../models/device'),
   	config = require('../../config/main'),
-    setDeviceInfo = require('../../helpers').setDeviceInfo,
-    passport = require('passport');
+    setDeviceInfo = require('../../helpers').setDeviceInfo;
 
 // Generate JWT
 // TO-DO Add issuer and audience

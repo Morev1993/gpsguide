@@ -3,6 +3,7 @@ var passport = require('passport');
 var AuthCtrl = require('./controllers/userAuth');
 var DeviceAuthCtrl = require('./controllers/device/deviceAuth');
 var DeviceCrudCtrl = require('./controllers/device/deviceCrud');
+var LanguageCrudCtrl = require('./controllers/language/languageCrud');
 
 var passportService = require('./config/passport');
 
@@ -14,7 +15,8 @@ module.exports = function (app) {
   // Initializing route groups
   var apiRoutes = express.Router(),
 	authRoutes = express.Router(),
-  devicesRoutes = express.Router();
+    devicesRoutes = express.Router(),
+    languagesRoutes = express.Router();
 
   //= ========================
   // User - Auth Routes
@@ -25,6 +27,8 @@ module.exports = function (app) {
   // Login route
   authRoutes.post('/user/signin', AuthCtrl.login);
 
+  apiRoutes.use('/', authRoutes);
+
   //Device routes
   devicesRoutes.post('/signin', DeviceAuthCtrl.login);
   devicesRoutes.post('/devices', requireAuth, DeviceCrudCtrl.create);
@@ -34,6 +38,14 @@ module.exports = function (app) {
   devicesRoutes.delete('/devices/:id', requireAuth, DeviceCrudCtrl.delete);
 
   apiRoutes.use('/', devicesRoutes);
+
+
+  languagesRoutes.get('/languages', LanguageCrudCtrl.getAll);
+
+  apiRoutes.use('/', languagesRoutes);
+
+
+
 
 
 

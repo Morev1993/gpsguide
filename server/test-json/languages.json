@@ -1,0 +1,314 @@
+[
+	{
+		"name": "Afrikaans",
+		"locale": "Afrikaans",
+		"orderBy": 0,
+		"status": "disabled"
+	},
+	{
+		"name": "Arabic",
+		"locale": "العربية",
+		"orderBy": 1,
+		"status": "disabled"
+	},
+	{
+		"name": "Bulgarian",
+		"locale": "Български",
+		"orderBy": 2,
+		"status": "disabled"
+	},
+	{
+		"name": "Catalan",
+		"locale": "Català",
+		"orderBy": 3,
+		"status": "disabled"
+	},
+	{
+		"name": "Czech",
+		"locale": "Čeština",
+		"orderBy": 4,
+		"status": "disabled"
+	},
+	{
+		"name": "Welsh",
+		"locale": "Cymraeg",
+		"orderBy": 5,
+		"status": "disabled"
+	},
+	{
+		"name": "Danish",
+		"locale": "Dansk",
+		"orderBy": 6,
+		"status": "disabled"
+	},
+	{
+		"name": "German (Austria)",
+		"locale": "Deutsch (Österreich)",
+		"orderBy": 7,
+		"status": "disabled"
+	},
+	{
+		"name": "German (Switzerland)",
+		"locale": "Deutsch (Schweiz)",
+		"orderBy": 8,
+		"status": "disabled"
+	},
+	{
+		"name": "German (Germany)",
+		"locale": "Deutsch (Deutschland)",
+		"orderBy": 9,
+		"status": "disabled"
+	},
+	{
+		"name": "Greek",
+		"locale": "Ελληνικά",
+		"orderBy": 10,
+		"status": "disabled"
+	},
+	{
+		"name": "English (UK)",
+		"locale": "English (UK)",
+		"orderBy": 11,
+		"status": "disabled"
+	},
+	{
+		"name": "English (US)",
+		"locale": "English (US)",
+		"orderBy": 12,
+		"status": "disabled"
+	},
+	{
+		"name": "Spanish (Chile)",
+		"locale": "Español (Chile)",
+		"orderBy": 13,
+		"status": "disabled"
+	},
+	{
+		"name": "Spanish (Spain)",
+		"locale": "Español (España)",
+		"orderBy": 14,
+		"status": "disabled"
+	},
+	{
+		"name": "Spanish (Mexico)",
+		"locale": "Español (México)",
+		"orderBy": 15,
+		"status": "disabled"
+	},
+	{
+		"name": "Estonian",
+		"locale": "Eesti",
+		"orderBy": 16,
+		"status": "disabled"
+	},
+	{
+		"name": "Basque",
+		"locale": "Euskara",
+		"orderBy": 17,
+		"status": "disabled"
+	},
+	{
+		"name": "Persian",
+		"locale": "فارسی",
+		"orderBy": 18,
+		"status": "disabled"
+	},
+	{
+		"name": "Finnish",
+		"locale": "Suomi",
+		"orderBy": 19,
+		"status": "disabled"
+	},
+	{
+		"name": "French (Canada)",
+		"locale": "Français (Canada)",
+		"orderBy": 20,
+		"status": "disabled"
+	},
+	{
+		"name": "French (France)",
+		"locale": "Français (France)",
+		"orderBy": 21,
+		"status": "disabled"
+	},
+	{
+		"name": "Hebrew",
+		"locale": "עברית",
+		"orderBy": 22,
+		"status": "disabled"
+	},
+	{
+		"name": "Croatian",
+		"locale": "Hrvatski",
+		"orderBy": 23,
+		"status": "disabled"
+	},
+	{
+		"name": "Hungarian",
+		"locale": "Magyar",
+		"orderBy": 24,
+		"status": "disabled"
+	},
+	{
+		"name": "Indonesian",
+		"locale": "Bahasa Indonesia",
+		"orderBy": 25,
+		"status": "disabled"
+	},
+	{
+		"name": "Icelandic",
+		"locale": "Íslenska",
+		"orderBy": 26,
+		"status": "disabled"
+	},
+	{
+		"name": "Italian",
+		"locale": "Italiano",
+		"orderBy": 27,
+		"status": "disabled"
+	},
+	{
+		"name": "Japanese",
+		"locale": "日本語",
+		"orderBy": 28,
+		"status": "disabled"
+	},
+	{
+		"name": "Khmer",
+		"locale": "ភាសាខ្មែរ",
+		"orderBy": 29,
+		"status": "disabled"
+	},
+	{
+		"name": "Korean",
+		"locale": "한국어",
+		"orderBy": 30,
+		"status": "disabled"
+	},
+	{
+		"name": "Lithuanian",
+		"locale": "Lietuvių",
+		"orderBy": 31,
+		"status": "disabled"
+	},
+	{
+		"name": "Latvian",
+		"locale": "Latviešu",
+		"orderBy": 32,
+		"status": "disabled"
+	},
+	{
+		"name": "Mongolian",
+		"locale": "Монгол",
+		"orderBy": 33,
+		"status": "disabled"
+	},
+	{
+		"name": "Norwegian (Bokmål)",
+		"locale": "Norsk bokmål",
+		"orderBy": 34,
+		"status": "disabled"
+	},
+	{
+		"name": "Dutch",
+		"locale": "Nederlands",
+		"orderBy": 35,
+		"status": "disabled"
+	},
+	{
+		"name": "Norwegian (Nynorsk)",
+		"locale": "Norsk nynorsk",
+		"orderBy": 36,
+		"status": "disabled"
+	},
+	{
+		"name": "Polish",
+		"locale": "Polski",
+		"orderBy": 37,
+		"status": "disabled"
+	},
+	{
+		"name": "Portuguese (Brazil)",
+		"locale": "Português (Brasil)",
+		"orderBy": 38,
+		"status": "disabled"
+	},
+	{
+		"name": "Portuguese (Portugal)",
+		"locale": "Português (Portugal)",
+		"orderBy": 39,
+		"status": "disabled"
+	},
+	{
+		"name": "Romanian",
+		"locale": "Română",
+		"orderBy": 40,
+		"status": "disabled"
+	},
+	{
+		"name": "Russian",
+		"locale": "Русский",
+		"orderBy": 41,
+		"status": "disabled"
+	},
+	{
+		"name": "Slovak",
+		"locale": "Slovenčina",
+		"orderBy": 42,
+		"status": "disabled"
+	},
+	{
+		"name": "Slovenian",
+		"locale": "Slovenščina",
+		"orderBy": 43,
+		"status": "disabled"
+	},
+	{
+		"name": "Serbian",
+		"locale": "Српски / Srpski",
+		"orderBy": 44,
+		"status": "disabled"
+	},
+	{
+		"name": "Swedish",
+		"locale": "Svenska",
+		"orderBy": 45,
+		"status": "disabled"
+	},
+	{
+		"name": "Thai",
+		"locale": "ไทย",
+		"orderBy": 46,
+		"status": "disabled"
+	},
+	{
+		"name": "Turkish",
+		"locale": "Türkçe",
+		"orderBy": 47,
+		"status": "disabled"
+	},
+	{
+		"name": "Ukrainian",
+		"locale": "Українська",
+		"orderBy": 48,
+		"status": "disabled"
+	},
+	{
+		"name": "Vietnamese",
+		"locale": "Tiếng Việt",
+		"orderBy": 49,
+		"status": "disabled"
+	},
+	{
+		"name": "Chinese (PRC)",
+		"locale": "中文 (中国大陆)",
+		"orderBy": 50,
+		"status": "disabled"
+	},
+	{
+		"name": "Chinese (Taiwan)",
+		"locale": "中文 (台灣)",
+		"orderBy": 51,
+		"status": "disabled"
+	}
+]

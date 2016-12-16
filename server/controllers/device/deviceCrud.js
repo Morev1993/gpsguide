@@ -1,5 +1,4 @@
 var jwt = require('jsonwebtoken'),
-    crypto = require('crypto'),
   	Device = require('../../models/device'),
   	config = require('../../config/main'),
     setDeviceInfo = require('../../helpers').setDeviceInfo;
@@ -74,8 +73,8 @@ exports.getAll = function(req, res) {
 			return res.send(err);
 		}
 
-	  	res.json({ 
-			success: true, 
+	  	res.json({
+			success: true,
 			data: devices
 		});
 	});
@@ -87,8 +86,8 @@ exports.get = function(req, res) {
       return res.send(err);
     }
 
-    res.json({ 
-	  	success: true, 
+    res.json({
+	  	success: true,
   		data: device
   	});
   });
@@ -111,8 +110,8 @@ exports.update = function(req, res) {
         return res.send(err);
       }
 
-      res.json({ 
-      	success: true, 
+      res.json({
+      	success: true,
       	data: device
       });
     });
@@ -127,8 +126,8 @@ exports.delete = function(req, res) {
       return res.send(err);
     }
 
-    res.json({ 
-    	success: true, 
+    res.json({
+    	success: true,
     	data: device
     });
   });
