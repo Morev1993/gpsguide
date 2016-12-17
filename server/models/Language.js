@@ -7,22 +7,21 @@ var mongoose = require('mongoose'),
 var LanguageSchema = new Schema({
     name: {
         type: String,
-		required: true
+        required: true
     },
-	locale: {
-		type: String,
-		required: true
-	},
+    locale: {
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         default: 'disabled'
     },
-	orderBy: {
-		type: Number,
-		default: 0
-	}
-},
-{
+    orderBy: {
+        type: Number,
+        default: 0
+    }
+}, {
     timestamps: true
 });
 
