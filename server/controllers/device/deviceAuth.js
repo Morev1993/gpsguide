@@ -63,11 +63,6 @@ exports.login = function(req, res, next) {
                 return next(err);
             }
 
-            // Subscribe member to Mailchimp list
-            // mailchimp.subscribeToNewsletter(user.email);
-
-            // Respond with JWT if user was created
-
             var deviceInfo = setDeviceInfo(device);
 
             res.status(201).json({

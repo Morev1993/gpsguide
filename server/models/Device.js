@@ -56,7 +56,6 @@ DeviceSchema.pre('save', function(next) {
         bcrypt.hash(device.authCode, salt, null, function(err, hash) {
             if (err) return next(err);
             device.authCode = hash;
-            console.log(device.authCode);
             next();
         });
     });

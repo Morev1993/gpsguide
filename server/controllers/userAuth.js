@@ -19,7 +19,7 @@ function generateToken(data) {
 exports.login = function(req, res, next) {
     passport.authenticate('user', function(err, user, info) {
         if (err) {
-            return next(err)
+            return next(err);
         }
 
         if (!user) {

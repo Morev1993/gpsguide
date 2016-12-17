@@ -109,6 +109,7 @@ exports.get = function(req, res) {
     });
 };
 
+
 exports.update = function(req, res) {
     Device.findOne({
         _id: req.params.id
@@ -121,7 +122,7 @@ exports.update = function(req, res) {
             device[prop] = req.body[prop];
         }
 
-    
+        // save the movie
         device.save(function(err) {
             if (err) {
                 return res.send(err);

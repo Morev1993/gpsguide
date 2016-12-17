@@ -45,7 +45,7 @@ var deviceOptions = {
 };
 
 // Setting up local login strategy
-var deviceLogin = new LocalStrategy(deviceOptions, function(model, authCode, done) {
+var deviceLogin = new LocalStrategy(deviceOptions, function(authCode, done) {
     Device.findOne({
         authCode: authCode
     }, function(err, device) {
