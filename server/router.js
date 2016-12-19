@@ -39,10 +39,11 @@ module.exports = function(app) {
     apiRoutes.use('/', devicesRoutes);
 
     //Language routes
-    languagesRoutes.get('/languages', LanguageCrudCtrl.getAll);
-    languagesRoutes.get('/languages/:id', LanguageCrudCtrl.get);
-    languagesRoutes.put('/languages/:id', LanguageCrudCtrl.update);
-    languagesRoutes.delete('/languages/:id', LanguageCrudCtrl.delete);
+    languagesRoutes.get('/languages', requireAuth, LanguageCrudCtrl.getAll);
+    languagesRoutes.get('/languages/active', requireAuth, LanguageCrudCtrl.getActives);
+    languagesRoutes.get('/languages/:id', requireAuth, LanguageCrudCtrl.get);
+    languagesRoutes.put('/languages/:id', requireAuth, LanguageCrudCtrl.update);
+    languagesRoutes.delete('/languages/:id', requireAuth, LanguageCrudCtrl.delete);
 
     apiRoutes.use('/', languagesRoutes);
 

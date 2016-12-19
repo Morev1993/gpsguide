@@ -1,7 +1,26 @@
 var Language = require('../../models/language');
 
 exports.getAll = function(req, res) {
-	Language.find(function(err, languages) {
+	Language.find({
+        accountId: req.query.sid
+    }, function(err, languages) {
+		if (err) {
+			return res.send(err);
+		}
+
+	  	res.json({
+			success: true,
+			data: languages
+		});
+	});
+};
+
+
+exports.getActives = function(req, res) {
+	Language.find({
+        accountId: req.query.sid,
+		status: 'enabled'
+    }, function(err, languages) {
 		if (err) {
 			return res.send(err);
 		}
