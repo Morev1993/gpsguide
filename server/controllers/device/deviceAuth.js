@@ -48,8 +48,8 @@ exports.login = function(req, res, next) {
             });
         }
 
-        device.device = model;
-        device.version = version;
+        device.device = model || device.device;
+        device.version = version || device.version;
         device.status = status || 'unactive';
 
         device.save((err, device) => {
