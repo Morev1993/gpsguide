@@ -80,7 +80,7 @@ var jwtOptions = {
 };
 
 // Setting up JWT login strategy
-var jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+var jwtUserLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     User.findById(payload._id, function(err, user) {
         if (err) {
             return done(err, false);
@@ -94,7 +94,22 @@ var jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     });
 });
 
-passport.use(jwtLogin);
+var jwtDeviceLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+    Device.findById(payload._id, function(err, device) {
+        if (err) {
+            return done(err, false);
+        }
+
+        if (device) {
+            done(null, device);
+        } else {
+            done(null, false);
+        }
+    });
+});
+
+passport.use('user-auth', jwtUserLogin);
+passport.use('device-auth', jwtDeviceLogin);
 //passport.use(localLogin);
 
 passport.use('user', userLogin);

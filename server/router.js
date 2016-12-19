@@ -8,9 +8,14 @@ var LanguageCrudCtrl = require('./controllers/language/languageCrud');
 var passportService = require('./config/passport');
 
 // Middleware to require login/auth
-var requireAuth = passport.authenticate('jwt', {
+var requireUserAuth = passport.authenticate('user-auth', {
     session: false
 });
+
+var requireDeviceAuth = passport.authenticate('device-auth', {
+    session: false
+});
+
 var requireLogin = passport.authenticate('local', {
     session: false
 });
@@ -30,25 +35,25 @@ module.exports = function(app) {
 
     //Device routes
     devicesRoutes.post('/signin', DeviceAuthCtrl.login);
-    devicesRoutes.post('/devices', requireAuth, DeviceCrudCtrl.create);
-    devicesRoutes.get('/devices', requireAuth, DeviceCrudCtrl.getAll);
-    devicesRoutes.get('/devices/:id', requireAuth, DeviceCrudCtrl.get);
-    devicesRoutes.put('/devices/:id', requireAuth, DeviceCrudCtrl.update);
-    devicesRoutes.delete('/devices/:id', requireAuth, DeviceCrudCtrl.delete);
+    devicesRoutes.post('/devices', requireUserAuth, DeviceCrudCtrl.create);
+    devicesRoutes.get('/devices', requireUserAuth, DeviceCrudCtrl.getAll);
+    devicesRoutes.get('/devices/:id', requireUserAuth, DeviceCrudCtrl.get);
+    devicesRoutes.put('/devices/:id', requireUserAuth, DeviceCrudCtrl.update);
+    devicesRoutes.delete('/devices/:id', requireUserAuth, DeviceCrudCtrl.delete);
 
     apiRoutes.use('/', devicesRoutes);
 
     //Language routes
-    languagesRoutes.get('/languages', requireAuth, LanguageCrudCtrl.getAll);
-    languagesRoutes.get('/languages/active', requireAuth, LanguageCrudCtrl.getActives);
-    languagesRoutes.get('/languages/:id', requireAuth, LanguageCrudCtrl.get);
-    languagesRoutes.put('/languages/:id', requireAuth, LanguageCrudCtrl.update);
-    languagesRoutes.delete('/languages/:id', requireAuth, LanguageCrudCtrl.delete);
+    languagesRoutes.get('/languages', requireUserAuth, LanguageCrudCtrl.getAll);
+    languagesRoutes.get('/languages/active', requireDeviceAuth, LanguageCrudCtrl.getActives);
+    languagesRoutes.get('/languages/:id', requireDeviceAuth, LanguageCrudCtrl.get);
+    languagesRoutes.put('/languages/:id', requireUserAuth, LanguageCrudCtrl.update);
+    languagesRoutes.delete('/languages/:id', requireUserAuth, LanguageCrudCtrl.delete);
 
     apiRoutes.use('/', languagesRoutes);
 
     // Test protected route
-    apiRoutes.get('/protected', requireAuth, (req, res) => {
+    apiRoutes.get('/protected', requireUserAuth, (req, res) => {
         res.send({
             content: 'The protected test route is functional!'
         });

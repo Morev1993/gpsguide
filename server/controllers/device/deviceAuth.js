@@ -20,18 +20,12 @@ exports.login = function(req, res, next) {
     var version = req.body.sdk_int;
     var status = req.body.status;
 
-    if (!authCode) {
-        return res.status(422).send({
-            error: 'Auth code is empty.'
-        });
-    }
-
     // Return error if no email provided
-    if (!model) {
+    /*if (!model) {
         return res.status(422).send({
             error: 'Model is empty.'
         });
-    }
+    }*/
 
     // Return error if no password provided
     if (!authCode) {
