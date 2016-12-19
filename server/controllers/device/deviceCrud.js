@@ -82,7 +82,9 @@ exports.create = function(req, res, next) {
 };
 
 exports.getAll = function(req, res) {
-    Device.find(function(err, devices) {
+    Device.find({
+        accountId: req.query.sid
+    }, function(err, devices) {
         if (err) {
             return res.send(err);
         }
@@ -96,7 +98,8 @@ exports.getAll = function(req, res) {
 
 exports.get = function(req, res) {
     Device.findOne({
-        _id: req.params.id
+        _id: req.params.id,
+        accountId: req.query.sid
     }, function(err, device) {
         if (err) {
             return res.send(err);
@@ -112,7 +115,8 @@ exports.get = function(req, res) {
 
 exports.update = function(req, res) {
     Device.findOne({
-        _id: req.params.id
+        _id: req.params.id,
+        accountId: req.query.sid
     }, function(err, device) {
         if (err) {
             return res.send(err);
@@ -138,7 +142,8 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
     Device.remove({
-        _id: req.params.id
+        _id: req.params.id,
+        accountId: req.query.sid
     }, function(err, device) {
         if (err) {
             return res.send(err);

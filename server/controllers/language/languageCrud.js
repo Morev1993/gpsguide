@@ -15,7 +15,8 @@ exports.getAll = function(req, res) {
 
 exports.get = function(req, res) {
     Language.findOne({
-        _id: req.params.id
+        _id: req.params.id,
+		accountId: req.query.sid
     }, function(err, language) {
         if (err) {
             return res.send(err);
@@ -30,7 +31,8 @@ exports.get = function(req, res) {
 
 exports.update = function(req, res) {
     Language.findOne({
-        _id: req.params.id
+        _id: req.params.id,
+		accountId: req.query.sid
     }, function(err, language) {
         if (err) {
             return res.send(err);
@@ -55,7 +57,8 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
     Language.remove({
-        _id: req.params.id
+        _id: req.params.id,
+		accountId: req.query.sid
     }, function(err, language) {
         if (err) {
             return res.send(err);
