@@ -1,20 +1,16 @@
-import { applyMiddleware, createStore } from 'redux'
-import { promiseMiddleware } from './middleware';
+import { applyMiddleware, createStore, combineReducers } from 'redux'
+import { promiseMiddleware, localStorageMiddleware } from './middleware';
+import auth from './reducers/auth';
+import common from './reducers/common';
+import home from './reducers/home';
 
-const defaultState = {
-	appName: 'GPSGuide',
-	projects: []
-}
+const reducer = combineReducers({
+	auth,
+	common,
+	home
+});
 
-const reducer = function(state = defaultState, action) {
-	switch (action.type) {
-		case 'MAIN_PAGE_LOADED':
-			return { ...state, projects: action.payload }
-	}
-	return state
-}
-
-const middleware = applyMiddleware(promiseMiddleware)
+const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware)
 
 const store = createStore(reducer, middleware)
 

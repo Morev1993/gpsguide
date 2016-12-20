@@ -6,10 +6,14 @@ const mapStateToProps = state => ({
     appName: state.appName
 })
 
-class Main extends Component {
+const mapDispatchToProps = dispatch => ({
+  onClickLogout: () => dispatch({ type: 'LOGOUT' })
+});
+
+class Breadcrumbs extends Component {
     render() {
         return <div className='container'>
-            {this.props.currentLocation}
+            <button className='btn btn-danger' onClick={this.props.onClickLogout}>Logout</button>
             <ol className='breadcrumb'>
                 <li className='breadcrumb-item'>
                     <Link to='/'>Dashboard</Link>
@@ -31,4 +35,4 @@ class Main extends Component {
     }
 }
 
-export default connect(mapStateToProps, () => ({}))(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Breadcrumbs)

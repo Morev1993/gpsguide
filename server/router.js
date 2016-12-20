@@ -33,6 +33,7 @@ module.exports = function(app) {
     //user auth routes
     authRoutes.post('/signup', AuthCtrl.register);
     authRoutes.post('/signin', AuthCtrl.login);
+    authRoutes.get('/user', requireUserAuth, AuthCtrl.getUserInfo);
 
     adminRoutes.use('/', authRoutes);
 

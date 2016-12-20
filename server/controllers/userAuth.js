@@ -39,6 +39,28 @@ exports.login = function(req, res, next) {
     })(req, res, next);
 };
 
+exports.getUserInfo = function(req, res, next) {
+    passport.authenticate('user-auth', function(err, user, info) {
+        if (err) {
+            return next(err);
+        }
+
+        if (!user) {
+            return res.status(422).send({
+                error: 'Auth error.'
+            });
+        }
+
+        console.log(user);
+
+        res.status(200).json({
+            success: true,
+            status: 200,
+            data: user
+        });
+    })(req, res, next);
+};
+
 
 //= =======================================
 // Registration Route
