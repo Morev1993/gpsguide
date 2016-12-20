@@ -12,3 +12,4 @@
 * npm install nodemon -g (for watch files changing)
 * npm install - in server folder		
 * for local development, serving and watching - nodemon server.js
+* for start mongodb process - mongod --dbpath /path/to/db-data
