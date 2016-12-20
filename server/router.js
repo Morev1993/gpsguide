@@ -31,8 +31,8 @@ module.exports = function(app) {
     /*** admin-webapp ***/
 
     //user auth routes
-    authRoutes.post('/user/signup', AuthCtrl.register);
-    authRoutes.post('/user/signin', AuthCtrl.login);
+    authRoutes.post('/signup', AuthCtrl.register);
+    authRoutes.post('/signin', AuthCtrl.login);
 
     adminRoutes.use('/', authRoutes);
 

@@ -30,7 +30,13 @@ exports.login = function(req, res, next) {
     // Return error if no password provided
     if (!authCode) {
         return res.status(422).send({
-            error: 'You must enter a authCode.'
+            error: 'You must enter an auth code.'
+        });
+    }
+
+    if (authCode.length !== 5) {
+        return res.status(422).send({
+            error: 'Auth code must have five numbers.'
         });
     }
 
@@ -44,7 +50,7 @@ exports.login = function(req, res, next) {
         // If user is not unique, return error
         if (!device) {
             return res.status(422).send({
-                error: 'That authCode gone.'
+                error: 'Auth code is not correct.'
             });
         }
 
