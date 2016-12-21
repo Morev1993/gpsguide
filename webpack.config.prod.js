@@ -13,7 +13,7 @@ module.exports = {
 	],
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'app.js',
+		filename: 'app.[hash].js',
 		publicPath: ''
 	},
 	module: {
@@ -44,7 +44,7 @@ module.exports = {
 				loader: 'style-loader!css-loader!postcss-loader'
 			},
 	      	{
-	      		test: /\.scss$/, 
+	      		test: /\.scss$/,
 	      		loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader'])
 	      	}
 		]
@@ -56,7 +56,7 @@ module.exports = {
     	includePaths: [path.resolve(__dirname, "./src")]
   	},
   	plugins: [
-  		new ExtractTextPlugin("app.css"),
+  		new ExtractTextPlugin("app.[hash].css"),
 		new webpack.optimize.UglifyJsPlugin({
 		    compress: {
 		        warnings: false
