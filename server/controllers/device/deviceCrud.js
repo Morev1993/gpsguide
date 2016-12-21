@@ -12,7 +12,7 @@ function generateToken(data) {
     });
 }
 
-exports.create = function(req, res, next) { 
+exports.create = function(req, res, next) {
     var accountId = req.user._id;
     var name = req.body.name;
     var authCode = req.body.authCode;
@@ -116,6 +116,14 @@ exports.update = function(req, res) {
     }, function(err, device) {
         if (err) {
             return res.send(err);
+        }
+
+        var authCode = req.body.authCode.toString();
+
+        if (authCode.length !== 5) {
+            return res.status(422).send({
+                error: 'Auth code must have five numbers.'
+            });
         }
 
         for (prop in req.body) {

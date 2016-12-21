@@ -40,7 +40,7 @@ const Tours = {
     get: id =>
         requests.get(`/tours/${id}`),
     update: (tour) => {
-        var id = tour._id;
+        var id = tour._id
         requests.put(`/tours/${id}`, tour)
     },
     delete: id =>
@@ -49,13 +49,15 @@ const Tours = {
 
 const Devices = {
     create: device =>
-        requests.post(`/devices`, { device }),
+        requests.post(`/devices`, device),
     all: () =>
         requests.get(`/devices`),
     get: id =>
         requests.get(`/devices/${id}`),
-    update: id =>
-        requests.put(`/devices/${id}`),
+    update: device => {
+        var id = device._id
+        requests.put(`/devices/${id}`, device)
+    },
     delete: id =>
         requests.del(`/devices/${id}`)
 }

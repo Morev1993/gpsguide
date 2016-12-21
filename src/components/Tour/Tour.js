@@ -74,7 +74,7 @@ class Tour extends Component {
                 <FormGroup row>
                     <Label for='name' sm={3}>Name</Label>
                     <Col sm={9}>
-                        <Input type='text' value={this.state.name} onChange={this.updateState('name')} name='name' id='name' placeholder='tour name' required/>
+                        <Input type='text' value={this.state.name} onChange={this.updateState('name')} name='name' id='name' required/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>

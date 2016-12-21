@@ -10,17 +10,14 @@ const promiseMiddleware = (store) => next => action => {
 					action.payload = res
 					store.dispatch({ type: 'ASYNC_END', promise: action.payload })
 					store.dispatch(action)
-				} else if (res.success === false) {
-					console.log(res);
-					action.payload = res
-					store.dispatch({ type: 'ASYNC_END', promise: action.payload })
-					store.dispatch(action)
-				} else {
-					store.dispatch({ type: 'LOGOUT' })
+					return;
 				}
+
+				store.dispatch({ type: 'LOGOUT' })
 			},
 			error => {
 				console.log(error)
+				store.dispatch({ type: 'LOGOUT' })
 				action.error = true
 				action.payload = error
 				store.dispatch({ type: 'ASYNC_END', promise: action.payload })

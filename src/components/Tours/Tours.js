@@ -6,7 +6,7 @@ import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, C
 import ListErrors from '../ListErrors'
 
 const mapStateToProps = state => ({
-    tours: state.tours.tours
+    tours: state.tours.tours || []
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -104,7 +104,7 @@ class Tours extends Component {
                         <FormGroup row>
                             <Label for='name' sm={3}>Name</Label>
                             <Col sm={9}>
-                                <Input type='text' value={this.state.name} onChange={this.changeName} name='name' id='name' placeholder='tour name' required/>
+                                <Input type='text' value={this.state.name} onChange={this.changeName} name='name' id='name' required/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
