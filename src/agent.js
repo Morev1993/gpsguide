@@ -18,22 +18,31 @@ const requests = {
     get: url =>
         superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
     post: (url, body) =>
-        superagent.post(`${API_ROOT}${url}`, body).then(responseBody),
+        superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
     put: (url, body) =>
-        superagent.put(`${API_ROOT}${url}`, body).then(responseBody),
+        superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
     del: url =>
-        superagent.del(`${API_ROOT}${url}`).then(responseBody)
+        superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody)
 }
+
+const Auth = {
+    current: () =>
+        requests.get('/user'),
+    login: (email, password) =>
+        requests.post('/signin', { email, password })
+};
 
 const Tours = {
     create: tour =>
-        requests.post(`/tours`, { tour }),
+        requests.post(`/tours`, tour),
     all: () =>
         requests.get(`/tours`),
     get: id =>
         requests.get(`/tours/${id}`),
-    update: id =>
-        requests.put(`/tours/${id}`),
+    update: (tour) => {
+        var id = tour._id;
+        requests.put(`/tours/${id}`, tour)
+    },
     delete: id =>
         requests.del(`/tours/${id}`)
 }
@@ -74,13 +83,6 @@ const Waypoints = {
     delete: id =>
         requests.del(`/waypoints/${id}`)
 }
-
-const Auth = {
-    current: () =>
-        requests.get('/user'),
-    login: (email, password) =>
-        requests.post('/signin', { email, password })
-};
 
 export default {
     Auth,

@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs'
 import { connect } from 'react-redux'
 import agent from '../agent'
+import store from '../store'
 
 const mapStateToProps = state => ({
     appName: state.appName,
-    tours: [],
-    currentUser: state.common.currentUser,
     redirectTo: state.common.redirectTo
 })
 
@@ -22,8 +21,8 @@ class App extends Component {
     componentWillMount() {
         const token = window.localStorage.getItem('jwt');
 
-        if (!token) { 
-          this.context.router.push('/auth');
+        if (!token) {
+          store.dispatch({ type: 'LOGOUT' })
         }
 
         agent.setToken(token);

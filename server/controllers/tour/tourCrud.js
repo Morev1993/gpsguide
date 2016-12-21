@@ -77,7 +77,7 @@ exports.update = function(req, res) {
         }
 
         // save the tour
-        device.save(function(err) {
+        tour.save(function(err) {
             if (err) {
                 return res.send(err);
             }

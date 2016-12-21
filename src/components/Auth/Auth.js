@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import ListErrors from './ListErrors';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import ListErrors from '../ListErrors'
 import './Auth.scss'
-import agent from '../../agent';
-import { connect } from 'react-redux';
+import agent from '../../agent'
+import { connect } from 'react-redux'
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -21,8 +21,8 @@ class Auth extends Component {
         super();
         this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
         this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-        this.submitForm = (email, password) => ev => {
-            ev.preventDefault();
+        this.submitForm = (email, password) => e => {
+            e.preventDefault();
             this.props.onSubmit(email, password);
         };
     }
