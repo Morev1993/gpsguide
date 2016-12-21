@@ -4,7 +4,7 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import App from './containers/App'
 import Auth from './components/Auth/Auth'
@@ -19,7 +19,7 @@ import store from './store'
 
 render(
     <Provider store={store}>
-        <Router history={hashHistory}>
+        <Router history={browserHistory}>
             <Route path='/' component={App} >
                 <IndexRoute component={Dashboard} />
                 <Route path='auth' component={Auth} />
