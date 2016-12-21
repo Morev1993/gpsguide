@@ -1,7 +1,8 @@
 var jwt = require('jsonwebtoken'),
     Device = require('../../models/device'),
     config = require('../../config/main'),
-    setDeviceInfo = require('../../helpers').setDeviceInfo;
+    setDeviceInfo = require('../../helpers').setDeviceInfo,
+    passport = require('passport');
 
 // Generate JWT
 // TO-DO Add issuer and audience
@@ -11,18 +12,11 @@ function generateToken(data) {
     });
 }
 
-exports.create = function(req, res, next) {
-    // Check for registration errors
-    var accountId = req.body.accountId;
+exports.create = function(req, res, next) { 
+    var accountId = req.user._id;
     var name = req.body.name;
     var authCode = req.body.authCode;
     var orderBy = req.body.orderBy || 0;
-
-    if (!accountId) {
-        return res.status(422).send({
-            error: 'AccountId wrong or empty.'
-        });
-    }
 
     // Return error if no email provided
     if (!name) {
@@ -43,8 +37,6 @@ exports.create = function(req, res, next) {
             error: 'Auth code must have five numbers.'
         });
     }
-
-
 
     Device.findOne({
         authCode
@@ -78,15 +70,16 @@ exports.create = function(req, res, next) {
             res.status(201).json({
                 success: true,
                 token: `JWT ${generateToken(deviceInfo)}`,
-                data: deviceInfo
+                data: device
             });
         });
     });
+
 };
 
 exports.getAll = function(req, res) {
     Device.find({
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, devices) {
         if (err) {
             return res.send(err);
@@ -102,7 +95,7 @@ exports.getAll = function(req, res) {
 exports.get = function(req, res) {
     Device.findOne({
         _id: req.params.id,
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, device) {
         if (err) {
             return res.send(err);
@@ -119,7 +112,7 @@ exports.get = function(req, res) {
 exports.update = function(req, res) {
     Device.findOne({
         _id: req.params.id,
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, device) {
         if (err) {
             return res.send(err);
@@ -146,7 +139,7 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     Device.remove({
         _id: req.params.id,
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, device) {
         if (err) {
             return res.send(err);

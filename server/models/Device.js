@@ -27,17 +27,17 @@ var DeviceSchema = new Schema({
         default: ''
     },
     version: {
-        type: Number,
-        default: 0
+        type: String,
+        default: '0'
     },
     orderBy: {
         type: Number,
         default: 0
     },
     status: {
-        type: String,
-        default: 'unactive'
-    }
+        type: Boolean,
+        default: false
+    },
 }, {
     timestamps: true
 });

@@ -8,7 +8,7 @@ export default (state = {}, action) => {
       };
     case 'ASYNC_START':
       if (action.subtype === 'LOGIN') {
-        return { ...state, inProgress: true };
+        return { ...state, inProgress: false };
       }
       break;
     case 'UPDATE_FIELD_AUTH':

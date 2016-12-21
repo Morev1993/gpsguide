@@ -7,9 +7,11 @@ const promiseMiddleware = (store) => next => action => {
 		action.payload.then(
 			res => {
 				console.log(res)
-				action.payload = res
-				store.dispatch({ type: 'ASYNC_END', promise: action.payload })
-				store.dispatch(action)
+				if (res.success) {
+					action.payload = res
+					store.dispatch({ type: 'ASYNC_END', promise: action.payload })
+					store.dispatch(action)
+				}
 			},
 			error => {
 				console.log(error)
@@ -29,7 +31,6 @@ const promiseMiddleware = (store) => next => action => {
 const localStorageMiddleware = () => next => action => {
   if (action.type === 'LOGIN') {
     if (!action.error) {
-		console.log(action.payload);
       window.localStorage.setItem('jwt', action.payload.token);
       //agent.setToken(action.payload.token);
     }

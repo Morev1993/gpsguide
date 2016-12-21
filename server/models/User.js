@@ -21,9 +21,9 @@ var UserSchema = new Schema({
         required: true
     },
     status: {
-        type: String,
-        default: 'enabled'
-    }
+        type: Boolean,
+        default: true
+    },
     /*role: {
       type: String,
       enum: ['Member', 'Client', 'Owner', 'Admin'],

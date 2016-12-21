@@ -4,5 +4,5 @@ module.exports = {
   	// Database connection information
 	'database': 'mongodb://localhost:27017/gpsguide',
   	// Setting port for server
-	'port': process.env.PORT || 8080
+	'port': process.env.PORT || 8090
 }

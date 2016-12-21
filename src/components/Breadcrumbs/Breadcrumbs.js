@@ -12,9 +12,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Breadcrumbs extends Component {
     render() {
-        return <div className='container'>
-            <button className='btn btn-danger' onClick={this.props.onClickLogout}>Logout</button>
-            <ol className='breadcrumb'>
+        return <div className='container top-layout'>
+            <ol className='breadcrumb float-xs-left'>
                 <li className='breadcrumb-item'>
                     <Link to='/'>Dashboard</Link>
                 </li>
@@ -27,10 +26,10 @@ class Breadcrumbs extends Component {
                 <li className='breadcrumb-item'>
                     <Link to='/languages'>Languages</Link>
                 </li>
-                <li className='breadcrumb-item'>
-                    <Link to='/auth'>Auth</Link>
-                </li>
             </ol>
+            <div className='float-xs-right'>
+                <button className='btn btn-danger' onClick={this.props.onClickLogout}>Logout</button> 
+            </div>
         </div>
     }
 }

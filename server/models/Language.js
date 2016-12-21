@@ -18,8 +18,8 @@ var LanguageSchema = new Schema({
         required: true
     },
     status: {
-        type: String,
-        default: 'disabled'
+        type: Boolean,
+        default: true
     },
     orderBy: {
         type: Number,

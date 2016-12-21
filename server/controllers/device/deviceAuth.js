@@ -56,7 +56,7 @@ exports.login = function(req, res, next) {
 
         device.device = model || device.device;
         device.version = version || device.version;
-        device.status = status || 'unactive';
+        device.status = true;
 
         device.save((err, device) => {
             if (err) {
@@ -68,7 +68,7 @@ exports.login = function(req, res, next) {
             res.status(201).json({
                 success: true,
                 token: `JWT ${generateToken(deviceInfo)}`,
-                data: deviceInfo
+                data: device
             });
         });
     });

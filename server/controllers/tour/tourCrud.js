@@ -3,16 +3,9 @@ var jwt = require('jsonwebtoken'),
     config = require('../../config/main');
 
 exports.create = function(req, res, next) {
-
-    var accountId = req.body.accountId;
+    var accountId = req.user._id;
     var name = req.body.name;
     var orderBy = req.body.orderBy || 0;
-
-    if (!accountId) {
-        return res.status(422).send({
-            error: 'AccountId wrong or empty.'
-        });
-    }
 
     if (!name) {
         return res.status(422).send({
@@ -20,9 +13,11 @@ exports.create = function(req, res, next) {
         });
     }
 
-	console.log(req.body);
-
-	var tour = new Tour(req.body);
+	var tour = new Tour({
+        accountId,
+        name,
+        orderBy
+    });
 
 	tour.save((err, tour) => {
 		if (err) {
@@ -38,7 +33,7 @@ exports.create = function(req, res, next) {
 
 exports.getAll = function(req, res) {
     Tour.find({
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, tours) {
         if (err) {
             return res.send(err);
@@ -54,7 +49,7 @@ exports.getAll = function(req, res) {
 exports.get = function(req, res) {
     Tour.findOne({
         _id: req.params.id,
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, tour) {
         if (err) {
             return res.send(err);
@@ -71,7 +66,7 @@ exports.get = function(req, res) {
 exports.update = function(req, res) {
     Tour.findOne({
         _id: req.params.id,
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, tour) {
         if (err) {
             return res.send(err);
@@ -98,7 +93,7 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     Tour.remove({
         _id: req.params.id,
-        accountId: req.query.sid
+        accountId: req.user._id
     }, function(err, tour) {
         if (err) {
             return res.send(err);

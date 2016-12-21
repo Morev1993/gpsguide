@@ -4,7 +4,9 @@ exports.setUserInfo = function setUserInfo(request) {
         _id: request._id,
         email: request.email,
         name: request.name,
-        status: request.status
+        status: request.status,
+        createdAt: request.createdAt,
+        updatedAt: request.updatedAt
     };
 
     return getUserInfo;

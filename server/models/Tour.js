@@ -18,8 +18,8 @@ var TourSchema = new Schema({
         default: 0
     },
     status: {
-        type: String,
-        default: 'unactive'
+        type: Boolean,
+        default: true
     },
     languages: {
         type: [Schema.Types.ObjectId],
