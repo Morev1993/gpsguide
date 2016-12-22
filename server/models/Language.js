@@ -5,6 +5,10 @@ var mongoose = require('mongoose'),
 // User Schema
 //================================
 var LanguageSchema = new Schema({
+    accountId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     name: {
         type: String,
         required: true
