@@ -5,11 +5,11 @@ var mongoose = require('mongoose'),
 // User Schema
 //================================
 var LanguageSchema = new Schema({
-    accountId: {
-        type: Schema.Types.ObjectId,
+    name: {
+        type: String,
         required: true
     },
-    name: {
+    code: {
         type: String,
         required: true
     },
@@ -19,7 +19,7 @@ var LanguageSchema = new Schema({
     },
     status: {
         type: Boolean,
-        default: true
+        default: false
     },
     orderBy: {
         type: Number,

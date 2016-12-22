@@ -1,8 +1,8 @@
 // Importing Passport, strategies, and config
 var passport = require('passport'),
-    User = require('../models/user'),
-    Device = require('../models/device'),
-    config = require('./main'),
+    User = require(__base + 'models/user'),
+    Device = require(__base + 'models/device'),
+    config = require(__base + 'config/main'),
     JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt,
     LocalStrategy = require('passport-local');

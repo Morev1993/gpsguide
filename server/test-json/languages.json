@@ -2,365 +2,365 @@
 	{
 		"name": "Afrikaans",
 		"locale": "Afrikaans",
-		"orderBy": 0,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "af-ZA",
+		"status": false,
+		"orderBy": 0
 	},
 	{
 		"name": "Arabic",
 		"locale": "العربية",
-		"orderBy": 1,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "ar",
+		"status": false,
+		"orderBy": 1
 	},
 	{
 		"name": "Bulgarian",
 		"locale": "Български",
-		"orderBy": 2,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "bg-BG",
+		"status": false,
+		"orderBy": 2
 	},
 	{
 		"name": "Catalan",
 		"locale": "Català",
-		"orderBy": 3,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "ca-AD",
+		"status": false,
+		"orderBy": 3
 	},
 	{
 		"name": "Czech",
 		"locale": "Čeština",
-		"orderBy": 4,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "cs-CZ",
+		"status": false,
+		"orderBy": 4
 	},
 	{
 		"name": "Welsh",
 		"locale": "Cymraeg",
-		"orderBy": 5,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "cy-GB",
+		"status": false,
+		"orderBy": 5
 	},
 	{
 		"name": "Danish",
 		"locale": "Dansk",
-		"orderBy": 6,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "da-DK",
+		"status": false,
+		"orderBy": 6
 	},
 	{
 		"name": "German (Austria)",
 		"locale": "Deutsch (Österreich)",
-		"orderBy": 7,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "de-AT",
+		"status": false,
+		"orderBy": 7
 	},
 	{
 		"name": "German (Switzerland)",
 		"locale": "Deutsch (Schweiz)",
-		"orderBy": 8,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "de-CH",
+		"status": false,
+		"orderBy": 8
 	},
 	{
 		"name": "German (Germany)",
 		"locale": "Deutsch (Deutschland)",
-		"orderBy": 9,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "de-DE",
+		"status": false,
+		"orderBy": 9
 	},
 	{
 		"name": "Greek",
 		"locale": "Ελληνικά",
-		"orderBy": 10,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "el-GR",
+		"status": false,
+		"orderBy": 10
 	},
 	{
 		"name": "English (UK)",
 		"locale": "English (UK)",
-		"orderBy": 11,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "en-GB",
+		"status": false,
+		"orderBy": 11
 	},
 	{
 		"name": "English (US)",
 		"locale": "English (US)",
-		"orderBy": 12,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "en-US",
+		"status": false,
+		"orderBy": 12
 	},
 	{
 		"name": "Spanish (Chile)",
 		"locale": "Español (Chile)",
-		"orderBy": 13,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "es-CL",
+		"status": false,
+		"orderBy": 13
 	},
 	{
 		"name": "Spanish (Spain)",
 		"locale": "Español (España)",
-		"orderBy": 14,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "es-ES",
+		"status": false,
+		"orderBy": 14
 	},
 	{
 		"name": "Spanish (Mexico)",
 		"locale": "Español (México)",
-		"orderBy": 15,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "es-MX",
+		"status": false,
+		"orderBy": 15
 	},
 	{
 		"name": "Estonian",
 		"locale": "Eesti",
-		"orderBy": 16,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "et-EE",
+		"status": false,
+		"orderBy": 16
 	},
 	{
 		"name": "Basque",
 		"locale": "Euskara",
-		"orderBy": 17,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "eu",
+		"status": false,
+		"orderBy": 17
 	},
 	{
 		"name": "Persian",
 		"locale": "فارسی",
-		"orderBy": 18,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "fa-IR",
+		"status": false,
+		"orderBy": 18
 	},
 	{
 		"name": "Finnish",
 		"locale": "Suomi",
-		"orderBy": 19,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "fi-FI",
+		"status": false,
+		"orderBy": 19
 	},
 	{
 		"name": "French (Canada)",
 		"locale": "Français (Canada)",
-		"orderBy": 20,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "fr-CA",
+		"status": false,
+		"orderBy": 20
 	},
 	{
 		"name": "French (France)",
 		"locale": "Français (France)",
-		"orderBy": 21,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "fr-FR",
+		"status": false,
+		"orderBy": 21
 	},
 	{
 		"name": "Hebrew",
 		"locale": "עברית",
-		"orderBy": 22,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "he-IL",
+		"status": false,
+		"orderBy": 22
 	},
 	{
 		"name": "Croatian",
 		"locale": "Hrvatski",
-		"orderBy": 23,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "hr-HR",
+		"status": false,
+		"orderBy": 23
 	},
 	{
 		"name": "Hungarian",
 		"locale": "Magyar",
-		"orderBy": 24,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "hu-HU",
+		"status": false,
+		"orderBy": 24
 	},
 	{
 		"name": "Indonesian",
 		"locale": "Bahasa Indonesia",
-		"orderBy": 25,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "id-ID",
+		"status": false,
+		"orderBy": 25
 	},
 	{
 		"name": "Icelandic",
 		"locale": "Íslenska",
-		"orderBy": 26,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "is-IS",
+		"status": false,
+		"orderBy": 26
 	},
 	{
 		"name": "Italian",
 		"locale": "Italiano",
-		"orderBy": 27,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "it-IT",
+		"status": false,
+		"orderBy": 27
 	},
 	{
 		"name": "Japanese",
 		"locale": "日本語",
-		"orderBy": 28,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "ja-JP",
+		"status": false,
+		"orderBy": 28
 	},
 	{
 		"name": "Khmer",
 		"locale": "ភាសាខ្មែរ",
-		"orderBy": 29,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "km-KH",
+		"status": false,
+		"orderBy": 29
 	},
 	{
 		"name": "Korean",
 		"locale": "한국어",
-		"orderBy": 30,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "ko-KR",
+		"status": false,
+		"orderBy": 30
 	},
 	{
 		"name": "Lithuanian",
 		"locale": "Lietuvių",
-		"orderBy": 31,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "lt-LT",
+		"status": false,
+		"orderBy": 31
 	},
 	{
 		"name": "Latvian",
 		"locale": "Latviešu",
-		"orderBy": 32,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "lv-LV",
+		"status": false,
+		"orderBy": 32
 	},
 	{
 		"name": "Mongolian",
 		"locale": "Монгол",
-		"orderBy": 33,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "mn-MN",
+		"status": false,
+		"orderBy": 33
 	},
 	{
 		"name": "Norwegian (Bokmål)",
 		"locale": "Norsk bokmål",
-		"orderBy": 34,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "nb-NO",
+		"status": false,
+		"orderBy": 34
 	},
 	{
 		"name": "Dutch",
 		"locale": "Nederlands",
-		"orderBy": 35,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "nl-NL",
+		"status": false,
+		"orderBy": 35
 	},
 	{
 		"name": "Norwegian (Nynorsk)",
 		"locale": "Norsk nynorsk",
-		"orderBy": 36,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "nn-NO",
+		"status": false,
+		"orderBy": 36
 	},
 	{
 		"name": "Polish",
 		"locale": "Polski",
-		"orderBy": 37,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "pl-PL",
+		"status": false,
+		"orderBy": 37
 	},
 	{
 		"name": "Portuguese (Brazil)",
 		"locale": "Português (Brasil)",
-		"orderBy": 38,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "pt-BR",
+		"status": false,
+		"orderBy": 38
 	},
 	{
 		"name": "Portuguese (Portugal)",
 		"locale": "Português (Portugal)",
-		"orderBy": 39,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "pt-PT",
+		"status": false,
+		"orderBy": 39
 	},
 	{
 		"name": "Romanian",
 		"locale": "Română",
-		"orderBy": 40,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "ro-RO",
+		"status": false,
+		"orderBy": 40
 	},
 	{
 		"name": "Russian",
 		"locale": "Русский",
-		"orderBy": 41,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "ru-RU",
+		"status": false,
+		"orderBy": 41
 	},
 	{
 		"name": "Slovak",
 		"locale": "Slovenčina",
-		"orderBy": 42,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "sk-SK",
+		"status": false,
+		"orderBy": 42
 	},
 	{
 		"name": "Slovenian",
 		"locale": "Slovenščina",
-		"orderBy": 43,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "sl-SI",
+		"status": false,
+		"orderBy": 43
 	},
 	{
 		"name": "Serbian",
 		"locale": "Српски / Srpski",
-		"orderBy": 44,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "sr-RS",
+		"status": false,
+		"orderBy": 44
 	},
 	{
 		"name": "Swedish",
 		"locale": "Svenska",
-		"orderBy": 45,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "sv-SE",
+		"status": false,
+		"orderBy": 45
 	},
 	{
 		"name": "Thai",
 		"locale": "ไทย",
-		"orderBy": 46,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "th-TH",
+		"status": false,
+		"orderBy": 46
 	},
 	{
 		"name": "Turkish",
 		"locale": "Türkçe",
-		"orderBy": 47,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "tr-TR",
+		"status": false,
+		"orderBy": 47
 	},
 	{
 		"name": "Ukrainian",
 		"locale": "Українська",
-		"orderBy": 48,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "uk-UA",
+		"status": false,
+		"orderBy": 48
 	},
 	{
 		"name": "Vietnamese",
 		"locale": "Tiếng Việt",
-		"orderBy": 49,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "vi-VN",
+		"status": false,
+		"orderBy": 49
 	},
 	{
 		"name": "Chinese (PRC)",
 		"locale": "中文 (中国大陆)",
-		"orderBy": 50,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "zh-CN",
+		"status": false,
+		"orderBy": 50
 	},
 	{
 		"name": "Chinese (Taiwan)",
 		"locale": "中文 (台灣)",
-		"orderBy": 51,
-		"status": "disabled",
-		"accountId": "5854f6562558770db2a53dfc"
+		"code": "zh-TW",
+		"status": false,
+		"orderBy": 51
 	}
 ]

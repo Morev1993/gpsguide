@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken'),
-    Tour = require('models/tour'),
-    config = require('config/main');
+    Tour = require(__base + 'models/tour'),
+    config = require(__base + 'config/main');
 
 exports.create = function(req, res, next) {
     var accountId = req.user._id;

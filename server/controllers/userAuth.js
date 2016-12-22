@@ -1,8 +1,8 @@
 var jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
-    User = require('models/user'),
-    config = require('config/main'),
-    setUserInfo = require('helpers').setUserInfo,
+    User = require(__base + 'models/user'),
+    config = require(__base + 'config/main'),
+    setUserInfo = require(__base + 'helpers').setUserInfo,
     passport = require('passport');
 
 // Generate JWT

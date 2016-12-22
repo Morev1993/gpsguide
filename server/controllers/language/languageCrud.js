@@ -1,4 +1,4 @@
-var Language = require('models/language');
+var Language = require(__base + 'models/language');
 
 exports.getAll = function(req, res) {
 	Language.find({

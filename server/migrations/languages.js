@@ -1,15 +1,17 @@
+global.__base = __dirname + '/../';
+
 var fs = require('fs');
-var Language = require('../models/language');
-var config = require('../config/main');
+var Language = require(__base + 'models/language');
+var config = require(__base + 'config/main');
 var mongoose = require('mongoose');
 
 mongoose.connect(config.database);
 
-mongoose.connection.collections['languages'].drop( function(err) {
+Language.remove({}, function(err) { 
 	if (err) throw err;
     console.log('collection dropped');
 
-	fs.readFile('../test-json/languages.json', (err, data) => {
+	fs.readFile(__base + 'test-json/languages.json', (err, data) => {
   		if (err) throw err;
 
   		var arr = JSON.parse(data);

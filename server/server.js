@@ -1,12 +1,13 @@
-// Importing Node modules and initializing Express
+global.__base = __dirname + '/';
+
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
-    config = require('./config/main');
+    config = require(__base + 'config/main');
     mongoose = require('mongoose'),
-    config = require('./config/main'),
-    router = require('./router');
+    config = require(__base + 'config/main'),
+    router = require(__base + 'router');
 
 mongoose.Promise = global.Promise;
 

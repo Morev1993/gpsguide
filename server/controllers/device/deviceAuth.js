@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken'),
-    Device = require('models/device'),
-    config = require('config/main'),
+    Device = require(__base + 'models/device'),
+    config = require(__base + 'config/main'),
     setDeviceInfo = require('helpers').setDeviceInfo;
 
 // Generate JWT

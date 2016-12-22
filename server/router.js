@@ -1,12 +1,12 @@
 var express = require('express');
 var passport = require('passport');
-var AuthCtrl = require('./controllers/userAuth');
-var DeviceAuthCtrl = require('./controllers/device/deviceAuth');
-var DeviceCrudCtrl = require('./controllers/device/deviceCrud');
-var LanguageCrudCtrl = require('./controllers/language/languageCrud');
-var TourCrudCtrl = require('./controllers/tour/tourCrud');
+var AuthCtrl = require(__base + 'controllers/userAuth');
+var DeviceAuthCtrl = require(__base + 'controllers/device/deviceAuth');
+var DeviceCrudCtrl = require(__base + 'controllers/device/deviceCrud');
+var LanguageCrudCtrl = require(__base + 'controllers/language/languageCrud');
+var TourCrudCtrl = require(__base + 'controllers/tour/tourCrud');
 
-var passportService = require('./config/passport');
+var passportService = require(__base + 'config/passport');
 
 // Middleware to require login/auth
 var requireUserAuth = passport.authenticate('user-auth', {
