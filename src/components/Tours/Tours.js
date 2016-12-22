@@ -84,7 +84,7 @@ class Tours extends Component {
                     return (
                         <div key={tour._id}>
                             <h4>
-                                Name: <Link to={`/tours/${tour._id}`}>{tour.name}</Link>
+                                Name: <Link to={`/tours/${tour._id}/edit`}>{tour.name}</Link>
                             </h4>
                             <p><Button color='danger' onClick={this.deleteTour.bind(this, tour._id)}>Del</Button></p>
                             <p><small>{new Date(tour.createdAt).toDateString()}</small></p>

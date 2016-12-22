@@ -65,10 +65,14 @@ const Devices = {
 const Languages = {
     all: () =>
         requests.get(`/languages`),
+    actives: () =>
+        requests.get(`/languages/active`),
     get: id =>
         requests.get(`/languages/${id}`),
-    update: id =>
-        requests.put(`/languages/${id}`),
+    update: lang => {
+        var id = lang._id;
+        requests.put(`/languages/${id}`, lang)
+    },
     delete: id =>
         requests.del(`/languages/${id}`)
 }

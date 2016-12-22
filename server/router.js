@@ -5,6 +5,7 @@ var DeviceAuthCtrl = require(__base + 'controllers/device/deviceAuth');
 var DeviceCrudCtrl = require(__base + 'controllers/device/deviceCrud');
 var LanguageCrudCtrl = require(__base + 'controllers/language/languageCrud');
 var TourCrudCtrl = require(__base + 'controllers/tour/tourCrud');
+var WaypointsCrudCtrl = require(__base + 'controllers/waypoints/waypointCrud');
 
 var passportService = require(__base + 'config/passport');
 
@@ -26,7 +27,8 @@ module.exports = function(app) {
         authRoutes = express.Router(),
         devicesRoutes = express.Router(),
         languagesRoutes = express.Router(),
-        toursRoutes = express.Router();
+        toursRoutes = express.Router(),
+        waypointsRouter = express.Router();
 
     /*** admin-webapp ***/
 
@@ -64,6 +66,14 @@ module.exports = function(app) {
     toursRoutes.delete('/tours/:id', requireUserAuth, TourCrudCtrl.delete);
 
     adminRoutes.use('/', toursRoutes);
+
+    waypointsRouter.post('/tours/:tourId/waypoints', requireUserAuth, WaypointsCrudCtrl.create);
+    waypointsRouter.get('/tours/:tourId/waypoints', requireUserAuth, WaypointsCrudCtrl.getAll);
+    waypointsRouter.get('/tours/:tourId/waypoints/:id', requireUserAuth, WaypointsCrudCtrl.get);
+    waypointsRouter.put('/tours/:tourId/waypoints/:id', requireUserAuth, WaypointsCrudCtrl.update);
+    waypointsRouter.delete('/tours/:tourId/waypoints/:id', requireUserAuth, WaypointsCrudCtrl.delete);
+
+    adminRoutes.use('/', waypointsRouter);
 
     // Test protected route
     adminRoutes.get('/protected', requireUserAuth, (req, res) => {

@@ -4,12 +4,16 @@ import agent from '../../agent'
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap'
 
 const mapStateToProps = state => ({
-    tour: state.tours.tour || {}
+    tour: state.tours.tour || {},
+    langsActive: state.tours.langsActive || []
 })
 
 const mapDispatchToProps = dispatch => ({
     onLoad: (payload) => {
         dispatch({ type: 'TOUR_DETAIL_LOADED', payload })
+    },
+    onLangsLoaded: (payload) => {
+        dispatch({ type: 'GET_LANGS_ACTIVE', payload })
     },
     onSubmit: (payload) => {
         dispatch({ type: 'UPDATE_TOUR', payload: agent.Tours.update(payload) })
@@ -52,6 +56,7 @@ class Tour extends Component {
     }
     componentWillMount() {
         this.props.onLoad(agent.Tours.get(this.props.params.id))
+        this.props.onLangsLoaded(agent.Languages.actives())
 
         Object.assign(this.state, {
             _id: this.props.tour._id,
@@ -67,8 +72,9 @@ class Tour extends Component {
           status: nextProps.tour.status
         }));
       }
-	render() {
-		return <div>
+    render() {
+        console.log(this.props)
+        return <div>
             <p><small>{new Date(this.props.tour.createdAt).toDateString()}</small></p>
             <Form onSubmit={this.updateTour}>
                 <FormGroup row>
@@ -80,7 +86,14 @@ class Tour extends Component {
                 <FormGroup row>
                     <Label for='orderBy' sm={3}>Available languages</Label>
                     <Col sm={9}>
-                        English
+                        <Input type='select' name='selectMulti' id='exampleSelectMulti' multiple>
+                            { this.props.langsActive.map(lang => {
+                                return (
+                                    <option key={lang._id}>{lang.name}</option>
+                                    )
+                                })
+                            }
+                        </Input>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -101,8 +114,8 @@ class Tour extends Component {
                     </Col>
                 </FormGroup>
             </Form>
-		</div>
-	}
+        </div>
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tour)

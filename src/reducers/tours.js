@@ -1,11 +1,16 @@
 'use strict';
 
-export default (state = { tours: []}, action) => {
+export default (state = { tours: [], langsActive: []}, action) => {
   switch (action.type) {
     case 'TOURS_PAGE_LOADED':
       return {
         ...state, tours: action.payload.data
       }
+      case 'GET_LANGS_ACTIVE':
+      console.log(action)
+        return {
+          ...state, langsActive: action.payload.data
+        }
       case 'TOUR_DETAIL_LOADED':
         return {
           ...state, tour: action.payload.data

@@ -1,6 +1,6 @@
 'use strict';
 
-export default (state = { tours: []}, action) => {
+export default (state = { devices: []}, action) => {
   switch (action.type) {
     case 'DEVICES_PAGE_LOADED':
       return {

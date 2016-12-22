@@ -25,6 +25,7 @@ render(
                 <Route path='auth' component={Auth} />
                 <Route path='tours' component={Tours} />
                 <Route path='tours/:id' component={Tour} />
+                <Route path='tours/:id/edit' component={Tour} />
                 <Route path='devices/:id' component={Device} />
                 <Route path='devices' component={Devices} />
                 <Route path='languages' component={Languages} />
