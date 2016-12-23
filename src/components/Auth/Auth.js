@@ -34,7 +34,7 @@ class Auth extends Component {
                 <div className='container'>
                     <div className='row'>
                         <div className='offset-md-2 col-sm-6'>
-                            <h1>Sign in to GPSGuide</h1>
+                            <h1>GPSGuide admin panel</h1>
                             <ListErrors errors={this.props.errors} />
                             <Form onSubmit={this.submitForm(email, password)}>
                                 <FormGroup>
@@ -47,7 +47,7 @@ class Auth extends Component {
                                     <Input type='password' value={password} onChange={this.changePassword} name='password' id='userPassword' placeholder='Password' />
                                 </FormGroup>
                                 {' '}
-                                <Button type='submit' disabled={this.props.inProgress}>Submit</Button>
+                                <Button className='btn btn-success' type='submit' disabled={this.props.inProgress}>Sign in</Button>
                             </Form>
                         </div>
                     </div>

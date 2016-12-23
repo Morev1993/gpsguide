@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 }
 
+h1, h2 {
+	margin-bottom: .5em;
+}
+
 /*ul {
 	list-style: none;
 	padding-left: 0;
@@ -29,4 +33,45 @@ h1, h2, h3, h4, h5, h6 {
 
 .typepage {
 	padding-top: 5rem;
+}
+
+.f-i {
+    font-style: italic
+}
+
+.f-b {
+    font-weight: bold
+}
+
+.f-UC {
+    text-transform: uppercase
+}
+
+.f-lc {
+    text-transform: lowercase
+}
+
+.f-Cp {
+    text-transform: capitalize
+}
+
+.t-C {
+    text-align: center
+}
+
+.t-R {
+    text-align: right
+}
+
+.t-L {
+    text-align: left
+}
+
+.t-J {
+    text-align: justify;
+    word-spacing: -0.08em
+}
+
+.nobr {
+    white-space: nowrap
 }

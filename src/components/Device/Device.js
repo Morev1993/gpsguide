@@ -73,6 +73,7 @@ class Device extends Component {
       }
 	render() {
 		return <div>
+            <h2>{this.state.name}</h2>
             <p><small>{new Date(this.props.device.createdAt).toDateString()}</small></p>
             <Form onSubmit={this.updateDevice}>
                 <FormGroup row>
@@ -107,7 +108,7 @@ class Device extends Component {
                 </FormGroup>
                 <FormGroup check row>
                     <Col sm={{ size: 10, offset: 2 }}>
-                        <Button>Update</Button>
+                        <Button className='btn btn-success'>Update</Button>
                     </Col>
                 </FormGroup>
             </Form>

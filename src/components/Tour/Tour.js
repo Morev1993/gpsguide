@@ -28,14 +28,14 @@ class Tour extends Component {
         super();
         this.state = {
             _id: '',
-          name: '',
-          status: false
+            name: '',
+            status: false
         };
 
         this.updateState = field => ev => {
-          const state = this.state;
-          const newState = Object.assign({}, state, { [field]: ev.target.value });
-          this.setState(newState);
+            const state = this.state;
+            const newState = Object.assign({}, state, { [field]: ev.target.value });
+            this.setState(newState);
         }
 
         this.toggleStatus = field => ev => {
@@ -62,19 +62,20 @@ class Tour extends Component {
             _id: this.props.tour._id,
             name: this.props.tour.name,
             status: this.props.tour.status
-          });
+        });
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState(Object.assign({}, this.state, {
             _id: nextProps.tour._id,
-          name: nextProps.tour.name,
-          status: nextProps.tour.status
+            name: nextProps.tour.name,
+            status: nextProps.tour.status
         }));
-      }
+    }
     render() {
         console.log(this.props)
         return <div>
+            <h2>{this.state.name}</h2>
             <p><small>{new Date(this.props.tour.createdAt).toDateString()}</small></p>
             <Form onSubmit={this.updateTour}>
                 <FormGroup row>
@@ -110,7 +111,7 @@ class Tour extends Component {
                 </FormGroup>
                 <FormGroup check row>
                     <Col sm={{ size: 10, offset: 2 }}>
-                        <Button>Update</Button>
+                        <Button className='btn btn-success'>Update</Button>
                     </Col>
                 </FormGroup>
             </Form>

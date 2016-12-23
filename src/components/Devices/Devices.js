@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import agent from '../../agent'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table } from 'reactstrap'
 
 const mapStateToProps = state => ({
     devices: state.devices.devices || []
@@ -85,27 +85,39 @@ class Devices extends Component {
     }
     render() {
         return <div>
-            <div>
-                <h2>Devices</h2>
+            <div className='row'>
+                <div className='col-xs-6 float-xs-left'>
+                    <h2>Devices</h2>
+                </div>
+                <p className='col-xs-6 float-xs-right t-R'>
+                    <Button color='primary' onClick={this.toggle}>Add device</Button>
+                </p>
             </div>
             <div>
                 {!this.props.devices.length ? 'No data' : ''}
-                { this.props.devices.map(device => {
-                    return (
-                        <div key={device._id}>
-                            <h4>
-                                <Link to={`/devices/${device._id}`}>{device.name}</Link>
-                            </h4>
-                            <p>Code: {device.authCode}</p>
-                            <p><Button color='danger' onClick={this.deleteDevice.bind(this, device._id)}>Del</Button></p>
-                            <p><small>{new Date(device.createdAt).toDateString()}</small></p>
-                        </div>
-                        )
-                    })
-                }
-            </div>
-            <div>
-                <Button color='primary' onClick={this.toggle}>Add new</Button>
+                <Table>
+                    <thead>
+                      <tr>
+                        <th>Device name</th>
+                        <th>Code</th>
+                        <th>CreatedAt</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    { this.props.devices.map(device => {
+                        return (
+                            <tr key={device._id}>
+                                <th scope='row'><Link to={`/devices/${device._id}`}>{device.name}</Link></th>
+                                <td>Code: {device.authCode}</td>
+                                <td><small>{new Date(device.createdAt).toDateString()}</small></td>
+                                <td><Button color='danger' onClick={this.deleteDevice.bind(this, device._id)}>Delete</Button></td>
+                            </tr>
+                            )
+                        })
+                    }
+                    </tbody>
+                </Table>
             </div>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>New device</ModalHeader>
@@ -131,7 +143,7 @@ class Devices extends Component {
                         </FormGroup>
                         <FormGroup check row>
                             <Col sm={{ size: 10, offset: 2 }}>
-                                <Button>Submit</Button>
+                                <Button className='btn btn-success'>Create device</Button>
                             </Col>
                         </FormGroup>
                     </Form>

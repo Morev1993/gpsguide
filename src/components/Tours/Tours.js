@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import agent from '../../agent'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table } from 'reactstrap'
 import ListErrors from '../ListErrors'
 
 const mapStateToProps = state => ({
@@ -20,13 +20,14 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
+
 class Tours extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          modal: false,
-          name: '',
-          orderBy: 0
+            modal: false,
+            name: '',
+            orderBy: 0
         };
 
         this.toggle = this.toggle.bind(this);
@@ -39,31 +40,30 @@ class Tours extends Component {
             const tour = {
                 name: this.state.name,
                 orderBy: this.state.orderBy
-              };
+            };
             this.props.onSubmit(tour);
             this.props.onLoad(agent.Tours.all())
 
             this.setState({
-              modal: false
+                modal: false
             });
         }
-      }
-
-      changeName(e) {
-          this.setState({
-            name: e.target.value
-          });
-      }
-
-      changeOrderBy(e) {
-          this.setState({
-            orderBy: e.target.value
-          });
-      }
-
-      toggle() {
+    }
+    changeName(e) {
         this.setState({
-          modal: !this.state.modal
+            name: e.target.value
+        });
+      }
+
+    changeOrderBy(e) {
+        this.setState({
+            orderBy: e.target.value
+        });
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
         });
     }
     componentWillMount() {
@@ -75,26 +75,37 @@ class Tours extends Component {
     }
     render() {
         return <div>
-            <div>
-                <h2>Tours</h2>
+            <div className='row'>
+                <div className='col-xs-6 float-xs-left'>
+                    <h2>Tours</h2>
+                </div>
+                <p className='col-xs-6 float-xs-right t-R'>
+                    <Button color='primary' onClick={this.toggle}>Add tour</Button>
+                </p>
             </div>
             <div>
                 {!this.props.tours.length ? 'No data' : ''}
-                { this.props.tours.map(tour => {
-                    return (
-                        <div key={tour._id}>
-                            <h4>
-                                Name: <Link to={`/tours/${tour._id}/edit`}>{tour.name}</Link>
-                            </h4>
-                            <p><Button color='danger' onClick={this.deleteTour.bind(this, tour._id)}>Del</Button></p>
-                            <p><small>{new Date(tour.createdAt).toDateString()}</small></p>
-                        </div>
-                        )
-                    })
-                }
-            </div>
-            <div>
-                <Button color='primary' onClick={this.toggle}>Add new</Button>
+                <Table>
+                    <thead>
+                      <tr>
+                        <th>Tour name</th>
+                        <th>CreatedAt</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    { this.props.tours.map(tour => {
+                        return (
+                            <tr key={tour._id}>
+                                <th scope='row'><Link to={`/tours/${tour._id}/edit`}>{tour.name}</Link></th>
+                                <td><small>{new Date(tour.createdAt).toDateString()}</small></td>
+                                <td><Button color='danger' onClick={this.deleteTour.bind(this, tour._id)}>Delete</Button></td>
+                            </tr>
+                            )
+                        })
+                    }
+                    </tbody>
+                </Table>
             </div>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>New tour</ModalHeader>
@@ -115,7 +126,7 @@ class Tours extends Component {
                         </FormGroup>
                         <FormGroup check row>
                             <Col sm={{ size: 10, offset: 2 }}>
-                                <Button>Submit</Button>
+                                <Button className='btn btn-success'>Create tour</Button>
                             </Col>
                         </FormGroup>
                     </Form>

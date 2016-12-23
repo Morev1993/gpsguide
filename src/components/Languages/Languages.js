@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import agent from '../../agent'
 import { Table } from 'reactstrap'
+import { Button, ButtonGroup } from 'reactstrap'
 
 const mapStateToProps = state => ({
     languages: state.languages.languages || []
@@ -57,7 +58,6 @@ class Languages extends Component {
                         <th>Code</th>
                         <th>Status</th>
                         <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -67,8 +67,12 @@ class Languages extends Component {
                                     <th scope='row'>{language.name}</th>
                                     <td>{language.code}</td>
                                     <td>Status: <input type='checkbox' checked={language.status} onChange={this.toggleStatus('status')} name='status' id='status'></input></td>
-                                    <td><button onClick={this.updateLang.bind(this, language._id)} className='btn btn-success'>Update</button></td>
-                                    <td><button onClick={this.deleteLang.bind(this, language._id)} className='btn btn-danger'>Delete</button></td>
+                                    <td>
+                                        <ButtonGroup>
+                                            <Button onClick={this.updateLang.bind(this, language._id)} className='btn btn-success'>Update</Button>{' '}
+                                            <Button onClick={this.deleteLang.bind(this, language._id)}  className='btn btn-danger'>Delete</Button>
+                                        </ButtonGroup>
+                                    </td>
                                   </tr>
                                 )}
                             )

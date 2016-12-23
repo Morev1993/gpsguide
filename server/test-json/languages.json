@@ -5,7 +5,7 @@
 		"code": "af-ZA",
 		"status": false,
 		"orderBy": 0,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Arabic",
@@ -13,7 +13,7 @@
 		"code": "ar",
 		"status": false,
 		"orderBy": 1,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Bulgarian",
@@ -21,7 +21,7 @@
 		"code": "bg-BG",
 		"status": false,
 		"orderBy": 2,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Catalan",
@@ -29,7 +29,7 @@
 		"code": "ca-AD",
 		"status": false,
 		"orderBy": 3,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Czech",
@@ -37,7 +37,7 @@
 		"code": "cs-CZ",
 		"status": false,
 		"orderBy": 4,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Welsh",
@@ -45,7 +45,7 @@
 		"code": "cy-GB",
 		"status": false,
 		"orderBy": 5,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Danish",
@@ -53,7 +53,7 @@
 		"code": "da-DK",
 		"status": false,
 		"orderBy": 6,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "German (Austria)",
@@ -61,7 +61,7 @@
 		"code": "de-AT",
 		"status": false,
 		"orderBy": 7,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "German (Switzerland)",
@@ -69,7 +69,7 @@
 		"code": "de-CH",
 		"status": false,
 		"orderBy": 8,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "German (Germany)",
@@ -77,7 +77,7 @@
 		"code": "de-DE",
 		"status": false,
 		"orderBy": 9,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Greek",
@@ -85,7 +85,7 @@
 		"code": "el-GR",
 		"status": false,
 		"orderBy": 10,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "English (UK)",
@@ -93,7 +93,7 @@
 		"code": "en-GB",
 		"status": false,
 		"orderBy": 11,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "English (US)",
@@ -101,7 +101,7 @@
 		"code": "en-US",
 		"status": false,
 		"orderBy": 12,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Spanish (Chile)",
@@ -109,7 +109,7 @@
 		"code": "es-CL",
 		"status": false,
 		"orderBy": 13,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Spanish (Spain)",
@@ -117,7 +117,7 @@
 		"code": "es-ES",
 		"status": false,
 		"orderBy": 14,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Spanish (Mexico)",
@@ -125,7 +125,7 @@
 		"code": "es-MX",
 		"status": false,
 		"orderBy": 15,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Estonian",
@@ -133,7 +133,7 @@
 		"code": "et-EE",
 		"status": false,
 		"orderBy": 16,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Basque",
@@ -141,7 +141,7 @@
 		"code": "eu",
 		"status": false,
 		"orderBy": 17,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Persian",
@@ -149,7 +149,7 @@
 		"code": "fa-IR",
 		"status": false,
 		"orderBy": 18,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Finnish",
@@ -157,7 +157,7 @@
 		"code": "fi-FI",
 		"status": false,
 		"orderBy": 19,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "French (Canada)",
@@ -165,7 +165,7 @@
 		"code": "fr-CA",
 		"status": false,
 		"orderBy": 20,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "French (France)",
@@ -173,7 +173,7 @@
 		"code": "fr-FR",
 		"status": false,
 		"orderBy": 21,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Hebrew",
@@ -181,7 +181,7 @@
 		"code": "he-IL",
 		"status": false,
 		"orderBy": 22,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Croatian",
@@ -189,7 +189,7 @@
 		"code": "hr-HR",
 		"status": false,
 		"orderBy": 23,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Hungarian",
@@ -197,7 +197,7 @@
 		"code": "hu-HU",
 		"status": false,
 		"orderBy": 24,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Indonesian",
@@ -205,7 +205,7 @@
 		"code": "id-ID",
 		"status": false,
 		"orderBy": 25,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Icelandic",
@@ -213,7 +213,7 @@
 		"code": "is-IS",
 		"status": false,
 		"orderBy": 26,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Italian",
@@ -221,7 +221,7 @@
 		"code": "it-IT",
 		"status": false,
 		"orderBy": 27,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Japanese",
@@ -229,7 +229,7 @@
 		"code": "ja-JP",
 		"status": false,
 		"orderBy": 28,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Khmer",
@@ -237,7 +237,7 @@
 		"code": "km-KH",
 		"status": false,
 		"orderBy": 29,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Korean",
@@ -245,7 +245,7 @@
 		"code": "ko-KR",
 		"status": false,
 		"orderBy": 30,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Lithuanian",
@@ -253,7 +253,7 @@
 		"code": "lt-LT",
 		"status": false,
 		"orderBy": 31,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Latvian",
@@ -261,7 +261,7 @@
 		"code": "lv-LV",
 		"status": false,
 		"orderBy": 32,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Mongolian",
@@ -269,7 +269,7 @@
 		"code": "mn-MN",
 		"status": false,
 		"orderBy": 33,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Norwegian (Bokmål)",
@@ -277,7 +277,7 @@
 		"code": "nb-NO",
 		"status": false,
 		"orderBy": 34,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Dutch",
@@ -285,7 +285,7 @@
 		"code": "nl-NL",
 		"status": false,
 		"orderBy": 35,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Norwegian (Nynorsk)",
@@ -293,7 +293,7 @@
 		"code": "nn-NO",
 		"status": false,
 		"orderBy": 36,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Polish",
@@ -301,7 +301,7 @@
 		"code": "pl-PL",
 		"status": false,
 		"orderBy": 37,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Portuguese (Brazil)",
@@ -309,7 +309,7 @@
 		"code": "pt-BR",
 		"status": false,
 		"orderBy": 38,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Portuguese (Portugal)",
@@ -317,7 +317,7 @@
 		"code": "pt-PT",
 		"status": false,
 		"orderBy": 39,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Romanian",
@@ -325,7 +325,7 @@
 		"code": "ro-RO",
 		"status": false,
 		"orderBy": 40,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Russian",
@@ -333,7 +333,7 @@
 		"code": "ru-RU",
 		"status": false,
 		"orderBy": 41,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Slovak",
@@ -341,7 +341,7 @@
 		"code": "sk-SK",
 		"status": false,
 		"orderBy": 42,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Slovenian",
@@ -349,7 +349,7 @@
 		"code": "sl-SI",
 		"status": false,
 		"orderBy": 43,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Serbian",
@@ -357,7 +357,7 @@
 		"code": "sr-RS",
 		"status": false,
 		"orderBy": 44,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Swedish",
@@ -365,7 +365,7 @@
 		"code": "sv-SE",
 		"status": false,
 		"orderBy": 45,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Thai",
@@ -373,7 +373,7 @@
 		"code": "th-TH",
 		"status": false,
 		"orderBy": 46,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Turkish",
@@ -381,7 +381,7 @@
 		"code": "tr-TR",
 		"status": false,
 		"orderBy": 47,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Ukrainian",
@@ -389,7 +389,7 @@
 		"code": "uk-UA",
 		"status": false,
 		"orderBy": 48,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Vietnamese",
@@ -397,7 +397,7 @@
 		"code": "vi-VN",
 		"status": false,
 		"orderBy": 49,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Chinese (PRC)",
@@ -405,7 +405,7 @@
 		"code": "zh-CN",
 		"status": false,
 		"orderBy": 50,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	},
 	{
 		"name": "Chinese (Taiwan)",
@@ -413,6 +413,6 @@
 		"code": "zh-TW",
 		"status": false,
 		"orderBy": 51,
-		"accountId": "5854f6562558770db2a53dfc"
+		"accountId": "58535472cc3baa2784d76501"
 	}
 ]
