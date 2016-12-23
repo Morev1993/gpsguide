@@ -34,7 +34,8 @@ module.exports = {
 				],
 				exclude: /node_modules/,
 				query: {
-		        	presets: [ "es2015", "stage-0", "react", "react-hmre" ]
+		        	presets: [ "es2015", "stage-0", "react", "react-hmre"],
+					plugins: ["transform-decorators-legacy"]
 		      	},
 		      	plugins: ['transform-runtime']
 			},

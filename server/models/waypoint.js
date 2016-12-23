@@ -19,7 +19,7 @@ var WaypointSchema = new Schema({
         type: Number,
         required: true
     },
-    lon: {
+    lng: {
         type: Number,
         required: true
     },

@@ -6,7 +6,7 @@ exports.create = function(req, res, next) {
 	var tourId = req.params.tourId;
     var name = req.body.name;
 	var lat = req.body.lat;
-	var lon = req.body.lon;
+	var lng = req.body.lng;
 	var tolerance = req.body.tolerance;
 	var delay = req.body.delay;
 	var overlap = req.body.overlap;
@@ -25,13 +25,7 @@ exports.create = function(req, res, next) {
         });
     }
 
-	if (!tourId) {
-        return res.status(422).send({
-            error: 'TourId is empty.'
-        });
-    }
-
-	if (!lat || !lon) {
+	if (!lat || !lng) {
         return res.status(422).send({
             error: 'Coords is empty.'
         });
@@ -41,7 +35,7 @@ exports.create = function(req, res, next) {
 		tourId,
         name,
 		lat,
-		lon,
+		lng,
 		tolerance,
 		delay,
 		overlap,

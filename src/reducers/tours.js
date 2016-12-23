@@ -7,15 +7,29 @@ export default (state = { tours: [], langsActive: []}, action) => {
         ...state, tours: action.payload.data
       }
       case 'GET_LANGS_ACTIVE':
-      console.log(action)
         return {
           ...state, langsActive: action.payload.data
         }
+        case 'GET_WAYPOINTS':
+          return {
+            ...state, waypoints: action.payload.data
+          }
+          case 'UPDATE_WAYPOINT':
+            return {
+                ...state,
+                inProgress: null,
+                errors: action.error ? action.payload.errors : null
+            }
+            case 'DELETE_WAYPOINT':
+                return {
+                    ...state,
+                    errors: action.error ? action.payload.errors : null
+            }
       case 'TOUR_DETAIL_LOADED':
-        return {
-          ...state, tour: action.payload.data
-        }
-        case 'UPDATE_TOUR':
+            return {
+              ...state, tour: action.payload.data
+            }
+      case 'UPDATE_TOUR':
           return {
               ...state,
               inProgress: null,

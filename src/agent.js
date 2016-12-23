@@ -79,13 +79,15 @@ const Languages = {
 
 const Waypoints = {
     create: waypoint =>
-        requests.post(`/waypoints`, { waypoint }),
-    all: () =>
-        requests.get(`/waypoints`),
+        requests.post(`/waypoints`, waypoint),
+    all: (tourId) =>
+        requests.get(`/tours/${tourId}/waypoints`),
     get: id =>
         requests.get(`/waypoints/${id}`),
-    update: id =>
-        requests.put(`/waypoints/${id}`),
+    update: waypoint => {
+        var id = waypoint._id;
+        requests.put(`/waypoints/${id}`, waypoint)
+    },
     delete: id =>
         requests.del(`/waypoints/${id}`)
 }
