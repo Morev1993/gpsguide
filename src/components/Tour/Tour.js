@@ -1,13 +1,16 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import agent from '../../agent'
-import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col } from 'reactstrap'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import controllable from 'react-controllables'
 
 import GoogleMap from 'google-map-react'
 import MyGreatPlaceWithControllableHover from './my_great_place_with_controllable_hover.js'
 import {K_SIZE} from './my_great_place_with_controllable_hover_styles.js'
+import ListErrors from '../ListErrors'
+
+import './waypoint.scss'
 
 const mapStateToProps = state => ({
     tour: state.tours.tour || {},
@@ -25,11 +28,14 @@ const mapDispatchToProps = dispatch => ({
     onWaypointsLoaded: (payload) => {
         dispatch({ type: 'GET_WAYPOINTS', payload })
     },
+    onWaypointCreate: (payload) => {
+        dispatch({ type: 'CREATE_WAYPOINT', payload: agent.Waypoints.create(payload) })
+    },
     onWaypointUpdate: (payload) => {
-        dispatch({ type: 'GET_WAYPOINTS', payload: agent.Waypoints.update(payload) })
+        dispatch({ type: 'UPDATE_WAYPOINT', payload: agent.Waypoints.update(payload) })
     },
     onWaypointDelete: (payload) => {
-        dispatch({ type: 'GET_WAYPOINTS', payload })
+        dispatch({ type: 'DELETE_WAYPOINT', payload })
     },
     onTourSubmit: (payload) => {
         dispatch({ type: 'UPDATE_TOUR', payload: agent.Tours.update(payload) })
@@ -63,18 +69,32 @@ class Tour extends Component {
       };
 
       shouldComponentUpdate = shouldPureComponentUpdate;
+
     constructor() {
         super();
         this.state = {
             _id: '',
             name: '',
-            status: false
+            status: false,
+            modal: false,
+            waypoints: [],
+            waypoint: {}
         };
 
         this.updateState = field => ev => {
             const state = this.state;
             const newState = Object.assign({}, state, { [field]: ev.target.value });
             this.setState(newState);
+        }
+
+        this.updateWaypointState = field => ev => {
+            const state = this.state.waypoint;
+            const newState = Object.assign({}, state, {
+                [field]: ev.target.value
+            });
+            this.setState({
+                waypoint: newState
+            });
         }
 
         this.toggleStatus = field => ev => {
@@ -88,9 +108,20 @@ class Tour extends Component {
 
             const tour = Object.assign({}, this.state);
 
-            console.log(tour);
-
             this.props.onTourSubmit(tour)
+        }
+
+        this.editWaypoint = (e) => {
+            e.preventDefault();
+
+            const waypoint = Object.assign({}, this.state.waypoint);
+
+            this.props.onWaypointUpdate(waypoint)
+            this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
+
+            this.setState({
+                modal: false
+            });
         }
     }
 
@@ -118,7 +149,8 @@ class Tour extends Component {
         Object.assign(this.state, {
             _id: this.props.tour._id,
             name: this.props.tour.name,
-            status: this.props.tour.status
+            status: this.props.tour.status,
+            waypoints: this.props.waypoints
         });
     }
 
@@ -126,25 +158,39 @@ class Tour extends Component {
         this.setState(Object.assign({}, this.state, {
             _id: nextProps.tour._id,
             name: nextProps.tour.name,
-            status: nextProps.tour.status
+            status: nextProps.tour.status,
+            waypoints: nextProps.waypoints
+        }));
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    openEditWaypointModal(waypoint) {
+        this.setState(Object.assign({}, this.state, {
+            modal: true,
+            waypoint: waypoint
         }));
     }
     render() {
-        const waypoints = this.props.waypoints
+        const waypoints = this.state.waypoints
           .map(waypoint => {
             const {_id, name, ...coords} = waypoint;
 
             return (
               <MyGreatPlaceWithControllableHover
                 key={_id}
+                id={_id}
+                openEditWaypointModal={this.openEditWaypointModal.bind(this)}
                 {...coords}
-                text={name}
+                waypoint={waypoint}
                 // use your hover state (from store, react-controllables etc...)
                 hover={this.props.hoverKey === _id} />
             );
           });
-
-          console.log(waypoints)
         return <div>
             <h2>{this.state.name}</h2>
             <p><small>{new Date(this.props.tour.createdAt).toDateString()}</small></p>
@@ -184,7 +230,6 @@ class Tour extends Component {
                             hoverDistance={K_SIZE / 2}
                             onBoundsChange={this._onBoundsChange}
                             onChildClick={this._onChildClick}
-                            onChildMouseEnter={this._onChildMouseEnter}
                             onChildMouseLeave={this._onChildMouseLeave}>
                             {waypoints}
                           </GoogleMap>
@@ -196,6 +241,87 @@ class Tour extends Component {
                     </Col>
                 </FormGroup>
             </Form>
+
+            <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)} className={this.props.className}>
+                <ModalHeader toggle={this.toggle.bind(this)}>Edit waypoint</ModalHeader>
+                <ModalBody>
+                    <ListErrors errors={this.props.errors}></ListErrors>
+                    <Form onSubmit={this.editWaypoint}>
+                        <FormGroup row>
+                            <Label for='point-name' sm={3}>Name</Label>
+                            <Col sm={9}>
+                                <Input type='text' value={this.state.waypoint.name} onChange={this.updateWaypointState('name')} name='point-name' id='point-name' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='lat' sm={3}>Latitude</Label>
+                            <Col sm={9}>
+                                <Input type='number' value={this.state.waypoint.lat} onChange={this.updateWaypointState('lat')} name='lat' id='lat' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='lng' sm={3}>Longitude</Label>
+                            <Col sm={9}>
+                                <Input type='number' value={this.state.waypoint.lng} onChange={this.updateWaypointState('lng')} name='lng' id='lng' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for='direction' sm={3}>Direction</Label>
+                          <Col sm={9}>
+                              <Input type='select' value={this.state.waypoint.direction}  name='direction' onChange={this.updateWaypointState('direction')}  id='direction'>
+                                <option>N</option>
+                                <option>S</option>
+                                <option>E</option>
+                                <option>W</option>
+                                <option>SW</option>
+                                <option>SE</option>
+                                <option>NW</option>
+                                <option>OD</option>
+                              </Input>
+                         </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for='overlap' sm={3}>Overlap</Label>
+                          <Col sm={9}>
+                              <Input type='select' name='overlap' value={this.state.waypoint.overlap} onChange={this.updateWaypointState('overlap')} id='overlap'>
+                                <option>ignore</option>
+                                <option>interrupt</option>
+                                <option>queue</option>
+                              </Input>
+                         </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='overlap' sm={3}>Tolerance</Label>
+                            <Col sm={9}>
+                                <Input type='number' value={this.state.waypoint.tolerance} onChange={this.updateWaypointState('tolerance')} name='tolerance' id='tolerance' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='delay' sm={3}>Delay</Label>
+                            <Col sm={9}>
+                                <Input type='number' value={this.state.waypoint.delay} onChange={this.updateWaypointState('delay')} name='delay' id='delay' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='radius' sm={3}>Radius</Label>
+                            <Col sm={9}>
+                                <Input type='number' value={this.state.waypoint.radius} onChange={this.updateWaypointState('radius')} name='radius' id='radius' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='orderBy' sm={3}>OrderBy</Label>
+                            <Col sm={9}>
+                                <Input type='number' value={this.state.waypoint.orderBy} onChange={this.updateWaypointState('orderBy')} name='orderBy' id='orderBy' required/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup check row>
+                            <Col sm={{ size: 10, offset: 2 }}>
+                                <Button className='btn btn-success'>Send</Button>
+                            </Col>
+                        </FormGroup>
+                    </Form>
+                </ModalBody>
+            </Modal>
         </div>
     }
 }

@@ -10,6 +10,12 @@ export default (state = { tours: [], langsActive: []}, action) => {
         return {
           ...state, langsActive: action.payload.data
         }
+        case 'CREATE_WAYPOINT':
+            return {
+                ...state,
+                inProgress: null,
+                errors: action.error ? action.payload.errors : null
+        }
         case 'GET_WAYPOINTS':
           return {
             ...state, waypoints: action.payload.data

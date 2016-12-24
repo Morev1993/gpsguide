@@ -23,6 +23,10 @@ var WaypointSchema = new Schema({
         type: Number,
         required: true
     },
+    direction: {
+        type: String,
+        default: 'N'
+    },
     tolerance: {
         type: Number,
         default: 30
@@ -32,8 +36,8 @@ var WaypointSchema = new Schema({
         default: 0
     },
     overlap: {
-        type: [String],
-        default: ['ignore', 'interrupt', 'queue']
+        type: String,
+        default: 'ignore'
     },
     radius : {
         type: Number,

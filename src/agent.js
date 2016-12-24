@@ -82,11 +82,13 @@ const Waypoints = {
         requests.post(`/waypoints`, waypoint),
     all: (tourId) =>
         requests.get(`/tours/${tourId}/waypoints`),
-    get: id =>
-        requests.get(`/waypoints/${id}`),
+    get: id => {
+        requests.get(`/waypoints/${id}`)
+    },
     update: waypoint => {
-        var id = waypoint._id;
-        requests.put(`/waypoints/${id}`, waypoint)
+        var id = waypoint._id
+        var tourId = waypoint.tourId
+        requests.put(`/tours/${tourId}/waypoints/${id}`, waypoint)
     },
     delete: id =>
         requests.del(`/waypoints/${id}`)
