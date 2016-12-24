@@ -261,13 +261,13 @@ class Tour extends Component {
                         <FormGroup row>
                             <Label for='lat' sm={3}>Latitude</Label>
                             <Col sm={9}>
-                                <Input type='number' value={this.state.waypoint.lat} onChange={this.updateWaypointState('lat')} name='lat' id='lat' required/>
+                                <Input type='number' step='any' value={this.state.waypoint.lat} onChange={this.updateWaypointState('lat')} name='lat' id='lat'/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for='lng' sm={3}>Longitude</Label>
                             <Col sm={9}>
-                                <Input type='number' value={this.state.waypoint.lng} onChange={this.updateWaypointState('lng')} name='lng' id='lng' required/>
+                                <Input type='number' step='any' value={this.state.waypoint.lng} onChange={this.updateWaypointState('lng')} name='lng' id='lng'/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
