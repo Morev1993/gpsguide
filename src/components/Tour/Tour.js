@@ -35,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: 'UPDATE_WAYPOINT', payload: agent.Waypoints.update(payload) })
     },
     onWaypointDelete: (payload) => {
-        dispatch({ type: 'DELETE_WAYPOINT', payload })
+        dispatch({ type: 'DELETE_WAYPOINT', payload: agent.Waypoints.delete(payload) })
     },
     onTourSubmit: (payload) => {
         dispatch({ type: 'UPDATE_TOUR', payload: agent.Tours.update(payload) })
@@ -175,6 +175,11 @@ class Tour extends Component {
             waypoint: waypoint
         }));
     }
+
+    deleteWaypoint(waypoint) {
+        this.props.onWaypointDelete(waypoint);
+        this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
+    }
     render() {
         const waypoints = this.state.waypoints
           .map(waypoint => {
@@ -185,9 +190,9 @@ class Tour extends Component {
                 key={_id}
                 id={_id}
                 openEditWaypointModal={this.openEditWaypointModal.bind(this)}
+                deleteWaypoint={this.deleteWaypoint.bind(this)}
                 {...coords}
                 waypoint={waypoint}
-                // use your hover state (from store, react-controllables etc...)
                 hover={this.props.hoverKey === _id} />
             );
           });
@@ -276,6 +281,7 @@ class Tour extends Component {
                                 <option>SW</option>
                                 <option>SE</option>
                                 <option>NW</option>
+                                <option>NE</option>
                                 <option>OD</option>
                               </Input>
                          </Col>

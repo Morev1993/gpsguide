@@ -90,8 +90,11 @@ const Waypoints = {
         var tourId = waypoint.tourId
         requests.put(`/tours/${tourId}/waypoints/${id}`, waypoint)
     },
-    delete: id =>
-        requests.del(`/waypoints/${id}`)
+    delete: waypoint => {
+        var id = waypoint._id
+        var tourId = waypoint.tourId
+        requests.del(`/tours/${tourId}/waypoints/${id}`)
+    }
 }
 
 export default {

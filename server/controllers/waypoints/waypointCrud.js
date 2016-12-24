@@ -7,6 +7,7 @@ exports.create = function(req, res, next) {
     var name = req.body.name;
 	var lat = req.body.lat;
 	var lng = req.body.lng;
+    var direction = req.body.direction;
 	var tolerance = req.body.tolerance;
 	var delay = req.body.delay;
 	var overlap = req.body.overlap;
@@ -37,6 +38,7 @@ exports.create = function(req, res, next) {
 		lat,
 		lng,
 		tolerance,
+        direction,
 		delay,
 		overlap,
 		radius,

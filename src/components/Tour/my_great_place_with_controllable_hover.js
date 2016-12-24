@@ -23,8 +23,9 @@ export default class MyGreatPlaceWithControllableHover extends Component {
       this.props.openEditWaypointModal(waypoint);
   }
 
-  deleteWaypoint(e) {
+  deleteWaypoint(waypoint, e) {
       e.preventDefault();
+      this.props.deleteWaypoint(waypoint)
   }
 
   render() {
