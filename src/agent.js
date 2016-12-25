@@ -78,8 +78,11 @@ const Languages = {
 }
 
 const Waypoints = {
-    create: waypoint =>
-        requests.post(`/waypoints`, waypoint),
+    create: state => {
+        var tourId = state._id
+        var payload = state.waypoint
+        requests.post(`/tours/${tourId}/waypoints`, payload)
+    },
     all: (tourId) =>
         requests.get(`/tours/${tourId}/waypoints`),
     get: id => {

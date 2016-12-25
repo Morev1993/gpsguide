@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import agent from '../../agent'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table } from 'reactstrap'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import controllable from 'react-controllables'
 
@@ -78,7 +78,8 @@ class Tour extends Component {
             status: false,
             modal: false,
             waypoints: [],
-            waypoint: {}
+            waypoint: {},
+            mapShowed: true
         };
 
         this.updateState = field => ev => {
@@ -116,12 +117,16 @@ class Tour extends Component {
 
             const waypoint = Object.assign({}, this.state.waypoint);
 
-            this.props.onWaypointUpdate(waypoint)
+            if (this.state.operation === 'create') {
+                console.log(this.state);
+                this.props.onWaypointCreate(this.state)
+            } else {
+                this.props.onWaypointUpdate(waypoint)
+            }
+
             this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
 
-            this.setState({
-                modal: false
-            });
+            this.toggle();
         }
     }
 
@@ -131,6 +136,7 @@ class Tour extends Component {
       }
 
       _onChildClick = (key, childProps) => {
+          console.log(childProps)
         this.props.onCenterChange([childProps.lat, childProps.lng]);
       }
 
@@ -141,6 +147,22 @@ class Tour extends Component {
       _onChildMouseLeave = (/* key, childProps */) => {
         this.props.onHoverKeyChange(null);
       }
+
+      _onClick = ({lat, lng}) => {
+          this.openCreateWaypointModal(lat, lng)
+      }
+
+      openCreateWaypointModal(lat, lng) {
+          this.setState(Object.assign({}, this.state, {
+              modal: true,
+              operation: 'create',
+              waypoint: {
+                  lat: lat || '',
+                  lng: lng || ''
+              }
+          }));
+      }
+
     componentWillMount() {
         this.props.onLoad(agent.Tours.get(this.props.params.id))
         this.props.onLangsLoaded(agent.Languages.actives())
@@ -150,7 +172,8 @@ class Tour extends Component {
             _id: this.props.tour._id,
             name: this.props.tour.name,
             status: this.props.tour.status,
-            waypoints: this.props.waypoints
+            waypoints: this.props.waypoints,
+            mapShowed: true
         });
     }
 
@@ -159,7 +182,8 @@ class Tour extends Component {
             _id: nextProps.tour._id,
             name: nextProps.tour.name,
             status: nextProps.tour.status,
-            waypoints: nextProps.waypoints
+            waypoints: nextProps.waypoints,
+            mapShowed: true
         }));
     }
 
@@ -169,9 +193,12 @@ class Tour extends Component {
         });
     }
 
-    openEditWaypointModal(waypoint) {
+    openEditWaypointModal(waypoint, event) {
+        event.stopPropagation()
+
         this.setState(Object.assign({}, this.state, {
             modal: true,
+            operation: 'edit',
             waypoint: waypoint
         }));
     }
@@ -179,6 +206,16 @@ class Tour extends Component {
     deleteWaypoint(waypoint) {
         this.props.onWaypointDelete(waypoint);
         this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
+    }
+    showMap() {
+        this.setState(Object.assign({}, this.state, {
+            mapShowed: true
+        }));
+    }
+    showList() {
+        this.setState(Object.assign({}, this.state, {
+            mapShowed: false
+        }));
     }
     render() {
         const waypoints = this.state.waypoints
@@ -225,23 +262,59 @@ class Tour extends Component {
                         <Input type='checkbox' checked={this.state.status} onChange={this.toggleStatus('status')} name='status' id='status'/>
                     </Col>
                 </FormGroup>
-                <FormGroup row>
-                    <Col sm={12}>Waypoints</Col>
-                    <Col className='map' sm={12}>
-                        <GoogleMap
-                            bootstrapURLKeys={'AIzaSyBFVKi5ynE6HyuzGMfQMv5cQkOmHblGXQQ'}
-                            center={this.props.center}
-                            zoom={this.props.zoom}
-                            hoverDistance={K_SIZE / 2}
-                            onBoundsChange={this._onBoundsChange}
-                            onChildClick={this._onChildClick}
-                            onChildMouseLeave={this._onChildMouseLeave}>
-                            {waypoints}
-                          </GoogleMap>
+                <FormGroup className='waypoints-heading' row>
+                    <Col sm={6}>Waypoints</Col>
+                    <Col className='t-R' sm={6}>
+                        <img onClick={this.showMap.bind(this)} src='/src/map.svg'/>
+                        <img onClick={this.showList.bind(this)} src='/src/list.svg'/>
                     </Col>
                 </FormGroup>
+                { this.state.mapShowed ?
+                <FormGroup className='map'>
+                    <GoogleMap
+                        bootstrapURLKeys={'AIzaSyBFVKi5ynE6HyuzGMfQMv5cQkOmHblGXQQ'}
+                        center={this.props.center}
+                        zoom={this.props.zoom}
+                        hoverDistance={K_SIZE / 2}
+                        onBoundsChange={this._onBoundsChange}
+                        onChildMouseDown={() => {}}
+                        onClick={this._onClick}
+                        onChildClick={this._onChildClick}
+                        onChildMouseLeave={this._onChildMouseLeave}>
+                        {waypoints}
+                      </GoogleMap>
+                </FormGroup>
+                :
+                <div>
+                    <Table>
+                        <thead>
+                          <tr>
+                            <th>Tour name</th>
+                            <th>CreatedAt</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        { this.state.waypoints.map(waypoint => {
+                            return (
+                                <tr key={waypoint._id}>
+                                    <th scope='row'>{waypoint.name}</th>
+                                    <td><small>{new Date(waypoint.createdAt).toDateString()}</small></td>
+                                    <td><Button color='primary' onClick={this.openEditWaypointModal.bind(this, waypoint)}>Edit</Button></td>
+                                    <td><Button color='danger' onClick={this.deleteWaypoint.bind(this, waypoint)}>Delete</Button></td>
+                                </tr>
+                                )
+                            })
+                        }
+                        </tbody>
+                    </Table>
+                    <div className='t-R'>
+                        <Button onClick={this.openCreateWaypointModal.bind(this)} className='btn btn-primary'>Create waypoint</Button>
+                    </div>
+                </div>
+            }
                 <FormGroup check row>
-                    <Col sm={{ size: 10, offset: 2 }}>
+                    <Col sm={{ size: 10}}>
                         <Button className='btn btn-success'>Update</Button>
                     </Col>
                 </FormGroup>
