@@ -7,6 +7,9 @@ var LanguageCrudCtrl = require(__base + 'controllers/language/languageCrud');
 var TourCrudCtrl = require(__base + 'controllers/tour/tourCrud');
 var WaypointsCrudCtrl = require(__base + 'controllers/waypoints/waypointCrud');
 
+var TourAppCtrl = require(__base + 'controllers/tour/tourApp');
+var LanguageAppCtrl = require(__base + 'controllers/language/languageApp');
+
 var passportService = require(__base + 'config/passport');
 
 // Middleware to require login/auth
@@ -98,12 +101,12 @@ module.exports = function(app) {
     apiRoutes.use('/', appAuthRoutes);
 
     //app-active-langs
-    appLanguagesRoutes.get('/languages/active', requireDeviceAuth, LanguageCrudCtrl.getActives);
+    appLanguagesRoutes.get('/languages/active', requireDeviceAuth, LanguageAppCtrl.getActives);
     apiRoutes.use('/', appLanguagesRoutes);
 
     //app-tours
-    appToursRoutes.get('/tours', requireDeviceAuth, TourCrudCtrl.getAll);
-    appToursRoutes.get('/tours/:id', requireDeviceAuth, TourCrudCtrl.get);
+    appToursRoutes.get('/tours', requireDeviceAuth, TourAppCtrl.getAll);
+    appToursRoutes.get('/tours/:id', requireDeviceAuth, TourAppCtrl.get);
     apiRoutes.use('/', appToursRoutes);
 
     app.use('/api', apiRoutes);

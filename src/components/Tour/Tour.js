@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
+import ReactDOM from 'react-dom';
 import agent from '../../agent'
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table } from 'reactstrap'
 import shouldPureComponentUpdate from 'react-pure-render/function'
@@ -77,6 +78,7 @@ class Tour extends Component {
             name: '',
             status: false,
             modal: false,
+            languages: [],
             waypoints: [],
             waypoint: {},
             mapShowed: true
@@ -127,6 +129,21 @@ class Tour extends Component {
             this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
 
             this.toggle();
+        }
+
+        this.updateStateMultiSelect = field => {
+            var node = ReactDOM.findDOMNode(this.refs.languages);
+            var options = [].slice.call(node.querySelectorAll('option'));
+            var selected = options.filter(function (option) {
+                return option.selected;
+            });
+            var selectedValues = selected.map(function (option) {
+                return option.getAttribute('data-id');
+            });
+
+            const state = this.state;
+            const newState = Object.assign({}, state, { [field]: selectedValues });
+            this.setState(newState);
         }
     }
 
@@ -246,10 +263,10 @@ class Tour extends Component {
                 <FormGroup row>
                     <Label for='orderBy' sm={3}>Available languages</Label>
                     <Col sm={9}>
-                        <Input type='select' name='selectMulti' id='exampleSelectMulti' multiple>
+                        <Input type='select' ref='languages' name='selectMulti' onChange={this.updateStateMultiSelect.bind(this, 'languages')}  id='exampleSelectMulti' multiple>
                             { this.props.langsActive.map(lang => {
                                 return (
-                                    <option key={lang._id}>{lang.name}</option>
+                                    <option data-id={lang._id} key={lang._id}>{lang.name}</option>
                                     )
                                 })
                             }

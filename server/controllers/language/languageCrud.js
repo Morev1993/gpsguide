@@ -19,7 +19,7 @@ exports.getAll = function(req, res) {
 exports.getActives = function(req, res) {
 	Language.find({
         accountId: req.user._id,
-		status: 'enabled'
+		status: true
     }, function(err, languages) {
 		if (err) {
 			return res.send(err);

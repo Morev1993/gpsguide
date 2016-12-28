@@ -1,5 +1,4 @@
-var jwt = require('jsonwebtoken'),
-    Tour = require(__base + 'models/tour'),
+var Tour = require(__base + 'models/tour'),
     config = require(__base + 'config/main');
 
 exports.create = function(req, res, next) {

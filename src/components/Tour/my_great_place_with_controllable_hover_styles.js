@@ -9,9 +9,8 @@ const greatPlaceStyle = {
   left: -K_SIZE / 2,
   top: -K_SIZE / 2,
 
-  border: '3px solid black',
   borderRadius: K_SIZE,
-  backgroundColor: 'white',
+  backgroundColor: 'transparent',
   textAlign: 'center',
   color: 'black',
   fontSize: 16,
@@ -22,7 +21,6 @@ const greatPlaceStyle = {
 
 const greatPlaceStyleHover = {
   ...greatPlaceStyle,
-  border: '3px solid red',
   color: '#f44336'
 };
 
