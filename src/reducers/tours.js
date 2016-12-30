@@ -48,6 +48,7 @@ export default (state = { tours: [], langsActive: []}, action) => {
               errors: action.error ? action.payload.errors : null
       }
       case 'DELETE_TOUR':
+      console.log(action)
           return {
               ...state,
               errors: action.error ? action.payload.errors : null
