@@ -410,6 +410,12 @@ class Tour extends Component {
                                 <Input type='number' value={this.state.waypoint.orderBy} onChange={this.updateWaypointState('orderBy')} name='orderBy' id='orderBy' required/>
                             </Col>
                         </FormGroup>
+                        <FormGroup row>
+                            <Label for='audio' sm={3}>Audio</Label>
+                            <Col sm={9}>
+                                <Input type='file' name='audio' id='audio' required/>
+                            </Col>
+                        </FormGroup>
                         <FormGroup check row>
                             <Col sm={{ size: 10, offset: 2 }}>
                                 <Button className='btn btn-success'>Send</Button>
