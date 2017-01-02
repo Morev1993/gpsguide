@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: 'DELETE_WAYPOINT', payload: agent.Waypoints.delete(payload) })
     },
     onTourSubmit: (payload) => {
+        console.log(payload)
         dispatch({ type: 'UPDATE_TOUR', payload: agent.Tours.update(payload) })
     },
     onTourDelete: (payload) => {
@@ -92,9 +93,20 @@ class Tour extends Component {
 
         this.updateWaypointState = field => ev => {
             const state = this.state.waypoint;
-            const newState = Object.assign({}, state, {
-                [field]: ev.target.value
-            });
+            let value
+            let newState
+            if (field === 'audio') {
+                value = ev.target.files
+                newState = Object.assign({}, state, {
+                    [field]: value
+                });
+            } else {
+                value = ev.target.value
+                newState = Object.assign({}, state, {
+                    [field]: value
+                });
+            }
+            
             this.setState({
                 waypoint: newState
             });
@@ -413,7 +425,7 @@ class Tour extends Component {
                         <FormGroup row>
                             <Label for='audio' sm={3}>Audio</Label>
                             <Col sm={9}>
-                                <Input type='file' name='audio' id='audio'/>
+                                <Input type='file' name='audio' onChange={this.updateWaypointState('audio')} id='audio'/>
                             </Col>
                         </FormGroup>
                         <FormGroup check row>

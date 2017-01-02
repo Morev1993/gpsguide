@@ -1,5 +1,6 @@
 var jwt = require('jsonwebtoken'),
     Waypoint = require(__base + 'models/waypoint'),
+    AudioFile = require(__base + 'models/audiofile'),
     config = require(__base + 'config/main');
 
 exports.create = function(req, res, next) {
@@ -45,16 +46,23 @@ exports.create = function(req, res, next) {
         orderBy
     });
 
-	waypoint.save((err, tour) => {
-		if (err) {
-			return next(err);
-		}
+	waypoint.save().then((waypoint) => {
+        res.status(201).json({
+            success: true,
+            data: waypoint
+        });
 
-		res.status(201).json({
-			success: true,
-			data: waypoint
-		});
-	});
+        console.log(req.files);
+        //return;
+
+        /*var audioFile = new AudioFile({
+            waypoint._id
+        })*/
+
+
+    }).catch((err) => {
+        return next(err);
+    });
 };
 
 exports.getAll = function(req, res) {
