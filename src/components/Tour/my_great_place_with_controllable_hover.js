@@ -33,7 +33,7 @@ export default class MyGreatPlaceWithControllableHover extends Component {
     const style = this.props.hover ? greatPlaceStyleHover : greatPlaceStyle;
 
     function setDirectionalMarker(direction) {
-        var imgUrl = `./src/${direction}.svg`
+        var imgUrl = `./src/assets/${direction}.svg`
         return <img className='marker-image' src={imgUrl} />
     }
     return (

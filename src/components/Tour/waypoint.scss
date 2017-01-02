@@ -1,5 +1,8 @@
 .hint, [data-hint] {
 	display: inline-block;
+	img {
+		width: 40px !important;
+	}
 }
 
 .hint--info .hint__content {

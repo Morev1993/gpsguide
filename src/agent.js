@@ -7,7 +7,6 @@ const API_ROOT = checkOrigin(location.origin)
 
 function checkOrigin(url) {
     if (url && url.indexOf('45.55.163.154') != -1) {
-        console.log(1);
         return 'http://45.55.163.154:8078/api/admin'
     } else {
         return 'http://localhost:8090/api/admin'
