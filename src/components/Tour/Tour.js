@@ -96,7 +96,7 @@ class Tour extends Component {
             let value
             let newState
             if (field === 'audio') {
-                value = ev.target.files
+                value = ev.target.files[0]
                 newState = Object.assign({}, state, {
                     [field]: value
                 });

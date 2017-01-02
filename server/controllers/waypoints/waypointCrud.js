@@ -52,7 +52,7 @@ exports.create = function(req, res, next) {
             data: waypoint
         });
 
-        console.log(req.files);
+        console.log(req);
         //return;
 
         /*var audioFile = new AudioFile({
