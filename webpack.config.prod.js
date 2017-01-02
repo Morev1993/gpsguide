@@ -35,7 +35,8 @@ module.exports = {
 				],
 				exclude: /node_modules/,
 				query: {
-		        	presets: [ "es2015", "react", "stage-0", ]
+		        	presets: ["es2015", "stage-0", "react"],
+		        	plugins: ["transform-decorators-legacy"]
 		      	},
 		      	plugins: ['transform-runtime']
 			},
@@ -56,6 +57,12 @@ module.exports = {
     	includePaths: [path.resolve(__dirname, "./src")]
   	},
   	plugins: [
+	  	new webpack.DefinePlugin({
+	  		'process.env': {
+		    	'NODE_ENV': JSON.stringify('production'),
+		    	'API_ROOT': JSON.stringify('http://45.55.163.154:8078/api/admin')
+		  	}
+		}),
   		new ExtractTextPlugin("app.[hash].css"),
 		new webpack.optimize.UglifyJsPlugin({
 		    compress: {
