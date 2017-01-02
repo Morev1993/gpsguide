@@ -425,7 +425,7 @@ class Tour extends Component {
                         <FormGroup row>
                             <Label for='audio' sm={3}>Audio</Label>
                             <Col sm={9}>
-                                <Input type='file' name='audio' onChange={this.updateWaypointState('audio')} id='audio'/>
+                                <Input type='file' name='uploadFile' onChange={this.updateWaypointState('audio')} id='audio'/>
                             </Col>
                         </FormGroup>
                         <FormGroup check row>
