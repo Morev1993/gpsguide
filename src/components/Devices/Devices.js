@@ -41,12 +41,11 @@ class Devices extends Component {
                 name: this.state.name,
                 authCode: this.state.authCode,
                 orderBy: this.state.orderBy
-              };
+            };
             this.props.onSubmit(device);
-            this.props.onLoad(agent.Devices.all())
 
             this.setState({
-              modal: false
+                modal: false
             });
         }
 
@@ -80,7 +79,6 @@ class Devices extends Component {
         this.props.onLoad(agent.Devices.all())
         this.deleteDevice = id => {
             this.props.onDelete(id)
-            this.props.onLoad(agent.Devices.all())
         }
     }
     render() {

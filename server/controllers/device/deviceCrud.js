@@ -148,14 +148,17 @@ exports.delete = function(req, res) {
     Device.remove({
         _id: req.params.id,
         accountId: req.user._id
-    }, function(err, device) {
+    }, function(err, result) {
         if (err) {
             return res.send(err);
         }
 
         res.json({
             success: true,
-            data: device
+            data: {
+                result: result,
+                _id: req.params.id
+            }
         });
     });
 }
