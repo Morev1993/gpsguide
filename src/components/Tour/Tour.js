@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom';
 import agent from '../../agent'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table, ButtonGroup } from 'reactstrap'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import controllable from 'react-controllables'
 
@@ -31,6 +31,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onWaypointCreate: (payload) => {
         dispatch({ type: 'CREATE_WAYPOINT', payload: agent.Waypoints.create(payload) })
+    },
+    onFilesCreate: (payload) => {
+        dispatch({ type: 'CREATE_FILES', payload: agent.Waypoints.createFiles(payload) })
     },
     onWaypointUpdate: (payload) => {
         dispatch({ type: 'UPDATE_WAYPOINT', payload: agent.Waypoints.update(payload) })
@@ -78,7 +81,8 @@ class Tour extends Component {
             _id: '',
             name: '',
             status: false,
-            modal: false,
+            wayModal: false,
+            filesModal: false,
             languages: [],
             waypoints: [],
             waypoint: {},
@@ -131,8 +135,7 @@ class Tour extends Component {
 
             const waypoint = Object.assign({}, this.state.waypoint);
 
-            if (this.state.operation === 'create') {
-                console.log(this.state);
+            if (this.state.wayOperation === 'create') {
                 this.props.onWaypointCreate(this.state)
             } else {
                 this.props.onWaypointUpdate(waypoint)
@@ -140,7 +143,15 @@ class Tour extends Component {
 
             this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
 
-            this.toggle();
+            this.wayToggle();
+        }
+
+        this.editFiles = (e) => {
+            e.preventDefault();
+
+            this.props.onFilesCreate(this.state)
+
+            this.filesToggle();
         }
 
         this.updateStateMultiSelect = field => {
@@ -181,16 +192,25 @@ class Tour extends Component {
           this.openCreateWaypointModal(lat, lng)
       }
 
-      openCreateWaypointModal(lat, lng) {
+    openCreateWaypointModal(lat, lng) {
           this.setState(Object.assign({}, this.state, {
-              modal: true,
-              operation: 'create',
+              wayModal: true,
+              filesModal: false,
+              wayOperation: 'create',
               waypoint: {
                   lat: lat || '',
                   lng: lng || ''
               }
           }));
-      }
+    }
+
+    openCreateFilesModal() {
+          this.setState(Object.assign({}, this.state, {
+              wayModal: false,
+              filesModal: true,
+              filesOperation: 'create'
+          }));
+    }
 
     componentWillMount() {
         this.props.onLoad(agent.Tours.get(this.props.params.id))
@@ -216,18 +236,30 @@ class Tour extends Component {
         }));
     }
 
-    toggle() {
+    wayToggle() {
         this.setState({
-            modal: !this.state.modal
+            wayModal: !this.state.wayModal
         });
     }
 
-    openEditWaypointModal(waypoint, event) {
-        event.stopPropagation()
+    filesToggle() {
+        this.setState({
+            filesModal: !this.state.filesModal
+        });
+    }
 
+    openEditWaypointModal(waypoint) {
         this.setState(Object.assign({}, this.state, {
-            modal: true,
-            operation: 'edit',
+            wayModal: true,
+            wayOperation: 'edit',
+            waypoint: waypoint
+        }));
+    }
+
+    openEditFilesModal(waypoint) {
+        this.setState(Object.assign({}, this.state, {
+            filesModal: true,
+            filesOperation: 'edit',
             waypoint: waypoint
         }));
     }
@@ -256,6 +288,7 @@ class Tour extends Component {
                 key={_id}
                 id={_id}
                 openEditWaypointModal={this.openEditWaypointModal.bind(this)}
+                openEditFilesModal={this.openEditFilesModal.bind(this)}
                 deleteWaypoint={this.deleteWaypoint.bind(this)}
                 {...coords}
                 waypoint={waypoint}
@@ -329,8 +362,13 @@ class Tour extends Component {
                                 <tr key={waypoint._id}>
                                     <th scope='row'>{waypoint.name}</th>
                                     <td><small>{new Date(waypoint.createdAt).toDateString()}</small></td>
-                                    <td><Button color='primary' onClick={this.openEditWaypointModal.bind(this, waypoint)}>Edit</Button></td>
-                                    <td><Button color='danger' onClick={this.deleteWaypoint.bind(this, waypoint)}>Delete</Button></td>
+                                    <td className='t-C'>
+                                        <ButtonGroup>
+                                            <Button color='primary' onClick={this.openEditWaypointModal.bind(this, waypoint)}>Edit waypoint</Button>{' '}
+                                            <Button color='default' onClick={this.openEditFilesModal.bind(this, waypoint)}>Edit files</Button>{' '}
+                                            <Button color='danger' onClick={this.deleteWaypoint.bind(this, waypoint)}>Delete</Button>
+                                        </ButtonGroup>
+                                    </td>
                                 </tr>
                                 )
                             })
@@ -349,8 +387,8 @@ class Tour extends Component {
                 </FormGroup>
             </Form>
 
-            <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)} className={this.props.className}>
-                <ModalHeader toggle={this.toggle.bind(this)}>Edit waypoint</ModalHeader>
+            <Modal isOpen={this.state.wayModal} toggle={this.wayToggle.bind(this)} className={this.props.className}>
+                <ModalHeader toggle={this.wayToggle.bind(this)}>{this.state.wayOperation} waypoint</ModalHeader>
                 <ModalBody>
                     <ListErrors errors={this.props.errors}></ListErrors>
                     <Form onSubmit={this.editWaypoint}>
@@ -422,10 +460,23 @@ class Tour extends Component {
                                 <Input type='number' value={this.state.waypoint.orderBy} onChange={this.updateWaypointState('orderBy')} name='orderBy' id='orderBy' required/>
                             </Col>
                         </FormGroup>
+                        <FormGroup check row>
+                            <Col sm={{ size: 10, offset: 2 }}>
+                                <Button className='btn btn-success'>Send</Button>
+                            </Col>
+                        </FormGroup>
+                    </Form>
+                </ModalBody>
+            </Modal>
+            <Modal isOpen={this.state.filesModal} toggle={this.filesToggle.bind(this)} className={this.props.className}>
+                <ModalHeader toggle={this.filesToggle.bind(this)}>{this.state.filesOperation} files</ModalHeader>
+                <ModalBody>
+                    <ListErrors errors={this.props.errors}></ListErrors>
+                    <Form onSubmit={this.editFiles}>
                         <FormGroup row>
                             <Label for='audio' sm={3}>Audio</Label>
                             <Col sm={9}>
-                                <Input type='file' name='uploadFile' onChange={this.updateWaypointState('audio')} id='audio'/>
+                                <Input type='file' name='uploadFile' onChange={this.updateWaypointState('audio')} id='audio' required/>
                             </Col>
                         </FormGroup>
                         <FormGroup check row>

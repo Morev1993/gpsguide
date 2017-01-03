@@ -71,6 +71,7 @@ module.exports = function(app) {
     adminRoutes.use('/', toursRoutes);
 
     waypointsRouter.post('/tours/:tourId/waypoints', requireUserAuth, WaypointsCrudCtrl.create);
+    waypointsRouter.post('/tours/:tourId/waypoints/:id/files', requireUserAuth, WaypointsCrudCtrl.createFiles);
     waypointsRouter.get('/tours/:tourId/waypoints', requireUserAuth, WaypointsCrudCtrl.getAll);
     waypointsRouter.get('/tours/:tourId/waypoints/:id', requireUserAuth, WaypointsCrudCtrl.get);
     waypointsRouter.put('/tours/:tourId/waypoints/:id', requireUserAuth, WaypointsCrudCtrl.update);

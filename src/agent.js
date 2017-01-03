@@ -90,10 +90,18 @@ const Waypoints = {
         var tourId = state._id
         var payload = state.waypoint
 
-        var formData = new FormData();
+        requests.post(`/tours/${tourId}/waypoints`, payload)
+    },
+    createFiles: state => {
+        var tourId = state._id
+        var id = state.waypoint._id
 
-        formData.append('uploadFile', payload.audio);
-        requests.post(`/tours/${tourId}/waypoints`, formData)
+        var formData = new FormData();
+        formData.append('uploadFile', state.waypoint.audio);
+
+        console.log(state)
+
+        requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
     },
     all: (tourId) =>
         requests.get(`/tours/${tourId}/waypoints`),

@@ -14,7 +14,13 @@ export default (state = { tours: [], langsActive: []}, action) => {
           return {
             ...state,
             inProgress: null,
-              errors: action.error ? action.payload.errors : null
+            errors: action.error ? action.payload.errors : null
+      }
+      case 'CREATE_FILES':
+          return {
+            ...state,
+            inProgress: null,
+            errors: action.error ? action.payload.errors : null
       }
       case 'GET_WAYPOINTS':
           return {

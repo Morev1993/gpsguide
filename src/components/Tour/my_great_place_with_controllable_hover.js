@@ -18,7 +18,13 @@ export default class MyGreatPlaceWithControllableHover extends Component {
     super(props);
   }
 
-  openEditModal(waypoint, e) {
+  openEditWaypointModal(waypoint, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.props.openEditWaypointModal(waypoint, e);
+  }
+
+  openEditFilesModal(waypoint, e) {
       e.preventDefault();
       e.stopPropagation();
       this.props.openEditWaypointModal(waypoint, e);
@@ -45,8 +51,10 @@ export default class MyGreatPlaceWithControllableHover extends Component {
               <p>Long: {this.props.waypoint.lng}</p>
               <p>Direction: {this.props.waypoint.direction}</p>
               <p>
-                  <a onClick={this.openEditModal.bind(this, this.props.waypoint)} href='#'>Edit</a> |
-                   <a onClick={this.deleteWaypoint.bind(this, this.props.waypoint)} href='#'>Delete</a>
+                  <a onClick={this.openEditWaypointModal.bind(this, this.props.waypoint)} href='#'>Edit waypoint</a>{' | '}
+                  <a onClick={this.openEditFilesModal.bind(this, this.props.waypoint)} href='#'>Edit files</a>{' | '}
+                  <a onClick={this.deleteWaypoint.bind(this, this.props.waypoint)} href='#'>Delete</a>
+            
               </p>
           </div>
        </div>
