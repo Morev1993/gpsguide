@@ -2,7 +2,6 @@ var Tour = require(__base + 'models/tour'),
     config = require(__base + 'config/main');
 
 exports.getAll = function(req, res) {
-    console.log(req.user.accountId)
     Tour.find({
         accountId: req.user.accountId
     }, function(err, tours) {

@@ -4,6 +4,7 @@ import agent from './agent'
 const promiseMiddleware = (store) => next => action => {
 	if (isPromise(action.payload)) {
 		store.dispatch({ type: 'ASYNC_START', subtype: action.type });
+		console.log(action)
 		action.payload.then(
 			res => {
 				if (res.success) {

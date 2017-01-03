@@ -8,6 +8,7 @@ var TourCrudCtrl = require(__base + 'controllers/tour/tourCrud');
 var WaypointsCrudCtrl = require(__base + 'controllers/waypoints/waypointCrud');
 
 var TourAppCtrl = require(__base + 'controllers/tour/tourApp');
+var WaypointsAppCtrl = require(__base + 'controllers/waypoints/waypointApp');
 var LanguageAppCtrl = require(__base + 'controllers/language/languageApp');
 
 var passportService = require(__base + 'config/passport');
@@ -93,7 +94,8 @@ module.exports = function(app) {
     var apiRoutes = express.Router(),
         appAuthRoutes = express.Router(),
         appToursRoutes = express.Router(),
-        appLanguagesRoutes = express.Router();
+        appLanguagesRoutes = express.Router(),
+        appWaypointsRoutes = express.Router();
 
     /*** mobile-app ***/
 
@@ -109,6 +111,11 @@ module.exports = function(app) {
     appToursRoutes.get('/tours', requireDeviceAuth, TourAppCtrl.getAll);
     appToursRoutes.get('/tours/:id', requireDeviceAuth, TourAppCtrl.get);
     apiRoutes.use('/', appToursRoutes);
+
+    //app-waypoints
+    appWaypointsRoutes.get('/tours/:tourId/waypoints', requireDeviceAuth, WaypointsAppCtrl.getAll);
+    appWaypointsRoutes.get('/tours/:tourId/waypoints/:id', requireDeviceAuth, WaypointsAppCtrl.get);
+    apiRoutes.use('/', appWaypointsRoutes);
 
     app.use('/api', apiRoutes);
 };

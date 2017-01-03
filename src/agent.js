@@ -97,7 +97,7 @@ const Waypoints = {
         var id = state.waypoint._id
 
         var formData = new FormData();
-        formData.append('uploadFile', state.waypoint.audio);
+        formData.append('uploadFile', state.waypoint.uploadFile);
 
         console.log(state)
 

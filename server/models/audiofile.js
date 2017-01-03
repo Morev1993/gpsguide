@@ -14,10 +14,6 @@ var AudioFileSchema = new Schema({
     path: {
         type: String,
         required: true
-    },
-    orderBy: {
-        type: Number,
-        default: 0
     }
 }, {
     timestamps: true

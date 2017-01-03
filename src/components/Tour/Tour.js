@@ -42,7 +42,6 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: 'DELETE_WAYPOINT', payload: agent.Waypoints.delete(payload) })
     },
     onTourSubmit: (payload) => {
-        console.log(payload)
         dispatch({ type: 'UPDATE_TOUR', payload: agent.Tours.update(payload) })
     },
     onTourDelete: (payload) => {
@@ -99,7 +98,7 @@ class Tour extends Component {
             const state = this.state.waypoint;
             let value
             let newState
-            if (field === 'audio') {
+            if (field === 'uploadFile') {
                 value = ev.target.files[0]
                 newState = Object.assign({}, state, {
                     [field]: value
@@ -110,7 +109,7 @@ class Tour extends Component {
                     [field]: value
                 });
             }
-            
+
             this.setState({
                 waypoint: newState
             });
@@ -369,7 +368,7 @@ class Tour extends Component {
                                     <td className='t-C'>
                                         <ButtonGroup>
                                             <Button color='primary' onClick={this.openEditWaypointModal.bind(this, waypoint)}>Edit waypoint</Button>{' '}
-                                            <Button color='default' onClick={this.openEditFilesModal.bind(this, waypoint)}>Edit files</Button>{' '}
+                                            <Button color='secondary' onClick={this.openEditFilesModal.bind(this, waypoint)}>Edit files</Button>{' '}
                                             <Button color='danger' onClick={this.deleteWaypoint.bind(this, waypoint)}>Delete</Button>
                                         </ButtonGroup>
                                     </td>
@@ -478,9 +477,9 @@ class Tour extends Component {
                     <ListErrors errors={this.props.errors}></ListErrors>
                     <Form onSubmit={this.editFiles}>
                         <FormGroup row>
-                            <Label for='audio' sm={3}>Audio</Label>
+                            <Label for='uploadFile' sm={3}>Audio files</Label>
                             <Col sm={9}>
-                                <Input type='file' name='uploadFile' onChange={this.updateWaypointState('audio')} id='audio' required/>
+                                <Input type='file' name='uploadFile' onChange={this.updateWaypointState('uploadFile')} id='uploadFile' required/>
                             </Col>
                         </FormGroup>
                         <FormGroup check row>

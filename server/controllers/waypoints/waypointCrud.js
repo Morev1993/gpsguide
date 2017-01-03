@@ -1,10 +1,10 @@
-var jwt = require('jsonwebtoken'),
-    Waypoint = require(__base + 'models/waypoint'),
+var Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),
     fs = require("fs"),
     multiparty = require('multiparty'),
     config = require(__base + 'config/main'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    mkdirp = require('mkdirp');
 
 exports.create = function(req, res, next) {
 	var tourId = req.params.tourId;
@@ -54,31 +54,66 @@ exports.create = function(req, res, next) {
             success: true,
             data: waypoint
         });
-
-
     }).catch((err) => {
-        return next(err);
+        return res.send(err);
     });
 };
 
-exports.createFiles = function(req, res) {
+exports.createFiles = function(req, res, next) {
+    var waypointId = req.params.id;
+
     var form = new multiparty.Form();
-
     var uploadFile = {path: '', type: '', size: 0};
-
     var supportMimeTypes = ['audio/mp3'];
-
     var errors = [];
 
-    console.log(req.params.id)
+    form.on('part', function(part) {
+        uploadFile.size = part.byteCount;
+        uploadFile.type = part.headers['content-type'];
+
+        var folder = __base + 'public/' + waypointId + '/';
+
+        mkdirp(folder, function (err) {
+            if (err) return next(err);
+
+            var name = crypto.createHash('md5').update(part.filename).digest("hex")
+            uploadFile.path = folder + name + '.mp3';
+
+            if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
+                errors.push('Unsupported mimetype ' + uploadFile.type);
+            }
+
+            if (errors.length == 0) {
+                var out = fs.createWriteStream(uploadFile.path);
+                part.pipe(out);
+            } else {
+                part.resume();
+            }
+        });
+    })
 
     form.on('close', function() {
         //если нет ошибок и все хорошо
-        if(errors.length == 0) {
+        if (errors.length == 0) {
             //сообщаем что все хорошо
-            res.send({status: 'ok', text: 'Success'});
-        }
-        else {
+
+            var path = uploadFile.path;
+
+            var audioFile = new AudioFile({
+                waypointId,
+                path
+            })
+
+            audioFile.save().then((file) => {
+                res.status(201).json({
+                    success: true,
+                    data: file
+                });
+            }).catch((err) => {
+                return next(err);
+            });
+
+        } else {
             if(fs.existsSync(uploadFile.path)) {
                 //если загружаемый файл существует удаляем его
                 fs.unlinkSync(uploadFile.path);
@@ -88,44 +123,20 @@ exports.createFiles = function(req, res) {
         }
     });
 
-    form.on('part', function(part) {
-        uploadFile.size = part.byteCount;
-        //читаем его тип
-        uploadFile.type = part.headers['content-type'];
-        //путь для сохранения файла
-
-        var name = crypto.createHash('md5').update(part.filename).digest("hex")
-        uploadFile.path = __base + '/public/' + name + '.mp3';
-
-        if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
-            errors.push('Unsupported mimetype ' + uploadFile.type);
-        }
-
-        if (errors.length == 0) {
-            var out = fs.createWriteStream(uploadFile.path);
-            part.pipe(out);
-        }
-        else {
-            //пропускаем
-            //вообще здесь нужно как-то остановить загрузку и перейти к onclose
-            part.resume();
-        }
-    })
-
     form.parse(req);
 }
 
 exports.getAll = function(req, res) {
     Waypoint.find({
         tourId: req.params.tourId
-    }, function(err, waypoint) {
+    }, function(err, waypoints) {
         if (err) {
             return res.send(err);
         }
 
         res.json({
             success: true,
-            data: waypoint
+            data: waypoints
         });
     });
 };
