@@ -188,8 +188,12 @@ class Tour extends Component {
         this.props.onHoverKeyChange(null);
       }
 
-      _onClick = ({lat, lng}) => {
-          this.openCreateWaypointModal(lat, lng)
+      _onClick = ({lat, lng, event}) => {
+        if (event.target.closest('.hint')) {
+            return;
+        }
+
+        this.openCreateWaypointModal(lat, lng);
       }
 
     openCreateWaypointModal(lat, lng) {
@@ -490,5 +494,22 @@ class Tour extends Component {
         </div>
     }
 }
+
+(function() {
+  if (!Element.prototype.closest) {
+
+    // реализуем
+    Element.prototype.closest = function(css) {
+      var node = this;
+
+      while (node) {
+        if (node.matches(css)) return node;
+        else node = node.parentElement;
+      }
+      return null;
+    };
+  }
+
+})();
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tour)
