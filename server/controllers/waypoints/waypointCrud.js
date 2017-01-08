@@ -62,7 +62,6 @@ exports.create = function(req, res, next) {
 
 exports.createFiles = function(req, res, next) {
     var waypointId = req.params.id;
-    var host = req.protocol + '://' + req.get('host') + '/';
 
     if (typeof waypointId === 'undefined') {
         return res.status(422).send({
@@ -71,7 +70,7 @@ exports.createFiles = function(req, res, next) {
     }
 
     var form = new multiparty.Form();
-    var uploadFile = {path: '', type: '', clientPath: '', size: 0};
+    var uploadFile = {path: '', type: '', size: 0};
     var supportMimeTypes = ['audio/mp3'];
     var errors = [];
 
@@ -86,7 +85,6 @@ exports.createFiles = function(req, res, next) {
 
             var name = crypto.createHash('md5').update(part.filename).digest("hex")
             uploadFile.path = folder + name + '.mp3';
-            uploadFile.clientPath = host + 'public/' + waypointId + '/' + name + '.mp3';;
 
             if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
                 errors.push('Unsupported mimetype ' + uploadFile.type);

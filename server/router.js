@@ -118,6 +118,7 @@ module.exports = function(app) {
     //app-waypoints
     appWaypointsRoutes.get('/tours/:tourId/waypoints', requireDeviceAuth, WaypointsAppCtrl.getAll);
     appWaypointsRoutes.get('/tours/:tourId/waypoints/:id', requireDeviceAuth, WaypointsAppCtrl.get);
+    appWaypointsRoutes.get('/tours/:tourId/waypoints/:id/files/:fileId', WaypointsAppCtrl.sendFile);
     apiRoutes.use('/', appWaypointsRoutes);
 
     app.use('/api', apiRoutes);

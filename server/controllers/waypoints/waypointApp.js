@@ -53,3 +53,15 @@ exports.get = function(req, res) {
         return res.send(err);
     })
 };
+
+exports.sendFile = function(req, res) {
+    AudioFile.findOne({
+        _id: req.params.fileId,
+    }, function(err, file) {
+        if (err) {
+            return res.send(err);
+        }
+
+        res.sendFile(file.path);
+    });
+}
