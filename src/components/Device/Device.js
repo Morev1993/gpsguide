@@ -53,8 +53,6 @@ class Device extends Component {
     componentWillMount() {
         this.props.onLoad(agent.Devices.get(this.props.params.id))
 
-        console.log(this.state)
-
         Object.assign(this.state, {
             _id: this.props.device._id,
             name: this.props.device.name,

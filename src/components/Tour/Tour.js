@@ -65,11 +65,7 @@ class Tour extends Component {
 
       static defaultProps = {
         center: [25.7877390574819, -80.1408648490906],
-        zoom: 14,
-        greatPlaces: [
-          {id: 'A', lat: 59.955413, lng: 30.337844},
-          {id: 'B', lat: 59.724, lng: 30.080}
-        ]
+        zoom: 14
       };
 
       shouldComponentUpdate = shouldPureComponentUpdate;
@@ -173,7 +169,6 @@ class Tour extends Component {
       }
 
       _onChildClick = (key, childProps) => {
-          console.log(childProps)
         this.props.onCenterChange([childProps.lat, childProps.lng]);
       }
 
@@ -222,8 +217,7 @@ class Tour extends Component {
             _id: this.props.tour._id,
             name: this.props.tour.name,
             status: this.props.tour.status,
-            waypoints: this.props.waypoints,
-            mapShowed: true
+            waypoints: this.props.waypoints
         });
     }
 
@@ -232,17 +226,14 @@ class Tour extends Component {
             _id: nextProps.tour._id,
             name: nextProps.tour.name,
             status: nextProps.tour.status,
-            waypoints: nextProps.waypoints,
-            mapShowed: true
+            waypoints: nextProps.waypoints
         }));
     }
 
     wayToggle() {
-        this.setState({
+        this.setState(Object.assign({}, {
             wayModal: !this.state.wayModal
-        });
-
-        console.log(this.state)
+        }));
     }
 
     filesToggle() {
@@ -260,7 +251,6 @@ class Tour extends Component {
     }
 
     openEditFilesModal(waypoint) {
-        console.log(waypoint)
         this.setState(Object.assign({}, this.state, {
             filesModal: true,
             filesOperation: 'edit',
@@ -367,9 +357,9 @@ class Tour extends Component {
                                     <td><small>{new Date(waypoint.createdAt).toDateString()}</small></td>
                                     <td className='t-C'>
                                         <ButtonGroup>
-                                            <Button color='primary' onClick={this.openEditWaypointModal.bind(this, waypoint)}>Edit waypoint</Button>{' '}
-                                            <Button color='secondary' onClick={this.openEditFilesModal.bind(this, waypoint)}>Edit files</Button>{' '}
-                                            <Button color='danger' onClick={this.deleteWaypoint.bind(this, waypoint)}>Delete</Button>
+                                            <Button type='button' color='primary' onClick={this.openEditWaypointModal.bind(this, waypoint)}>Edit waypoint</Button>{' '}
+                                            <Button type='button'  color='secondary' onClick={this.openEditFilesModal.bind(this, waypoint)}>Edit files</Button>{' '}
+                                            <Button ctype='button' color='danger' onClick={this.deleteWaypoint.bind(this, waypoint)}>Delete</Button>
                                         </ButtonGroup>
                                     </td>
                                 </tr>
@@ -379,7 +369,7 @@ class Tour extends Component {
                         </tbody>
                     </Table>
                     <div className='t-R'>
-                        <Button onClick={this.openCreateWaypointModal.bind(this)} className='btn btn-primary'>Create waypoint</Button>
+                        <Button type='button' onClick={this.openCreateWaypointModal.bind(this)} className='btn btn-primary'>Create waypoint</Button>
                     </div>
                 </div>
             }
@@ -404,28 +394,28 @@ class Tour extends Component {
                         <FormGroup row>
                             <Label for='lat' sm={3}>Latitude</Label>
                             <Col sm={9}>
-                                <Input type='number' step='any' value={this.state.waypoint.lat} onChange={this.updateWaypointState('lat')} name='lat' id='lat'/>
+                                <Input type='number' step='any' value={this.state.waypoint.lat} onChange={this.updateWaypointState('lat')} name='lat' id='lat' required/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label for='lng' sm={3}>Longitude</Label>
                             <Col sm={9}>
-                                <Input type='number' step='any' value={this.state.waypoint.lng} onChange={this.updateWaypointState('lng')} name='lng' id='lng'/>
+                                <Input type='number' step='any' value={this.state.waypoint.lng} onChange={this.updateWaypointState('lng')} name='lng' id='lng' required/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                           <Label for='direction' sm={3}>Direction</Label>
                           <Col sm={9}>
                               <Input type='select' value={this.state.waypoint.direction}  name='direction' onChange={this.updateWaypointState('direction')}  id='direction'>
-                                <option>N</option>
-                                <option>S</option>
-                                <option>E</option>
-                                <option>W</option>
-                                <option>SW</option>
-                                <option>SE</option>
-                                <option>NW</option>
-                                <option>NE</option>
-                                <option>OD</option>
+                                <option value='N'>N</option>
+                                <option value='S'>S</option>
+                                <option value='E'>E</option>
+                                <option value='W'>W</option>
+                                <option value='SW'>SW</option>
+                                <option value='SE'>SE</option>
+                                <option value='NW'>NW</option>
+                                <option value='NE'>NE</option>
+                                <option value='OD'>OD</option>
                               </Input>
                          </Col>
                         </FormGroup>
@@ -433,9 +423,9 @@ class Tour extends Component {
                           <Label for='overlap' sm={3}>Overlap</Label>
                           <Col sm={9}>
                               <Input type='select' name='overlap' value={this.state.waypoint.overlap} onChange={this.updateWaypointState('overlap')} id='overlap'>
-                                <option>ignore</option>
-                                <option>interrupt</option>
-                                <option>queue</option>
+                                <option value='ignore'>ignore</option>
+                                <option value='interrupt'>interrupt</option>
+                                <option value='queue'>queue</option>
                               </Input>
                          </Col>
                         </FormGroup>

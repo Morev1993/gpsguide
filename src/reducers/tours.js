@@ -23,6 +23,7 @@ export default (state = {
         case 'UPDATE_TOUR':
             const tour = Object.assign({}, state.tour, action.payload.data)
             return {
+                ...state,
                 tour,
                 inProgress: null,
                 errors: action.error ? action.payload.errors : null
@@ -57,7 +58,6 @@ export default (state = {
                 errors: action.error ? action.payload.errors : null
             }
         case 'CREATE_FILES':
-            //console.log(action)
             return {
                 ...state,
                 inProgress: null,
@@ -69,8 +69,19 @@ export default (state = {
                 waypoints: action.payload.data
             }
         case 'UPDATE_WAYPOINT':
+            deletedIndex
+
+            state.waypoints.forEach(function(item, i) {
+                if (item._id === action.payload.data._id) {
+                    deletedIndex = i;
+                }
+            })
+
+            waypoints = [...state.waypoints.slice(0, deletedIndex), ...state.waypoints.slice(deletedIndex + 1)]
+            waypoints.splice(deletedIndex, 0, action.payload.data)
             return {
                 ...state,
+                waypoints,
                 inProgress: null,
                 errors: action.error ? action.payload.errors : null
             }
