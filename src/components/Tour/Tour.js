@@ -97,7 +97,7 @@ class Tour extends Component {
             this.setState(newState);
         }
 
-        this.updateWaypointState = (langId, field) => ev => {
+        this.updateWaypointState = (field, langId) => ev => {
             let value
             let newState
             const state = this.state.waypoint;
@@ -116,6 +116,8 @@ class Tour extends Component {
                     [field]: value
                 });
             }
+
+            console.log(newState)
 
             this.setState({
                 waypoint: newState
