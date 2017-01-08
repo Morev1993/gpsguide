@@ -16,7 +16,8 @@ import './waypoint.scss'
 const mapStateToProps = state => ({
     tour: state.tours.tour || {},
     langsActive: state.tours.langsActive || [],
-    waypoints: state.tours.waypoints || []
+    waypoints: state.tours.waypoints || [],
+    files: state.tours.files || []
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -32,8 +33,11 @@ const mapDispatchToProps = dispatch => ({
     onWaypointCreate: (payload) => {
         dispatch({ type: 'CREATE_WAYPOINT', payload: agent.Waypoints.create(payload) })
     },
-    onFilesCreate: (payload) => {
-        dispatch({ type: 'CREATE_FILES', payload: agent.Waypoints.createFiles(payload) })
+    onFilesCreate: payload => {
+        dispatch({ type: 'CREATE_FILES', payload: agent.Files.createFiles(payload) })
+    },
+    onFilesLoaded: (payload) => {
+        dispatch({ type: 'GET_FILES', payload: agent.Files.getFiles(payload) })
     },
     onWaypointUpdate: (payload) => {
         dispatch({ type: 'UPDATE_WAYPOINT', payload: agent.Waypoints.update(payload) })
@@ -80,6 +84,7 @@ class Tour extends Component {
             filesModal: false,
             languages: [],
             waypoints: [],
+            files: [],
             waypoint: {},
             mapShowed: true
         };
@@ -139,7 +144,7 @@ class Tour extends Component {
             this.wayToggle();
         }
 
-        this.editFiles = (e) => {
+        this.addFilesSubmit = (e) => {
             e.preventDefault();
 
             this.props.onFilesCreate(this.state)
@@ -200,14 +205,6 @@ class Tour extends Component {
           }));
     }
 
-    openCreateFilesModal() {
-          this.setState(Object.assign({}, this.state, {
-              wayModal: false,
-              filesModal: true,
-              filesOperation: 'create'
-          }));
-    }
-
     componentWillMount() {
         this.props.onLoad(agent.Tours.get(this.props.params.id))
         this.props.onLangsLoaded(agent.Languages.actives())
@@ -217,7 +214,8 @@ class Tour extends Component {
             _id: this.props.tour._id,
             name: this.props.tour.name,
             status: this.props.tour.status,
-            waypoints: this.props.waypoints
+            waypoints: this.props.waypoints,
+            files: this.props.files
         });
     }
 
@@ -226,7 +224,8 @@ class Tour extends Component {
             _id: nextProps.tour._id,
             name: nextProps.tour.name,
             status: nextProps.tour.status,
-            waypoints: nextProps.waypoints
+            waypoints: nextProps.waypoints,
+            files: nextProps.files
         }));
     }
 
@@ -251,11 +250,13 @@ class Tour extends Component {
     }
 
     openEditFilesModal(waypoint) {
-        this.setState(Object.assign({}, this.state, {
+        const newState = Object.assign({}, this.state, {
             filesModal: true,
-            filesOperation: 'edit',
             waypoint: waypoint
-        }));
+        });
+        this.setState(newState)
+        this.props.onFilesLoaded(newState)
+        console.log(this.props)
     }
 
     deleteWaypoint(waypoint) {
@@ -462,21 +463,36 @@ class Tour extends Component {
                 </ModalBody>
             </Modal>
             <Modal isOpen={this.state.filesModal} toggle={this.filesToggle.bind(this)} className={this.props.className}>
-                <ModalHeader toggle={this.filesToggle.bind(this)}>{this.state.filesOperation} files</ModalHeader>
+                <ModalHeader toggle={this.filesToggle.bind(this)}>Audio files</ModalHeader>
                 <ModalBody>
                     <ListErrors errors={this.props.errors}></ListErrors>
-                    <Form onSubmit={this.editFiles}>
-                        <FormGroup row>
-                            <Label for='uploadFile' sm={3}>Audio files</Label>
-                            <Col sm={9}>
-                                <Input type='file' name='uploadFile' onChange={this.updateWaypointState('uploadFile')} id='uploadFile' required/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup check row>
-                            <Col sm={{ size: 10, offset: 2 }}>
-                                <Button className='btn btn-success'>Send</Button>
-                            </Col>
-                        </FormGroup>
+                    <Form onSubmit={this.addFilesSubmit}>
+
+                        { this.state.files.map(file => {
+                                return (
+                                    <audio key={file._id} controls>
+                                      <source src={agent.Files.getFilePath(this.state, file._id)} type='audio/mp3'/>
+                                    </audio>
+                                )
+                            })
+                        }
+
+                        { !this.state.files.length ?
+                            <div>
+                                <FormGroup row>
+                                    <Label for='uploadFile' sm={3}>Audio files</Label>
+                                    <Col sm={9}>
+                                        <Input type='file' name='uploadFile' onChange={this.updateWaypointState('uploadFile')} id='uploadFile' required/>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup check row>
+                                    <Col sm={{ size: 10, offset: 2 }}>
+                                        <Button className='btn btn-success'>Send</Button>
+                                    </Col>
+                                </FormGroup>
+                            </div>
+                        : ''}
+
                     </Form>
                 </ModalBody>
             </Modal>

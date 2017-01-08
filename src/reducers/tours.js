@@ -2,7 +2,8 @@
 
 export default (state = {
     tours: [],
-    langsActive: []
+    langsActive: [],
+    files: []
 }, action) => {
     switch (action.type) {
         case 'TOURS_PAGE_LOADED':
@@ -58,10 +59,17 @@ export default (state = {
                 errors: action.error ? action.payload.errors : null
             }
         case 'CREATE_FILES':
+            let files = [...state.files, action.payload.data]
             return {
                 ...state,
+                files,
                 inProgress: null,
                 errors: action.error ? action.payload.errors : null
+            }
+        case 'GET_FILES':
+            return {
+                ...state,
+                files: action.payload.data
             }
         case 'GET_WAYPOINTS':
             return {

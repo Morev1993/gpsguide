@@ -92,17 +92,6 @@ const Waypoints = {
 
         return requests.post(`/tours/${tourId}/waypoints`, payload)
     },
-    createFiles: state => {
-        var tourId = state._id
-        var id = state.waypoint._id
-
-        var formData = new FormData();
-        formData.append('uploadFile', state.waypoint.uploadFile);
-
-        console.log(state)
-
-        return requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
-    },
     all: (tourId) =>
         requests.get(`/tours/${tourId}/waypoints`),
     get: id => {
@@ -120,11 +109,35 @@ const Waypoints = {
     }
 }
 
+const Files = {
+    createFiles: state => {
+        var tourId = state._id
+        var id = state.waypoint._id
+
+        var formData = new FormData();
+        formData.append('uploadFile', state.waypoint.uploadFile)
+
+        return requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
+    },
+    getFiles: state => {
+        var tourId = state._id
+        var id = state.waypoint._id
+
+        return requests.get(`/tours/${tourId}/waypoints/${id}/files`)
+    },
+    getFilePath: (state, fileId) => {
+        var tourId = state._id
+        var id = state.waypoint._id
+
+        return `${API_ROOT}/tours/${tourId}/waypoints/${id}/files/${fileId}`
+    }
+}
 export default {
     Auth,
     Tours,
     Devices,
     Languages,
     Waypoints,
+    Files,
     setToken: _token => { token = _token; }
 }
