@@ -6,10 +6,6 @@ var Waypoint = require(__base + 'models/waypoint'),
     crypto = require('crypto'),
     mkdirp = require('mkdirp');
 
-    /*<audio key={file._id} controls>
-        <source src={agent.Files.getFilePath(this.state, lang._id, file._id)} type='audio/mp3'/>
-    </audio>*/
-
 exports.create = function(req, res, next) {
 	var tourId = req.params.tourId;
     var name = req.body.name;

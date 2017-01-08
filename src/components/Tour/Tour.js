@@ -117,8 +117,6 @@ class Tour extends Component {
                 });
             }
 
-            console.log(newState)
-
             this.setState({
                 waypoint: newState
             });
@@ -166,6 +164,7 @@ class Tour extends Component {
             var selected = options.filter(function (option) {
                 return option.selected;
             });
+
             var selectedValues = selected.map(function (option) {
                 return option.value;
             });
@@ -176,7 +175,7 @@ class Tour extends Component {
         }
     }
 
-    _onBoundsChange = (center, zoom /* , bounds, marginBounds */ ) => {
+    _onBoundsChange = (center, zoom) => {
         this.props.onCenterChange(center);
         this.props.onZoomChange(zoom);
     }
@@ -185,11 +184,11 @@ class Tour extends Component {
         this.props.onCenterChange([childProps.lat, childProps.lng]);
     }
 
-    _onChildMouseEnter = (key /*, childProps */ ) => {
+    _onChildMouseEnter = (key) => {
         this.props.onHoverKeyChange(key);
     }
 
-    _onChildMouseLeave = ( /* key, childProps */ ) => {
+    _onChildMouseLeave = () => {
         this.props.onHoverKeyChange(null);
     }
 
@@ -266,6 +265,8 @@ class Tour extends Component {
         });
         this.setState(newState)
         this.props.onFilesLoaded(newState)
+
+
     }
 
     deleteWaypoint(waypoint) {
@@ -299,12 +300,14 @@ class Tour extends Component {
             );
           });
 
-          const selectedLangs = this.props.langsActive
+          let selectedLangs = this.props.langsActive
              .filter(lang => {
                  if (this.state.languages.indexOf(lang._id) != -1) {
                      return lang
                  }
              })
+         let filteredFiles = []
+
 
 
         return <div>
@@ -487,20 +490,31 @@ class Tour extends Component {
                     <Form onSubmit={this.addFilesSubmit}>
 
                         { selectedLangs.map(lang => {
-                                //let inputName = `uploadFiles_+ ${lang._id}`
-                                return (
-                                    <div key={lang._id}>
-                                        <FormGroup row>
+                                if (!this.state.files.length) {
+                                    return (
+                                        <FormGroup key={lang._id} row>
                                             <Label for='uploadFile' sm={3}>{lang.name}</Label>
                                             <Col sm={9}>
                                                 <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState(lang._id, 'uploadFiles')} id='uploadFile' required/>
                                             </Col>
                                         </FormGroup>
-                                    </div>
-                                )
+                                    )
+                                } else {
+                                    return (
+                                        <FormGroup key={lang._id}  row>
+                                            <Label for='uploadFile' sm={3}>{lang.name}</Label>
+                                            <Col sm={9}>
+                                                <audio controls>
+                                                    <source src='' type='audio/mp3'/>
+                                                </audio>
+                                            </Col>
+                                        </FormGroup>
+                                    )
+                                }
                             })
                         }
 
+                        {filteredFiles}
                         <FormGroup row>
                             <Col className='t-R' sm={{ size: 12, offset: 0 }}>
                                 <Button className='btn btn-success'>Send</Button>
