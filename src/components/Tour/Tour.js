@@ -95,9 +95,9 @@ class Tour extends Component {
         }
 
         this.updateWaypointState = field => ev => {
-            const state = this.state.waypoint;
             let value
             let newState
+            const state = this.state.waypoint;
             if (field === 'uploadFile') {
                 value = ev.target.files[0]
                 newState = Object.assign({}, state, {
@@ -132,15 +132,13 @@ class Tour extends Component {
         this.editWaypoint = (e) => {
             e.preventDefault();
 
-            const waypoint = Object.assign({}, this.state.waypoint);
-
             if (this.state.wayOperation === 'create') {
                 this.props.onWaypointCreate(this.state)
             } else {
+                const waypoint = Object.assign({}, this.state.waypoint);
                 this.props.onWaypointUpdate(waypoint)
             }
 
-            this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
 
             this.wayToggle();
         }
@@ -243,12 +241,14 @@ class Tour extends Component {
         this.setState({
             wayModal: !this.state.wayModal
         });
+
+        console.log(this.state)
     }
 
     filesToggle() {
-        this.setState({
+        this.setState(Object.assign({}, this.state, {
             filesModal: !this.state.filesModal
-        });
+        }));
     }
 
     openEditWaypointModal(waypoint) {
@@ -260,6 +260,7 @@ class Tour extends Component {
     }
 
     openEditFilesModal(waypoint) {
+        console.log(waypoint)
         this.setState(Object.assign({}, this.state, {
             filesModal: true,
             filesOperation: 'edit',
@@ -269,7 +270,6 @@ class Tour extends Component {
 
     deleteWaypoint(waypoint) {
         this.props.onWaypointDelete(waypoint);
-        this.props.onWaypointsLoaded(agent.Waypoints.all(this.props.params.id))
     }
     showMap() {
         this.setState(Object.assign({}, this.state, {

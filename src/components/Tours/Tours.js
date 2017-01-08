@@ -42,7 +42,6 @@ class Tours extends Component {
                 orderBy: this.state.orderBy
             };
             this.props.onSubmit(tour);
-            this.props.onLoad(agent.Tours.all())
 
             this.setState({
                 modal: false
@@ -70,7 +69,6 @@ class Tours extends Component {
         this.props.onLoad(agent.Tours.all())
         this.deleteTour = id => {
             this.props.onDelete(id)
-            this.props.onLoad(agent.Tours.all())
         }
     }
     render() {

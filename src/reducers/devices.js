@@ -15,8 +15,9 @@ export default (state = {
                 device: action.payload.data
             }
         case 'UPDATE_DEVICE':
+            const device = Object.assign({}, state.device, action.payload.data);
             return {
-                ...state,
+                device,
                 inProgress: null,
                 errors: action.error ? action.payload.errors : null
             }

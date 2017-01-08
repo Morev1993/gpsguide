@@ -93,14 +93,17 @@ exports.delete = function(req, res) {
     Tour.remove({
         _id: req.params.id,
         accountId: req.user._id
-    }, function(err, tour) {
+    }, function(err, result) {
         if (err) {
             return res.send(err);
         }
 
         res.json({
             success: true,
-            data: tour
+            data: {
+                result: result,
+                _id: req.params.id
+            }
         });
     });
 }

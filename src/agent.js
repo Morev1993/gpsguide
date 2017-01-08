@@ -49,7 +49,7 @@ const Tours = {
         requests.get(`/tours/${id}`),
     update: (tour) => {
         var id = tour._id
-        requests.put(`/tours/${id}`, tour)
+        return requests.put(`/tours/${id}`, tour)
     },
     delete: id =>
         requests.del(`/tours/${id}`)
@@ -64,7 +64,7 @@ const Devices = {
         requests.get(`/devices/${id}`),
     update: device => {
         var id = device._id
-        requests.put(`/devices/${id}`, device)
+        return requests.put(`/devices/${id}`, device)
     },
     delete: id =>
         requests.del(`/devices/${id}`)
@@ -79,7 +79,7 @@ const Languages = {
         requests.get(`/languages/${id}`),
     update: lang => {
         var id = lang._id;
-        requests.put(`/languages/${id}`, lang)
+        return requests.put(`/languages/${id}`, lang)
     },
     delete: id =>
         requests.del(`/languages/${id}`)
@@ -90,7 +90,7 @@ const Waypoints = {
         var tourId = state._id
         var payload = state.waypoint
 
-        requests.post(`/tours/${tourId}/waypoints`, payload)
+        return requests.post(`/tours/${tourId}/waypoints`, payload)
     },
     createFiles: state => {
         var tourId = state._id
@@ -101,7 +101,7 @@ const Waypoints = {
 
         console.log(state)
 
-        requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
+        return requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
     },
     all: (tourId) =>
         requests.get(`/tours/${tourId}/waypoints`),
@@ -111,12 +111,12 @@ const Waypoints = {
     update: waypoint => {
         var id = waypoint._id
         var tourId = waypoint.tourId
-        requests.put(`/tours/${tourId}/waypoints/${id}`, waypoint)
+        return requests.put(`/tours/${tourId}/waypoints/${id}`, waypoint)
     },
     delete: waypoint => {
         var id = waypoint._id
         var tourId = waypoint.tourId
-        requests.del(`/tours/${tourId}/waypoints/${id}`)
+        return requests.del(`/tours/${tourId}/waypoints/${id}`)
     }
 }
 

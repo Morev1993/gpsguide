@@ -55,6 +55,7 @@ exports.create = function(req, res, next) {
             data: waypoint
         });
     }).catch((err) => {
+        console.log(err)
         return res.send(err);
     });
 };
@@ -189,14 +190,17 @@ exports.delete = function(req, res) {
     Waypoint.remove({
 		_id: req.params.id,
         tourId: req.params.tourId
-    }, function(err, waypoint) {
+    }, function(err, result) {
         if (err) {
             return res.send(err);
         }
 
         res.json({
             success: true,
-            data: waypoint
+            data: {
+                result: result,
+                _id: req.params.id
+            }
         });
     });
 }
