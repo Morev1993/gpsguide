@@ -159,7 +159,7 @@ class Tour extends Component {
                 return option.selected;
             });
             var selectedValues = selected.map(function (option) {
-                return option.getAttribute('data-id');
+                return option.value;
             });
 
             const state = this.state;
@@ -214,6 +214,7 @@ class Tour extends Component {
             _id: this.props.tour._id,
             name: this.props.tour.name,
             status: this.props.tour.status,
+            languages: this.props.tour.languages,
             waypoints: this.props.waypoints,
             files: this.props.files
         });
@@ -224,6 +225,7 @@ class Tour extends Component {
             _id: nextProps.tour._id,
             name: nextProps.tour.name,
             status: nextProps.tour.status,
+            languages: nextProps.tour.languages,
             waypoints: nextProps.waypoints,
             files: nextProps.files
         }));
@@ -256,7 +258,6 @@ class Tour extends Component {
         });
         this.setState(newState)
         this.props.onFilesLoaded(newState)
-        console.log(this.props)
     }
 
     deleteWaypoint(waypoint) {
@@ -305,7 +306,7 @@ class Tour extends Component {
                         <Input type='select' ref='languages' name='selectMulti' onChange={this.updateStateMultiSelect.bind(this, 'languages')}  id='exampleSelectMulti' multiple>
                             { this.props.langsActive.map(lang => {
                                 return (
-                                    <option data-id={lang._id} key={lang._id}>{lang.name}</option>
+                                    <option selected={this.state.languages.indexOf(lang._id) != -1} key={lang._id} value={lang._id}>{lang.name}</option>
                                     )
                                 })
                             }
