@@ -6,6 +6,10 @@ var Waypoint = require(__base + 'models/waypoint'),
     crypto = require('crypto'),
     mkdirp = require('mkdirp');
 
+    /*<audio key={file._id} controls>
+        <source src={agent.Files.getFilePath(this.state, lang._id, file._id)} type='audio/mp3'/>
+    </audio>*/
+
 exports.create = function(req, res, next) {
 	var tourId = req.params.tourId;
     var name = req.body.name;
@@ -70,13 +74,17 @@ exports.createFiles = function(req, res, next) {
     }
 
     var form = new multiparty.Form();
-    var uploadFile = {path: '', type: '', size: 0};
+    var uploadFile = {path: '', type: '', size: 0, filename: ''};
     var supportMimeTypes = ['audio/mp3'];
     var errors = [];
 
     form.on('part', function(part) {
         uploadFile.size = part.byteCount;
         uploadFile.type = part.headers['content-type'];
+        uploadFile.filename = part.filename;
+        uploadFile.langId = part.name.split('_')[1];
+
+        var languageId = uploadFile.langId;
 
         var folder = __base + 'public/' + waypointId + '/';
 
@@ -86,12 +94,31 @@ exports.createFiles = function(req, res, next) {
             var name = crypto.createHash('md5').update(part.filename).digest("hex")
             uploadFile.path = folder + name + '.mp3';
 
+            var path = uploadFile.path;
+
             if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
                 errors.push('Unsupported mimetype ' + uploadFile.type);
             }
 
             if (errors.length == 0) {
                 var out = fs.createWriteStream(uploadFile.path);
+
+                out.on('close', function() {
+                    var audioFile = new AudioFile({
+                        waypointId,
+                        languageId,
+                        path
+                    })
+
+                    audioFile.save().then((file) => {
+                        res.status(201).json({
+                            success: true,
+                            data: file
+                        });
+                    }).catch((err) => {
+                        return next(err);
+                    });
+                });
                 part.pipe(out);
             } else {
                 part.resume();
@@ -103,22 +130,6 @@ exports.createFiles = function(req, res, next) {
         //если нет ошибок и все хорошо
         if (errors.length == 0) {
             //сообщаем что все хорошо
-
-            var path = uploadFile.path;
-
-            var audioFile = new AudioFile({
-                waypointId,
-                path
-            })
-
-            audioFile.save().then((file) => {
-                res.status(201).json({
-                    success: true,
-                    data: file
-                });
-            }).catch((err) => {
-                return next(err);
-            });
 
         } else {
             if(fs.existsSync(uploadFile.path)) {
@@ -146,8 +157,11 @@ exports.sendFile = function(req, res) {
 }
 
 exports.getFiles = function(req, res) {
+    var langsId = req.query.langs.split(',');
+
     AudioFile.find({
-        waypointId: req.params.id
+        waypointId: req.params.id,
+        'languageId': { $in: langsId}
     }, function(err, files) {
         if (err) {
             return res.send(err);

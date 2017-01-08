@@ -48,7 +48,7 @@ const Tours = {
     get: id =>
         requests.get(`/tours/${id}`),
     update: (tour) => {
-        var id = tour._id
+        let id = tour._id
         return requests.put(`/tours/${id}`, tour)
     },
     delete: id =>
@@ -63,7 +63,7 @@ const Devices = {
     get: id =>
         requests.get(`/devices/${id}`),
     update: device => {
-        var id = device._id
+        let id = device._id
         return requests.put(`/devices/${id}`, device)
     },
     delete: id =>
@@ -78,7 +78,7 @@ const Languages = {
     get: id =>
         requests.get(`/languages/${id}`),
     update: lang => {
-        var id = lang._id;
+        let id = lang._id;
         return requests.put(`/languages/${id}`, lang)
     },
     delete: id =>
@@ -87,8 +87,8 @@ const Languages = {
 
 const Waypoints = {
     create: state => {
-        var tourId = state._id
-        var payload = state.waypoint
+        let tourId = state._id
+        let payload = state.waypoint
 
         return requests.post(`/tours/${tourId}/waypoints`, payload)
     },
@@ -98,36 +98,40 @@ const Waypoints = {
         requests.get(`/waypoints/${id}`)
     },
     update: waypoint => {
-        var id = waypoint._id
-        var tourId = waypoint.tourId
+        let id = waypoint._id
+        let tourId = waypoint.tourId
         return requests.put(`/tours/${tourId}/waypoints/${id}`, waypoint)
     },
     delete: waypoint => {
-        var id = waypoint._id
-        var tourId = waypoint.tourId
+        let id = waypoint._id
+        let tourId = waypoint.tourId
         return requests.del(`/tours/${tourId}/waypoints/${id}`)
     }
 }
 
 const Files = {
     createFiles: state => {
-        var tourId = state._id
-        var id = state.waypoint._id
+        let tourId = state._id
+        let id = state.waypoint._id
+        var uploadFiles = state.waypoint.uploadFiles
 
-        var formData = new FormData();
-        formData.append('uploadFile', state.waypoint.uploadFile)
+        let formData = new FormData();
+        for (let key in uploadFiles) {
+            formData.append(`uploadFiles_${key}`, uploadFiles[key])
+        }
 
         return requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
     },
     getFiles: state => {
-        var tourId = state._id
-        var id = state.waypoint._id
+        let tourId = state._id
+        let id = state.waypoint._id
+        let langsStr = state.languages.join(',')
 
-        return requests.get(`/tours/${tourId}/waypoints/${id}/files`)
+        return requests.get(`/tours/${tourId}/waypoints/${id}/files?langs=${langsStr}`)
     },
     getFilePath: (state, fileId) => {
-        var tourId = state._id
-        var id = state.waypoint._id
+        let tourId = state._id
+        let id = state.waypoint._id
 
         return `${API_ROOT}/tours/${tourId}/waypoints/${id}/files/${fileId}`
     }

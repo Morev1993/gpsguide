@@ -56,13 +56,13 @@ const mapDispatchToProps = dispatch => ({
 @controllable(['center', 'zoom', 'hoverKey', 'clickKey'])
 class Tour extends Component {
     static propTypes = {
-        center: PropTypes.array, // @controllable
-        zoom: PropTypes.number, // @controllable
-        hoverKey: PropTypes.string, // @controllable
-        clickKey: PropTypes.string, // @controllable
-        onCenterChange: PropTypes.func, // @controllable generated fn
-        onZoomChange: PropTypes.func, // @controllable generated fn
-        onHoverKeyChange: PropTypes.func, // @controllable generated fn
+        center: PropTypes.array,
+        zoom: PropTypes.number,
+        hoverKey: PropTypes.string,
+        clickKey: PropTypes.string,
+        onCenterChange: PropTypes.func,
+        onZoomChange: PropTypes.func,
+        onHoverKeyChange: PropTypes.func,
 
         greatPlaces: PropTypes.array
       };
@@ -89,20 +89,26 @@ class Tour extends Component {
             mapShowed: true
         };
 
+        let files = {}
+
         this.updateState = field => ev => {
             const state = this.state;
             const newState = Object.assign({}, state, { [field]: ev.target.value });
             this.setState(newState);
         }
 
-        this.updateWaypointState = field => ev => {
+        this.updateWaypointState = (langId, field) => ev => {
             let value
             let newState
             const state = this.state.waypoint;
-            if (field === 'uploadFile') {
+            if (field === 'uploadFiles') {
                 value = ev.target.files[0]
+                value.langId = langId
+
+                files[langId] = value
+
                 newState = Object.assign({}, state, {
-                    [field]: value
+                    [field]: files
                 });
             } else {
                 value = ev.target.value
@@ -168,30 +174,30 @@ class Tour extends Component {
         }
     }
 
-    _onBoundsChange = (center, zoom /* , bounds, marginBounds */) => {
+    _onBoundsChange = (center, zoom /* , bounds, marginBounds */ ) => {
         this.props.onCenterChange(center);
         this.props.onZoomChange(zoom);
-      }
+    }
 
-      _onChildClick = (key, childProps) => {
+    _onChildClick = (key, childProps) => {
         this.props.onCenterChange([childProps.lat, childProps.lng]);
-      }
+    }
 
-      _onChildMouseEnter = (key /*, childProps */) => {
+    _onChildMouseEnter = (key /*, childProps */ ) => {
         this.props.onHoverKeyChange(key);
-      }
+    }
 
-      _onChildMouseLeave = (/* key, childProps */) => {
+    _onChildMouseLeave = ( /* key, childProps */ ) => {
         this.props.onHoverKeyChange(null);
-      }
+    }
 
-      _onClick = ({lat, lng, event}) => {
+    _onClick = ({ lat, lng, event }) => {
         if (event.target.closest('.hint')) {
             return;
         }
 
         this.openCreateWaypointModal(lat, lng);
-      }
+    }
 
     openCreateWaypointModal(lat, lng) {
           this.setState(Object.assign({}, this.state, {
@@ -290,6 +296,15 @@ class Tour extends Component {
                 hover={this.props.hoverKey === _id} />
             );
           });
+
+          const selectedLangs = this.props.langsActive
+             .filter(lang => {
+                 if (this.state.languages.indexOf(lang._id) != -1) {
+                     return lang
+                 }
+             })
+
+
         return <div>
             <h2>{this.state.name}</h2>
             <p><small>{new Date(this.props.tour.createdAt).toDateString()}</small></p>
@@ -469,30 +484,26 @@ class Tour extends Component {
                     <ListErrors errors={this.props.errors}></ListErrors>
                     <Form onSubmit={this.addFilesSubmit}>
 
-                        { this.state.files.map(file => {
+                        { selectedLangs.map(lang => {
+                                //let inputName = `uploadFiles_+ ${lang._id}`
                                 return (
-                                    <audio key={file._id} controls>
-                                      <source src={agent.Files.getFilePath(this.state, file._id)} type='audio/mp3'/>
-                                    </audio>
+                                    <div key={lang._id}>
+                                        <FormGroup row>
+                                            <Label for='uploadFile' sm={3}>{lang.name}</Label>
+                                            <Col sm={9}>
+                                                <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState(lang._id, 'uploadFiles')} id='uploadFile' required/>
+                                            </Col>
+                                        </FormGroup>
+                                    </div>
                                 )
                             })
                         }
 
-                        { !this.state.files.length ?
-                            <div>
-                                <FormGroup row>
-                                    <Label for='uploadFile' sm={3}>Audio files</Label>
-                                    <Col sm={9}>
-                                        <Input type='file' name='uploadFile' onChange={this.updateWaypointState('uploadFile')} id='uploadFile' required/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup check row>
-                                    <Col sm={{ size: 10, offset: 2 }}>
-                                        <Button className='btn btn-success'>Send</Button>
-                                    </Col>
-                                </FormGroup>
-                            </div>
-                        : ''}
+                        <FormGroup row>
+                            <Col className='t-R' sm={{ size: 12, offset: 0 }}>
+                                <Button className='btn btn-success'>Send</Button>
+                            </Col>
+                        </FormGroup>
 
                     </Form>
                 </ModalBody>
