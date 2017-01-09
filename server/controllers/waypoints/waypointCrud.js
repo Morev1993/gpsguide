@@ -75,10 +75,16 @@ exports.createFiles = function(req, res, next) {
     var errors = [];
 
     form.on('part', function(part) {
+    	console.log(part)
         uploadFile.size = part.byteCount;
         uploadFile.type = part.headers['content-type'];
         uploadFile.filename = part.filename;
         uploadFile.langId = part.name.split('_')[1];
+
+        if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
+        	console.log('Unsupported mimetype ' + uploadFile.type);
+            errors.push('Unsupported mimetype ' + uploadFile.type);
+        }
 
         var languageId = uploadFile.langId;
 
@@ -91,10 +97,6 @@ exports.createFiles = function(req, res, next) {
             uploadFile.path = folder + name + '.mp3';
 
             var path = uploadFile.path;
-
-            if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
-                errors.push('Unsupported mimetype ' + uploadFile.type);
-            }
 
             if (errors.length == 0) {
                 var out = fs.createWriteStream(uploadFile.path);

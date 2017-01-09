@@ -103,13 +103,14 @@ class Tour extends Component {
             const state = this.state.waypoint;
             if (field === 'uploadFiles') {
                 value = ev.target.files[0]
-                value.langId = langId
 
                 files[langId] = value
 
                 newState = Object.assign({}, state, {
                     [field]: files
                 });
+
+                console.log(newState)
             } else {
                 value = ev.target.value
                 newState = Object.assign({}, state, {
@@ -495,7 +496,7 @@ class Tour extends Component {
                                         <FormGroup key={lang._id} row>
                                             <Label for='uploadFile' sm={3}>{lang.name}</Label>
                                             <Col sm={9}>
-                                                <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState(lang._id, 'uploadFiles')} id='uploadFile' required/>
+                                                <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', lang._id)} id='uploadFile' required/>
                                             </Col>
                                         </FormGroup>
                                     )
