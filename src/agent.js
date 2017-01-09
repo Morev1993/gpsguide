@@ -9,7 +9,8 @@ function checkOrigin(url) {
     if (url && url.indexOf('localhost') != -1) {
         return 'http://localhost:8090/api/admin'
     } else {
-        return url + ':8078/api/admin'
+        var apiUrl = url.split(':')[0] + url.split(':')[1];
+        return apiUrl + ':8078/api/admin'
     }
 }
 
