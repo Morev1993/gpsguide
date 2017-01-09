@@ -130,6 +130,13 @@ const Files = {
 
         return requests.get(`/tours/${tourId}/waypoints/${id}/files?langs=${langsStr}`)
     },
+    delete: (payload) => {
+        let tourId = payload.state._id
+        let id = payload.state.waypoint._id
+        let fileId = payload.fileId
+        
+        return requests.del(`/tours/${tourId}/waypoints/${id}/files/${fileId}`)
+    },
     getFilePath: (state, fileId) => {
         let tourId = state._id
         let id = state.waypoint._id

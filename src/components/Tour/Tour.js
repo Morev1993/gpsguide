@@ -39,6 +39,9 @@ const mapDispatchToProps = dispatch => ({
     onFilesLoaded: (payload) => {
         dispatch({ type: 'GET_FILES', payload: agent.Files.getFiles(payload) })
     },
+    onFileDelete: (payload) => {
+        dispatch({ type: 'DELETE_FILE', payload: agent.Files.delete(payload) })
+    },
     onWaypointUpdate: (payload) => {
         dispatch({ type: 'UPDATE_WAYPOINT', payload: agent.Waypoints.update(payload) })
     },
@@ -157,6 +160,14 @@ class Tour extends Component {
             this.props.onFilesCreate(this.state)
 
             this.filesToggle();
+        }
+
+        this.deleteFile = (state, fileId) => {
+            let payload = {
+                state: state,
+                fileId: fileId
+            }
+            this.props.onFileDelete(payload);
         }
 
         this.updateStateMultiSelect = field => {
@@ -501,11 +512,14 @@ class Tour extends Component {
                                 } else {
                                     return (
                                         <FormGroup key={lang._id}  row>
-                                            <Label for='uploadFile' sm={3}>{lang.name}</Label>
-                                            <Col sm={9}>
+                                            <Label for='uploadFile' sm={2}>{lang.name}</Label>
+                                            <Col sm={6}>
                                                 <audio controls>
                                                     <source src={agent.Files.getFilePath(this.state, this.state.files[i]._id)} type='audio/mp3'/>
                                                 </audio>
+                                            </Col>
+                                            <Col className='t-C' sm={4}>
+                                                <Button type='button' onClick={this.deleteFile.bind(this, this.state, this.state.files[i]._id)} color='danger'>Delete</Button>
                                             </Col>
                                         </FormGroup>
                                     )

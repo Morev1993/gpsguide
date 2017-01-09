@@ -71,6 +71,21 @@ export default (state = {
                 ...state,
                 files: action.payload.data
             }
+        case 'DELETE_FILE':
+            deletedIndex
+
+            state.files.forEach(function(item, i) {
+                if (item._id === action.payload.data._id) {
+                    deletedIndex = i;
+                }
+            })
+
+            files = [...state.files.slice(0, deletedIndex), ...state.files.slice(deletedIndex + 1)]
+            return {
+                ...state,
+                files,
+                errors: action.error ? action.payload.errors : null
+            }
         case 'GET_WAYPOINTS':
             return {
                 ...state,

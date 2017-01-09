@@ -140,7 +140,7 @@ exports.createFiles = function(req, res, next) {
     });
 
     form.parse(req);
-}
+};
 
 exports.sendFile = function(req, res) {
     AudioFile.findOne({
@@ -157,7 +157,7 @@ exports.sendFile = function(req, res) {
         }
 
     });
-}
+};
 
 exports.getFiles = function(req, res) {
     var langsId = req.query.langs.split(',');
@@ -175,7 +175,28 @@ exports.getFiles = function(req, res) {
             data: files
         });
     });
-}
+};
+
+exports.deleteFile = function(req, res) {
+    AudioFile.remove({
+		_id: req.params.fileId,
+        waypointId: req.params.id
+    }, function(err, result) {
+        if (err) {
+            return res.send(err);
+        }
+
+        console.log(result)
+
+        res.json({
+            success: true,
+            data: {
+                result: result,
+                _id: req.params.fileId
+            }
+        });
+    });
+};
 
 exports.getAll = function(req, res) {
     Waypoint.find({
