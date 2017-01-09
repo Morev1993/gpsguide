@@ -35,9 +35,13 @@ class Languages extends Component {
         }
 
         this.updateLang = (id) => {
-            this.setState({ _id: id });
-            console.log(this.state)
-            this.props.onUpdate(this.state)
+            const newState = Object.assign({}, this.state, { 
+                _id: id 
+            });
+
+            this.setState(newState);
+            console.log(newState)
+            this.props.onUpdate(newState)
             this.props.onLoad(agent.Languages.all())
         }
     }

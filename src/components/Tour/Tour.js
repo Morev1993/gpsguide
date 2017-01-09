@@ -266,8 +266,6 @@ class Tour extends Component {
         });
         this.setState(newState)
         this.props.onFilesLoaded(newState)
-
-
     }
 
     deleteWaypoint(waypoint) {
@@ -490,7 +488,7 @@ class Tour extends Component {
                     <ListErrors errors={this.props.errors}></ListErrors>
                     <Form onSubmit={this.addFilesSubmit}>
 
-                        { selectedLangs.map(lang => {
+                        { selectedLangs.map((lang, i) => {
                                 if (!this.state.files.length) {
                                     return (
                                         <FormGroup key={lang._id} row>
@@ -506,7 +504,7 @@ class Tour extends Component {
                                             <Label for='uploadFile' sm={3}>{lang.name}</Label>
                                             <Col sm={9}>
                                                 <audio controls>
-                                                    <source src='' type='audio/mp3'/>
+                                                    <source src={agent.Files.getFilePath(this.state, this.state.files[i]._id)} type='audio/mp3'/>
                                                 </audio>
                                             </Col>
                                         </FormGroup>

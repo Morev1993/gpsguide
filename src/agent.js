@@ -78,6 +78,7 @@ const Languages = {
     get: id =>
         requests.get(`/languages/${id}`),
     update: lang => {
+        console.log(lang)
         let id = lang._id;
         return requests.put(`/languages/${id}`, lang)
     },
