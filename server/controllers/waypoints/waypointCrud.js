@@ -150,7 +150,12 @@ exports.sendFile = function(req, res) {
             return res.send(err);
         }
 
-        res.sendFile(file.path);
+        if (file) {
+        	res.sendFile(file.path);
+        } else {
+        	return res.send(err);
+        }
+
     });
 }
 

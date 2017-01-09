@@ -514,12 +514,14 @@ class Tour extends Component {
                         }
 
                         {filteredFiles}
-                        <FormGroup row>
-                            <Col className='t-R' sm={{ size: 12, offset: 0 }}>
-                                <Button className='btn btn-success'>Send</Button>
-                            </Col>
-                        </FormGroup>
-
+                        {!this.state.files.length ?
+                            <FormGroup row>
+                                <Col className='t-R' sm={{ size: 12, offset: 0 }}>
+                                    <Button className='btn btn-success'>Send</Button>
+                                </Col>
+                            </FormGroup>
+                        : ''
+                        }
                     </Form>
                 </ModalBody>
             </Modal>
