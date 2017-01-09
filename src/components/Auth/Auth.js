@@ -39,12 +39,12 @@ class Auth extends Component {
                             <Form onSubmit={this.submitForm(email, password)}>
                                 <FormGroup>
                                     <Label for='userEmail' hidden>Email</Label>
-                                    <Input type='email' value={email} onChange={this.changeEmail} name='email' id='userEmail' placeholder='Email' />
+                                    <Input type='email' value={email} onChange={this.changeEmail} name='email' id='userEmail' placeholder='Email' required/>
                                 </FormGroup>
                                 {' '}
                                 <FormGroup>
                                     <Label for='userPassword' hidden>Password</Label>
-                                    <Input type='password' value={password} onChange={this.changePassword} name='password' id='userPassword' placeholder='Password' />
+                                    <Input type='password' value={password} onChange={this.changePassword} name='password' id='userPassword' placeholder='Password' required/>
                                 </FormGroup>
                                 {' '}
                                 <Button className='btn btn-success' type='submit' disabled={this.props.inProgress}>Sign in</Button>
