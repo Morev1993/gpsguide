@@ -81,6 +81,8 @@ export default (state = {
             })
 
             files = [...state.files.slice(0, deletedIndex), ...state.files.slice(deletedIndex + 1)]
+
+            console.log(files)
             return {
                 ...state,
                 files,

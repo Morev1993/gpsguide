@@ -275,6 +275,10 @@ class Tour extends Component {
             filesModal: true,
             waypoint: waypoint
         });
+        if (!newState.languages.length) {
+            console.log('need langs');
+            return;
+        }
         this.setState(newState)
         this.props.onFilesLoaded(newState)
     }
@@ -316,7 +320,6 @@ class Tour extends Component {
                      return lang
                  }
              })
-         let filteredFiles = []
 
 
 
@@ -500,14 +503,23 @@ class Tour extends Component {
                     <Form onSubmit={this.addFilesSubmit}>
 
                         { selectedLangs.map((lang, i) => {
-                                if (!this.state.files.length) {
+                                if (!this.state.files[i]) {
                                     return (
-                                        <FormGroup key={lang._id} row>
-                                            <Label for='uploadFile' sm={3}>{lang.name}</Label>
-                                            <Col sm={9}>
-                                                <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', lang._id)} id='uploadFile' required/>
-                                            </Col>
-                                        </FormGroup>
+                                        <div key={lang._id}>
+                                            <FormGroup row>
+                                                <Label for='uploadFile' sm={3}>{lang.name}</Label>
+                                                <Col sm={9}>
+                                                    <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', lang._id)} id='uploadFile' required/>
+                                                </Col>
+                                            </FormGroup>
+                                            { i === selectedLangs.length - 1 ?
+                                            <FormGroup row>
+                                                <Col className='t-R' sm={{ size: 12, offset: 0 }}>
+                                                    <Button className='btn btn-success'>Send</Button>
+                                                </Col>
+                                            </FormGroup>
+                                            : '' }
+                                        </div>
                                     )
                                 } else {
                                     return (
@@ -525,16 +537,6 @@ class Tour extends Component {
                                     )
                                 }
                             })
-                        }
-
-                        {filteredFiles}
-                        {!this.state.files.length ?
-                            <FormGroup row>
-                                <Col className='t-R' sm={{ size: 12, offset: 0 }}>
-                                    <Button className='btn btn-success'>Send</Button>
-                                </Col>
-                            </FormGroup>
-                        : ''
                         }
                     </Form>
                 </ModalBody>

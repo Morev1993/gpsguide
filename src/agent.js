@@ -134,8 +134,8 @@ const Files = {
         let tourId = payload.state._id
         let id = payload.state.waypoint._id
         let fileId = payload.fileId
-        
-        return requests.del(`/tours/${tourId}/waypoints/${id}/files/${fileId}`)
+
+        return requests.del(`/tours/${tourId}/waypoints/${id}/files/${fileId}/`)
     },
     getFilePath: (state, fileId) => {
         let tourId = state._id
