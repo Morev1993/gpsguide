@@ -3,9 +3,12 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import agent from '../../agent'
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col, Table } from 'reactstrap'
+import ListErrors from '../ListErrors'
+import './Devices.scss'
 
 const mapStateToProps = state => ({
-    devices: state.devices.devices || []
+    devices: state.devices.devices || [],
+    errors: state.devices.errors
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -33,6 +36,7 @@ class Devices extends Component {
         this.changeName = this.changeName.bind(this);
         this.changeAuthCode = this.changeAuthCode.bind(this);
         this.changeOrderBy = this.changeOrderBy.bind(this);
+        this.generateAuthCode = this.generateAuthCode.bind(this);
 
         this.createDevice = e => {
             e.preventDefault();
@@ -50,11 +54,23 @@ class Devices extends Component {
         }
 
         this.toggle = this.toggle.bind(this);
+
+
       }
 
       changeName(e) {
           this.setState({
             name: e.target.value
+          });
+      }
+
+      generateAuthCode() {
+          let code = '';
+          for (let i = 0; i < 5; i++ ) {
+              code += randomInteger(0, 9);
+          }
+          this.setState({
+            authCode: code
           });
       }
 
@@ -86,6 +102,7 @@ class Devices extends Component {
             <div className='row'>
                 <div className='col-xs-6 float-xs-left'>
                     <h2>Devices</h2>
+                    <ListErrors errors={this.props.errors} />
                 </div>
                 <p className='col-xs-6 float-xs-right t-R'>
                     <Button color='primary' onClick={this.toggle}>Add device</Button>
@@ -130,7 +147,14 @@ class Devices extends Component {
                         <FormGroup row>
                             <Label for='AuthCode' sm={3}>Auth code</Label>
                             <Col sm={9}>
-                                <Input type='number' value={this.state.authCode} onChange={this.changeAuthCode} name='AuthCode' id='AuthCode' required/>
+                                <div className='row'>
+                                    <Col sm={10}>
+                                        <Input type='number' value={this.state.authCode} onChange={this.changeAuthCode} name='AuthCode' id='AuthCode' required/>
+                                    </Col>
+                                    <Col className='code-trigger' sm={2}>
+                                        <i onClick={this.generateAuthCode} className='fa fa-list-ol' aria-hidden='true'></i>
+                                    </Col>
+                                </div>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -149,6 +173,12 @@ class Devices extends Component {
             </Modal>
         </div>
     }
+}
+
+function randomInteger(min, max) {
+    var rand = min + Math.random() * (max - min)
+    rand = Math.round(rand);
+    return rand;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Devices)

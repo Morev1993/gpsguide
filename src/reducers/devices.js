@@ -22,11 +22,19 @@ export default (state = {
                 errors: action.error ? action.payload.errors : null
             }
         case 'CREATE_DEVICE':
-            let devices = [...state.devices, action.payload.data];
+            let devices
+            if (!action.error) {
+                devices = [...state.devices, action.payload.data];
+            } else {
+                devices = state.devices
+            }
+
+            console.log(action)
+
             return {
                 devices,
                 inProgress: null,
-                errors: action.error ? action.payload.errors : null
+                errors: action.error ? action.payload : null
             }
         case 'DELETE_DEVICE':
             let deletedIndex
