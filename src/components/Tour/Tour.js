@@ -92,7 +92,7 @@ class Tour extends Component {
             mapShowed: true
         };
 
-        let files = {}
+        this.files = {}
 
         this.updateState = field => ev => {
             const state = this.state;
@@ -107,13 +107,12 @@ class Tour extends Component {
             if (field === 'uploadFiles') {
                 value = ev.target.files[0]
 
-                files[langId] = value
+                this.files[langId] = value
 
                 newState = Object.assign({}, state, {
-                    [field]: files
+                    [field]: this.files
                 });
 
-                console.log(newState)
             } else {
                 value = ev.target.value
                 newState = Object.assign({}, state, {
@@ -271,6 +270,7 @@ class Tour extends Component {
     }
 
     openEditFilesModal(waypoint) {
+        this.files = {};
         const newState = Object.assign({}, this.state, {
             filesModal: true,
             waypoint: waypoint
