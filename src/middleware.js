@@ -6,9 +6,13 @@ const promiseMiddleware = (store) => next => action => {
 		store.dispatch({ type: 'ASYNC_START', subtype: action.type });
 		action.payload.then(
 			res => {
-				store.dispatch({ type: 'ASYNC_END', promise: action.payload })
-				store.dispatch(action)
-				action.payload = res
+				if (res.success) {
+					store.dispatch({ type: 'ASYNC_END', promise: action.payload })
+					store.dispatch(action)
+					action.payload = res
+				} else {
+					store.dispatch({ type: 'LOGOUT' })
+				}
 			},
 			error => {
 				if (error.status === 401) {
