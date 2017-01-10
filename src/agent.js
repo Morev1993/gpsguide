@@ -3,16 +3,13 @@ import _superagent from 'superagent'
 
 const superagent = superagentPromise(_superagent, global.Promise)
 
-const API_ROOT = checkOrigin(location.origin)
+const API_ROOT = checkOrigin(location.hostname)
 
-function checkOrigin(url) {
-    if (url && url.indexOf('localhost') != -1) {
+function checkOrigin(host) {
+    if (host === 'localhost') {
         return 'http://localhost:8090/api/admin'
     } else {
-        let apiUrl = '';
-        apiUrl = url.split(':')[0] + url.split(':')[1];
-        console.log(apiUrl);
-        return apiUrl + ':8078/api/admin'
+        return `http://${host}:8078/api/admin`
     }
 }
 
