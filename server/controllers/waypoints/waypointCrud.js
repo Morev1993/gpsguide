@@ -73,9 +73,17 @@ exports.createFiles = function(req, res, next) {
     var uploadFile = {path: '', type: '', size: 0, filename: ''};
     var supportMimeTypes = ['audio/mp3'];
     var errors = [];
+    var data = [];
+
+    form.on('error', function(err) {
+        if(fs.existsSync(uploadFile.path)) {
+            //если загружаемый файл существует удаляем его
+            fs.unlinkSync(uploadFile.path);
+            console.log('Error parsing form: ' + err.stack);
+        }
+    });
 
     form.on('part', function(part) {
-    	console.log(part)
         uploadFile.size = part.byteCount;
         uploadFile.type = part.headers['content-type'];
         uploadFile.filename = part.filename;
@@ -84,6 +92,7 @@ exports.createFiles = function(req, res, next) {
         if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
         	console.log('Unsupported mimetype ' + uploadFile.type);
             errors.push('Unsupported mimetype ' + uploadFile.type);
+            part.resume();
         }
 
         var languageId = uploadFile.langId;
@@ -98,25 +107,14 @@ exports.createFiles = function(req, res, next) {
 
             var path = uploadFile.path;
 
+            data.push({
+	        	langId: uploadFile.langId,
+	        	path: path
+	        })
+
             if (errors.length == 0) {
                 var out = fs.createWriteStream(uploadFile.path);
 
-                out.on('close', function() {
-                    var audioFile = new AudioFile({
-                        waypointId,
-                        languageId,
-                        path
-                    })
-
-                    audioFile.save().then((file) => {
-                        res.status(201).json({
-                            success: true,
-                            data: file
-                        });
-                    }).catch((err) => {
-                        return next(err);
-                    });
-                });
                 part.pipe(out);
             } else {
                 part.resume();
@@ -128,6 +126,30 @@ exports.createFiles = function(req, res, next) {
         //если нет ошибок и все хорошо
         if (errors.length == 0) {
             //сообщаем что все хорошо
+
+            console.log('Upload completed!');
+
+            data.forEach(function(item) {
+            	var languageId = item.langId;
+            	var path = item.path;
+            	
+        		var audioFile = new AudioFile({
+	                waypointId,
+	                languageId,
+	                path
+	            })
+
+	            audioFile.save().then((file) => {
+	                res.status(201).json({
+	                    success: true,
+	                    data: file
+	                });
+	            }).catch((err) => {
+	                return send(err);
+	            });
+            })
+
+            
 
         } else {
             if(fs.existsSync(uploadFile.path)) {
