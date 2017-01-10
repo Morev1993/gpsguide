@@ -11,7 +11,7 @@ const promiseMiddleware = (store) => next => action => {
 				action.payload = res
 			},
 			error => {
-				if (error.status === 402) {
+				if (error.status === 401) {
 					store.dispatch({ type: 'LOGOUT' })
 					console.dir(error)
 					return
