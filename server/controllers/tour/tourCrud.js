@@ -1,5 +1,9 @@
 var Tour = require(__base + 'models/tour'),
-    config = require(__base + 'config/main');
+    config = require(__base + 'config/main'),
+    deleteFolderRecursive = require(__base + 'helpers'),
+    Waypoint = require(__base + 'models/waypoint'),
+    AudioFile = require(__base + 'models/audiofile'),
+    deleteFolderRecursive = require(__base + 'helpers').deleteFolderRecursive;
 
 exports.create = function(req, res, next) {
     var accountId = req.user._id;
@@ -89,15 +93,31 @@ exports.update = function(req, res) {
     });
 };
 
-exports.delete = function(req, res) {
+exports.delete = function(req, res, next) {
+    var waysIds = [];
     Tour.remove({
         _id: req.params.id,
         accountId: req.user._id
-    }, function(err, result) {
-        if (err) {
-            return res.send(err);
-        }
-
+    }).then(result => {
+        return Waypoint.remove({
+            tourId: req.params.id
+        })
+    }).then(result => {
+        return AudioFile.find({
+            tourId: req.params.id
+        })
+    }).then(files => {
+        files.forEach(file => {
+            waysIds.push(file.waypointId);
+        })
+        return AudioFile.remove({
+            tourId: req.params.id
+        })
+    }).then(result => {
+        waysIds.forEach(id => {
+            var folder = `${global.__base}public/${id}`;
+            deleteFolderRecursive(folder);
+        })
         res.json({
             success: true,
             data: {
@@ -105,5 +125,7 @@ exports.delete = function(req, res) {
                 _id: req.params.id
             }
         });
-    });
+    }).catch(err => {
+        return next(err);
+    })
 }

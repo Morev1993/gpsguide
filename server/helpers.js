@@ -1,4 +1,6 @@
 // Set user info from request
+var fs = require("fs");
+
 exports.setUserInfo = function setUserInfo(request) {
     var getUserInfo = {
         _id: request._id,
@@ -25,4 +27,18 @@ exports.setDeviceInfo = function setDeviceInfo(request) {
     };
 
     return getDeviceInfo;
+};
+
+exports.deleteFolderRecursive = deleteFolderRecursive = path => {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach((file, index) => {
+            var curPath = path + "/" + file;
+            if (fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
 };
