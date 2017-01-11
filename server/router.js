@@ -79,7 +79,6 @@ module.exports = function(app) {
 
     waypointsRouter.post('/tours/:tourId/waypoints/:id/files', requireUserAuth, WaypointsCrudCtrl.createFiles);
     waypointsRouter.get('/tours/:tourId/waypoints/:id/files', requireUserAuth, WaypointsCrudCtrl.getFiles);
-    waypointsRouter.get('/tours/:tourId/waypoints/:id/files/:fileId', WaypointsCrudCtrl.sendFile);
     waypointsRouter.delete('/tours/:tourId/waypoints/:id/files/:fileId', requireUserAuth, WaypointsCrudCtrl.deleteFile);
 
     adminRoutes.use('/', waypointsRouter);
@@ -119,7 +118,6 @@ module.exports = function(app) {
     //app-waypoints
     appWaypointsRoutes.get('/tours/:tourId/waypoints', requireDeviceAuth, WaypointsAppCtrl.getAll);
     appWaypointsRoutes.get('/tours/:tourId/waypoints/:id', requireDeviceAuth, WaypointsAppCtrl.get);
-    appWaypointsRoutes.get('/tours/:tourId/waypoints/:id/files/:fileId', WaypointsAppCtrl.sendFile);
     apiRoutes.use('/', appWaypointsRoutes);
 
     app.use('/api', apiRoutes);

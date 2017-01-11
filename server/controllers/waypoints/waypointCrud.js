@@ -62,6 +62,7 @@ exports.create = function(req, res, next) {
 
 exports.createFiles = function(req, res, next) {
     var waypointId = req.params.id;
+    var fullUrl = `${req.protocol}://${req.get('host')}/`;
 
     if (typeof waypointId === 'undefined') {
         return res.status(422).send({
@@ -88,6 +89,7 @@ exports.createFiles = function(req, res, next) {
         uploadFile.type = part.headers['content-type'];
         uploadFile.filename = part.filename;
         uploadFile.langId = part.name.split('_')[1];
+        uploadFile.langCode = part.name.split('_')[2];
 
         if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
         	console.log('Unsupported mimetype ' + uploadFile.type);
@@ -97,7 +99,7 @@ exports.createFiles = function(req, res, next) {
 
         var languageId = uploadFile.langId;
 
-        var folder = __base + 'public/' + waypointId + '/';
+        var folder = fullUrl + 'public/' + waypointId + '/';
 
         mkdirp(folder, function (err) {
             if (err) return send(err);
@@ -109,7 +111,8 @@ exports.createFiles = function(req, res, next) {
 
             data.push({
 	        	langId: uploadFile.langId,
-	        	path: path
+	        	path: path,
+                langCode: uploadFile.langCode
 	        })
 
             if (errors.length == 0) {
@@ -132,11 +135,13 @@ exports.createFiles = function(req, res, next) {
             data.forEach(function(item) {
             	var languageId = item.langId;
             	var path = item.path;
-            	
+                var langCode = item.langCode;
+
         		var audioFile = new AudioFile({
 	                waypointId,
 	                languageId,
-	                path
+	                path,
+                    langCode
 	            })
 
 	            audioFile.save().then((file) => {
@@ -149,7 +154,7 @@ exports.createFiles = function(req, res, next) {
 	            });
             })
 
-            
+
 
         } else {
             if(fs.existsSync(uploadFile.path)) {
@@ -162,23 +167,6 @@ exports.createFiles = function(req, res, next) {
     });
 
     form.parse(req);
-};
-
-exports.sendFile = function(req, res) {
-    AudioFile.findOne({
-        _id: req.params.fileId,
-    }, function(err, file) {
-        if (err) {
-            return res.send(err);
-        }
-
-        if (file) {
-        	res.sendFile(file.path);
-        } else {
-        	return res.send(err);
-        }
-
-    });
 };
 
 exports.getFiles = function(req, res) {

@@ -7,7 +7,8 @@ var express = require('express'),
     config = require(__base + 'config/main');
     mongoose = require('mongoose'),
     config = require(__base + 'config/main'),
-    router = require(__base + 'router');
+    router = require(__base + 'router'),
+    path = require('path');
 
 mongoose.Promise = global.Promise;
 
@@ -20,6 +21,7 @@ console.log('Your server is running on port ' + config.port + '.');
 
 // Setting up basic middleware for all Express requests
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+app.use('/public', express.static(path.join(global.__base, 'public')));
 app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
 

@@ -11,6 +11,10 @@ var AudioFileSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    langCode: {
+        type: String,
+        required: true
+    },
     languageId: {
         type: Schema.Types.ObjectId,
         required: true

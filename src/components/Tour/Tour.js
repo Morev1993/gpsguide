@@ -100,14 +100,17 @@ class Tour extends Component {
             this.setState(newState);
         }
 
-        this.updateWaypointState = (field, langId) => ev => {
+        this.updateWaypointState = (field, lang) => ev => {
             let value
             let newState
             const state = this.state.waypoint;
             if (field === 'uploadFiles') {
                 value = ev.target.files[0]
 
-                this.files[langId] = value
+                this.files[lang._id] = {
+                    file: value,
+                    langCode: lang.code
+                }
 
                 newState = Object.assign({}, state, {
                     [field]: this.files
@@ -509,7 +512,7 @@ class Tour extends Component {
                                             <FormGroup row>
                                                 <Label for='uploadFile' sm={3}>{lang.name}</Label>
                                                 <Col sm={9}>
-                                                    <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', lang._id)} id='uploadFile' required/>
+                                                    <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', lang)} id='uploadFile' required/>
                                                 </Col>
                                             </FormGroup>
                                             { i === selectedLangs.length - 1 ?
@@ -527,7 +530,7 @@ class Tour extends Component {
                                             <Label for='uploadFile' sm={2}>{lang.name}</Label>
                                             <Col sm={6}>
                                                 <audio controls>
-                                                    <source src={agent.Files.getFilePath(this.state, this.state.files[i]._id)} type='audio/mp3'/>
+                                                    <source src={this.state.files[i].path} type='audio/mp3'/>
                                                 </audio>
                                             </Col>
                                             <Col className='t-C' sm={4}>

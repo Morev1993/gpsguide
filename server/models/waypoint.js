@@ -46,6 +46,9 @@ var WaypointSchema = new Schema({
     orderBy: {
         type: Number,
         default: 0
+    },
+    audiofiles: {
+        type: []
     }
 }, {
     timestamps: true

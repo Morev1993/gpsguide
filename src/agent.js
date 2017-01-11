@@ -118,7 +118,7 @@ const Files = {
 
         let formData = new FormData();
         for (let key in uploadFiles) {
-            formData.append(`uploadFiles_${key}`, uploadFiles[key])
+            formData.append(`uploadFiles_${key}_${uploadFiles[key].langCode}`, uploadFiles[key].file)
         }
 
         return requests.post(`/tours/${tourId}/waypoints/${id}/files`, formData)
