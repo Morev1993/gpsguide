@@ -97,21 +97,18 @@ exports.createFiles = function(req, res, next) {
             part.resume();
         }
 
-        var languageId = uploadFile.langId;
-
-        var folder = fullUrl + 'public/' + waypointId + '/';
+        var folder = `${global.__base}public/${waypointId}/`;
 
         mkdirp(folder, function (err) {
             if (err) return send(err);
 
             var name = crypto.createHash('md5').update(part.filename).digest("hex")
-            uploadFile.path = folder + name + '.mp3';
-
-            var path = uploadFile.path;
+            uploadFile.path = `${folder}${name}.mp3`;
+            var publicPath = `${fullUrl}public/${waypointId}/${name}.mp3`;
 
             data.push({
 	        	langId: uploadFile.langId,
-	        	path: path,
+	        	path: publicPath,
                 langCode: uploadFile.langCode
 	        })
 
