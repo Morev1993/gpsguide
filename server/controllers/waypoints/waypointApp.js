@@ -37,7 +37,7 @@ exports.getAll = function(req, res) {
             success: true,
             data: ways
         });
-    }).catch((err) => {
+    }).catch(err => {
         return res.send(err);
     })
 };

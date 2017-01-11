@@ -49,12 +49,12 @@ exports.create = function(req, res, next) {
         orderBy
     });
 
-	waypoint.save().then((waypoint) => {
+	waypoint.save().then(waypoint => {
         res.status(201).json({
             success: true,
             data: waypoint
         });
-    }).catch((err) => {
+    }).catch(err => {
         console.log(err)
         return res.send(err);
     });
@@ -193,8 +193,6 @@ exports.deleteFile = function(req, res) {
             return res.send(err);
         }
 
-        console.log(result)
-
         res.json({
             success: true,
             data: {
@@ -268,10 +266,13 @@ exports.delete = function(req, res) {
     Waypoint.remove({
 		_id: req.params.id,
         tourId: req.params.tourId
-    }, function(err, result) {
-        if (err) {
-            return res.send(err);
-        }
+    }).then(result => {
+        return AudioFile.remove({
+            waypointId: req.params.id
+        });
+    }).then(result => {
+        var folder = `${global.__base}public/${req.params.id}`;
+        deleteFolderRecursive(folder);
 
         res.json({
             success: true,
@@ -280,5 +281,21 @@ exports.delete = function(req, res) {
                 _id: req.params.id
             }
         });
+    }).catch(err => {
+        return res.send(err);
     });
 }
+
+var deleteFolderRecursive = path => {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach((file, index) => {
+            var curPath = path + "/" + file;
+            if (fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+};
