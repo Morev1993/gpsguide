@@ -4,6 +4,7 @@ var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	devtool: 'cheap-module-source-map',
@@ -59,8 +60,7 @@ module.exports = {
   	plugins: [
 	  	new webpack.DefinePlugin({
 	  		'process.env': {
-		    	'NODE_ENV': JSON.stringify('production'),
-		    	'API_ROOT': JSON.stringify('http://45.55.163.154:8078/api/admin')
+		    	'NODE_ENV': JSON.stringify('production')
 		  	}
 		}),
   		new ExtractTextPlugin("app.[hash].css"),
@@ -72,8 +72,14 @@ module.exports = {
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
 		new HtmlWebpackPlugin({
-	      template: 'index.html',
-	      inject: 'body'
-	    })
+			filename: 'index.html',
+		  	template: path.join(__dirname, './src/index.html'),
+	      	inject: 'body'
+	  }),
+	  new CopyWebpackPlugin([{
+				from: './src/assets',
+				to: './assets'
+			}
+	  ])
 	]
 }

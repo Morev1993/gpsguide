@@ -11,7 +11,7 @@ module.exports = {
 		'./src/index'
 	],
 	output: {
-		path: path.join(__dirname, 'dist'),
+		path: path.join(__dirname, 'src'),
 		filename: 'app.js',
 		publicPath: ''
 	},
@@ -57,8 +57,9 @@ module.exports = {
   	},
   	plugins: [
 		new HtmlWebpackPlugin({
-	      template: 'index.html',
-	      inject: 'body'
+		  	filename: 'index.html',
+  		  	template: path.join(__dirname, './src/index.html'),
+	      	inject: 'body'
 	    })
 	]
 }

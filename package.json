@@ -4,9 +4,9 @@
   "description": "GPSGuide webapp with rest api",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress --inline --hot --port 3000 --history-api-fallback",
+    "dev": "webpack-dev-server --progress --inline --content-base ./src  --hot --port 3000 --history-api-fallback",
     "build": "webpack --config webpack.config.prod.js",
-    "build:serve": "webpack-dev-server --config webpack.config.prod.js --ccntent-base ./dist --port 3000 --history-api-fallback"
+    "build:serve": "webpack-dev-server --config webpack.config.prod.js --content-base ./dist --port 3000 --history-api-fallback"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.25.0",
     "eslint": "^1.10.3",
     "eslint-loader": "^1.2.1",

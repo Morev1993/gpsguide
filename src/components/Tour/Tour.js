@@ -358,8 +358,8 @@ class Tour extends Component {
                 <FormGroup className='waypoints-heading' row>
                     <Col sm={6}>Waypoints</Col>
                     <Col className='t-R' sm={6}>
-                        <img onClick={this.showMap.bind(this)} src='/src/assets/map.svg'/>
-                        <img onClick={this.showList.bind(this)} src='/src/assets/list.svg'/>
+                        <img onClick={this.showMap.bind(this)} src='/assets/map.svg'/>
+                        <img onClick={this.showList.bind(this)} src='/assets/list.svg'/>
                     </Col>
                 </FormGroup>
                 { this.state.mapShowed ?
