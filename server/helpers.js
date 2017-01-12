@@ -18,6 +18,7 @@ exports.setDeviceInfo = function setDeviceInfo(request) {
     var getDeviceInfo = {
         _id: request._id,
         accountId: request.accountId,
+        deviceId: request.deviceId,
         name: request.name,
         authCode: request.authCode,
         device: request.device,

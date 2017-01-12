@@ -9,6 +9,10 @@ var DeviceSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    deviceId: {
+    	type: String,
+	 	unique: true
+    },
     name: {
         type: String,
         required: true

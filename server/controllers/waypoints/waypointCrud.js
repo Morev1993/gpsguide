@@ -207,6 +207,8 @@ exports.deleteFile = function(req, res) {
 };
 
 exports.getAll = function(req, res) {
+	var fullUrl = req.protocol + '://' + req.get('host');
+	console.log(fullUrl);
     Waypoint.find({
         tourId: req.params.tourId
     }, function(err, waypoints) {

@@ -19,6 +19,9 @@ exports.login = function(req, res, next) {
     var model = req.body.model;
     var version = req.body.sdk_int;
     var status = req.body.status;
+    var deviceId = req.body.deviceId;
+
+    var deviceIdOut = false;
 
     // Return error if no email provided
     /*if (!model) {
@@ -34,6 +37,12 @@ exports.login = function(req, res, next) {
         });
     }
 
+    if (!deviceId) {
+        return res.status(422).send({
+            error: 'You must enter device id.'
+        });
+    }
+
     if (authCode.length !== 5) {
         return res.status(422).send({
             error: 'Auth code must have five numbers.'
@@ -41,36 +50,57 @@ exports.login = function(req, res, next) {
     }
 
     Device.findOne({
-        authCode
-    }, (err, device) => {
-        if (err) {
-            return next(err);
-        }
+        authCode,
+        deviceId
+    }).then(device => {
+    	if (device) {
+    		console.log('device id and auth code is right');
+    		var deviceInfo = setDeviceInfo(device);
 
-        // If user is not unique, return error
-        if (!device) {
-            return res.status(422).send({
-                error: 'Auth code is not correct.'
-            });
-        }
+    		res.status(201).json({
+	            success: true,
+	            token: `JWT ${generateToken(deviceInfo)}`,
+	            data: device
+	        });
+	        
+	        return Promise.reject();
+    	} else {
+    		// device with device_id is gone and we should find by authcode
+    		return Device.findOne({ authCode });
+    	}
+    }).then(device => {
+    	if (!device) {
+			res.status(422).send({
+	            error: 'Wrong auth code.'
+	        });
 
-        device.device = model || device.device;
-        device.version = version || device.version;
-        device.status = true;
+	        return Promise.reject();
+    	} else if (device) {
+    		if (!device.deviceId) {
+				device.device = model || device.device;
+		        device.version = version || device.version;
+		        device.status = true;
+		        device.deviceId = deviceId;
 
-        device.save((err, device) => {
-            if (err) {
-                return next(err);
-            }
+		        return device.save();
+    		} else {
+				res.status(422).send({
+		            error: 'Wrong device id.'
+		        });
 
-            var deviceInfo = setDeviceInfo(device);
+		        return Promise.reject();
+    		}
+    	}
+	}).then(device => {
+		var deviceInfo = setDeviceInfo(device);
 
-            res.status(201).json({
-                success: true,
-                token: `JWT ${generateToken(deviceInfo)}`,
-                data: device
-            });
+        res.status(201).json({
+            success: true,
+            token: `JWT ${generateToken(deviceInfo)}`,
+            data: device
         });
-    });
+	}).catch(err => {
+		return next(err);
+	})
 
 };
