@@ -26,10 +26,10 @@ class Devices extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          modal: false,
-          authCode: '',
-          name: '',
-          orderBy: 0
+            modal: false,
+            authCode: '',
+            name: '',
+            orderBy: 0
         };
 
         this.toggle = this.toggle.bind(this);
@@ -54,8 +54,6 @@ class Devices extends Component {
         }
 
         this.toggle = this.toggle.bind(this);
-
-
       }
 
       changeName(e) {
@@ -87,17 +85,18 @@ class Devices extends Component {
       }
 
       toggle() {
-        this.setState({
-          modal: !this.state.modal
-        });
+          this.generateAuthCode();
+          this.setState({
+              modal: !this.state.modal
+          });
       }
-    componentWillMount() {
-        this.props.onLoad(agent.Devices.all())
-        this.deleteDevice = id => {
-            this.props.onDelete(id)
-        }
-    }
-    render() {
+      componentWillMount() {
+          this.props.onLoad(agent.Devices.all())
+          this.deleteDevice = id => {
+              this.props.onDelete(id)
+          }
+      }
+      render() {
         return <div>
             <div className='row'>
                 <div className='col-xs-6 float-xs-left'>
@@ -147,14 +146,7 @@ class Devices extends Component {
                         <FormGroup row>
                             <Label for='AuthCode' sm={3}>Auth code</Label>
                             <Col sm={9}>
-                                <div className='row'>
-                                    <Col sm={10}>
-                                        <Input type='number' value={this.state.authCode} onChange={this.changeAuthCode} name='AuthCode' id='AuthCode' required/>
-                                    </Col>
-                                    <Col className='code-trigger' sm={2}>
-                                        <i onClick={this.generateAuthCode} className='fa fa-list-ol' aria-hidden='true'></i>
-                                    </Col>
-                                </div>
+                                <Input readOnly type='number' value={this.state.authCode} onChange={this.changeAuthCode} name='AuthCode' id='AuthCode' required/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>

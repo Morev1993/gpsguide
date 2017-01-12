@@ -24,9 +24,10 @@ class Device extends Component {
         super();
         this.state = {
             _id: '',
-          name: '',
-          authCode: '',
-          status: false
+            deviceId: '',
+            name: '',
+            authCode: '',
+            status: false
         };
 
         this.updateState = field => ev => {
@@ -57,6 +58,7 @@ class Device extends Component {
             _id: this.props.device._id,
             name: this.props.device.name,
             authCode: this.props.device.authCode,
+            deviceId: this.props.device.deviceId,
             status: this.props.device.status
           });
     }
@@ -66,6 +68,7 @@ class Device extends Component {
             _id: nextProps.device._id,
           name: nextProps.device.name,
           authCode: nextProps.device.authCode,
+          deviceId: nextProps.device.deviceId,
           status: nextProps.device.status
         }));
       }
@@ -87,15 +90,21 @@ class Device extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
+                    <Label for='deviceId' sm={3}>Device id</Label>
+                    <Col sm={9}>
+                        <Input type='text' value={this.state.deviceId} onChange={this.updateState('deviceId')} name='deviceId' id='deviceId' readOnly/>
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
                     <Label for='device' sm={3}>Device name</Label>
                     <Col sm={9}>
-                        <Input type='text' value={this.props.device.device} name='device' id='device' disabled/>
+                        <Input type='text' value={this.props.device.device} name='device' id='device' readOnly/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for='name' sm={3}>Version</Label>
                     <Col sm={9}>
-                        <Input type='text' value={this.props.device.version} name='version' id='version' disabled/>
+                        <Input type='text' value={this.props.device.version} name='version' id='version' readOnly/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
