@@ -1,5 +1,4 @@
-var Tour = require(__base + 'models/tour'),
-    config = require(__base + 'config/main');
+var Tour = require(__base + 'models/tour');
 
 exports.getAll = function(req, res) {
     Tour.find({

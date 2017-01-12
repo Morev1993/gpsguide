@@ -2,7 +2,7 @@
 var passport = require('passport'),
     User = require(__base + 'models/user'),
     Device = require(__base + 'models/device'),
-    config = require(__base + 'config/main'),
+    config = require(__base + 'config/config'),
     JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt,
     LocalStrategy = require('passport-local');

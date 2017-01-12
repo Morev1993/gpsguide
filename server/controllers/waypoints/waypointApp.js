@@ -1,6 +1,5 @@
 var Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),
-    config = require(__base + 'config/main'),
     mongoose = require('mongoose');
 
 exports.getAll = function(req, res) {

@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken'),
     Device = require(__base + 'models/device'),
-    config = require(__base + 'config/main'),
+    config = require(__base + 'config/config'),
     setDeviceInfo = require(__base + 'helpers').setDeviceInfo,
     passport = require('passport');
 

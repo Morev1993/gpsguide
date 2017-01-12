@@ -2,12 +2,12 @@ global.__base = __dirname + '/../';
 
 var fs = require('fs');
 var Language = require(__base + 'models/language');
-var config = require(__base + 'config/main');
+var config = require(__base + 'config/config');
 var mongoose = require('mongoose');
 
 mongoose.connect(config.database);
 
-Language.remove({}, function(err) { 
+Language.remove({}, function(err) {
 	if (err) throw err;
     console.log('collection dropped');
 

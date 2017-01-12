@@ -2,10 +2,10 @@ var Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),
     fs = require("fs"),
     multiparty = require('multiparty'),
-    config = require(__base + 'config/main'),
     crypto = require('crypto'),
     mkdirp = require('mkdirp'),
-    deleteFolderRecursive = require(__base + 'helpers').deleteFolderRecursive;
+    deleteFolderRecursive = require(__base + 'helpers').deleteFolderRecursive,
+    config = require(__base + 'config/config');
 
 exports.create = function(req, res, next) {
 	var tourId = req.params.tourId;
@@ -62,9 +62,9 @@ exports.create = function(req, res, next) {
 };
 
 exports.createFiles = function(req, res, next) {
+    console.log(config.url);
     var tourId = req.params.tourId;
     var waypointId = req.params.id;
-    var fullUrl = `${req.protocol}://${req.get('host')}/`;
 
     if (typeof waypointId === 'undefined') {
         return res.status(422).send({
@@ -102,11 +102,11 @@ exports.createFiles = function(req, res, next) {
         var folder = `${global.__base}public/${waypointId}/`;
 
         mkdirp(folder, function (err) {
-            if (err) return send(err);
+            if (err) return next(err);
 
             var name = crypto.createHash('md5').update(part.filename).digest("hex")
             uploadFile.path = `${folder}${name}.mp3`;
-            var publicPath = `${fullUrl}public/${waypointId}/${name}.mp3`;
+            var publicPath = `${config.url}/public/${waypointId}/${name}.mp3`;
 
             data.push({
 	        	langId: uploadFile.langId,
@@ -157,7 +157,7 @@ exports.createFiles = function(req, res, next) {
 
 
         } else {
-            if(fs.existsSync(uploadFile.path)) {
+            if (fs.existsSync(uploadFile.path)) {
                 //если загружаемый файл существует удаляем его
                 fs.unlinkSync(uploadFile.path);
             }
@@ -187,15 +187,24 @@ exports.getFiles = function(req, res) {
     });
 };
 
-exports.deleteFile = function(req, res) {
-    AudioFile.remove({
-		_id: req.params.fileId,
+exports.deleteFile = function(req, res, next) {
+    AudioFile.findOne({
+        _id: req.params.fileId,
         waypointId: req.params.id
-    }, function(err, result) {
-        if (err) {
-            return res.send(err);
+    }).then(file => {
+        var fileNameArr = file.path.split('/');
+        var fileName = fileNameArr[fileNameArr.length - 1];
+        var filePath = `${global.__base}public/${req.params.id}/${fileName}`;
+
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
         }
 
+        return AudioFile.remove({
+    		_id: req.params.fileId,
+            waypointId: req.params.id
+        });
+    }).then(result => {
         res.json({
             success: true,
             data: {
@@ -203,12 +212,10 @@ exports.deleteFile = function(req, res) {
                 _id: req.params.fileId
             }
         });
-    });
+    })
 };
 
 exports.getAll = function(req, res) {
-	var fullUrl = req.protocol + '://' + req.get('host');
-	console.log(fullUrl);
     Waypoint.find({
         tourId: req.params.tourId
     }, function(err, waypoints) {

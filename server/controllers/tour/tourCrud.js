@@ -1,5 +1,4 @@
 var Tour = require(__base + 'models/tour'),
-    config = require(__base + 'config/main'),
     deleteFolderRecursive = require(__base + 'helpers'),
     Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),

@@ -4,9 +4,8 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
-    config = require(__base + 'config/main');
     mongoose = require('mongoose'),
-    config = require(__base + 'config/main'),
+    config = require(__base + 'config/config'),
     router = require(__base + 'router'),
     path = require('path');
 

@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
     User = require(__base + 'models/user'),
-    config = require(__base + 'config/main'),
+    config = require(__base + 'config/config'),
     setUserInfo = require(__base + 'helpers').setUserInfo,
     passport = require('passport');
 
