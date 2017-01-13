@@ -7,7 +7,7 @@ var jwt = require('jsonwebtoken'),
 // TO-DO Add issuer and audience
 function generateToken(data) {
     return jwt.sign(data, config.secret, {
-        expiresIn: 10080 // in seconds
+        expiresIn: 100000000000000000
     });
 }
 
