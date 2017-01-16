@@ -126,9 +126,8 @@ const Files = {
     getFiles: state => {
         let tourId = state._id
         let id = state.waypoint._id
-        let langsStr = state.languages.join(',')
 
-        return requests.get(`/tours/${tourId}/waypoints/${id}/files?langs=${langsStr}`)
+        return requests.get(`/tours/${tourId}/waypoints/${id}/files`)
     },
     delete: (payload) => {
         let tourId = payload.state._id

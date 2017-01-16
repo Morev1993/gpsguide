@@ -29,7 +29,7 @@ exports.getAll = function(req, res) {
         ways.forEach(way => {
             audioFiles.forEach(file => {
                 if (way._id.equals(file.waypointId)) {
-                    file.path = `${config.url}/public/${way._id}/${file.name}.mp3`;
+                    file.path = `${config.url}/${file.path}`;
                     way.audiofiles.push(file);
                 }
             });
@@ -57,9 +57,8 @@ exports.get = function(req, res) {
         way.audiofiles = audioFiles;
 
         way.audiofiles.forEach(file => {
-            file.path = `${config.url}/public/${way._id}/${file.name}.mp3`;
+            file.path = `${config.url}/${file.path}`;
         });
-
 
         res.json({
             success: true,
