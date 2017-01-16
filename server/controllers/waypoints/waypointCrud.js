@@ -106,11 +106,11 @@ exports.createFiles = function(req, res, next) {
 
             var name = crypto.createHash('md5').update(part.filename).digest("hex")
             uploadFile.path = `${folder}${name}.mp3`;
-            var publicPath = `${config.url}/public/${waypointId}/${name}.mp3`;
+            var relativePath = `/public/${req.params.id}/${name}.mp3`
 
             data.push({
 	        	langId: uploadFile.langId,
-	        	path: publicPath,
+                path: relativePath,
                 langCode: uploadFile.langCode
 	        })
 
@@ -133,15 +133,15 @@ exports.createFiles = function(req, res, next) {
 
             data.forEach(function(item) {
             	var languageId = item.langId;
-            	var path = item.path;
                 var langCode = item.langCode;
+                var path = item.path;
 
         		var audioFile = new AudioFile({
 	                waypointId,
 	                languageId,
                     tourId,
-	                path,
-                    langCode
+                    langCode,
+                    path
 	            })
 
 	            audioFile.save().then((file) => {
@@ -180,6 +180,12 @@ exports.getFiles = function(req, res) {
             return res.send(err);
         }
 
+        files.forEach(file => {
+            file.path = `${config.url}${file.path}`;
+        });
+
+        console.log(files);
+
         res.json({
             success: true,
             data: files
@@ -192,9 +198,7 @@ exports.deleteFile = function(req, res, next) {
         _id: req.params.fileId,
         waypointId: req.params.id
     }).then(file => {
-        var fileNameArr = file.path.split('/');
-        var fileName = fileNameArr[fileNameArr.length - 1];
-        var filePath = `${global.__base}public/${req.params.id}/${fileName}`;
+        var filePath = `${global.__base}${file.path}.mp3`;
 
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
