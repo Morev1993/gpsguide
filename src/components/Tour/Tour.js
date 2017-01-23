@@ -529,9 +529,9 @@ class Tour extends Component {
                                         <FormGroup key={lang._id}  row>
                                             <Label for='uploadFile' sm={2}>{lang.name}</Label>
                                             <Col sm={6}>
-                                                <audio controls>
+                                                <video controls>
                                                     <source src={this.state.files[i].path} type='audio/mp3'/>
-                                                </audio>
+                                                </video>
                                             </Col>
                                             <Col className='t-C' sm={4}>
                                                 <Button type='button' onClick={this.deleteFile.bind(this, this.state, this.state.files[i]._id)} color='danger'>Delete</Button>

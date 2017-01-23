@@ -77,6 +77,7 @@ exports.createFiles = function(req, res, next) {
     var supportMimeTypes = ['audio/mp3'];
     var errors = [];
     var data = [];
+    var maxSize = 100 * 1024 * 1024;
 
     form.on('error', function(err) {
         if(fs.existsSync(uploadFile.path)) {
@@ -92,6 +93,10 @@ exports.createFiles = function(req, res, next) {
         uploadFile.filename = part.filename;
         uploadFile.langId = part.name.split('_')[1];
         uploadFile.langCode = part.name.split('_')[2];
+
+        if(uploadFile.size > maxSize) {
+            errors.push('File size is ${uploadFile.size}. Limit is ${(maxSize / 1024 / 1024)} MB.');
+        }
 
         if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
         	console.log('Unsupported mimetype ' + uploadFile.type);
@@ -162,7 +167,7 @@ exports.createFiles = function(req, res, next) {
                 fs.unlinkSync(uploadFile.path);
             }
             //сообщаем что все плохо и какие произошли ошибки
-            res.send({status: 'bad', errors: errors});
+            res.send({success: true, errors: errors});
         }
     });
 
