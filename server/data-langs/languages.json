@@ -3,416 +3,364 @@
 		"name": "Afrikaans",
 		"locale": "Afrikaans",
 		"code": "af-ZA",
-		"status": false,
 		"orderBy": 0,
-		"accountId": "586a035810385d139c507af3"
+		"id": 0
 	},
 	{
 		"name": "Arabic",
 		"locale": "العربية",
 		"code": "ar",
-		"status": false,
 		"orderBy": 1,
-		"accountId": "586a035810385d139c507af3"
+		"id": 1
 	},
 	{
 		"name": "Bulgarian",
 		"locale": "Български",
 		"code": "bg-BG",
-		"status": false,
 		"orderBy": 2,
-		"accountId": "586a035810385d139c507af3"
+		"id": 2
 	},
 	{
 		"name": "Catalan",
 		"locale": "Català",
 		"code": "ca-AD",
-		"status": false,
 		"orderBy": 3,
-		"accountId": "586a035810385d139c507af3"
+		"id": 3
 	},
 	{
 		"name": "Czech",
 		"locale": "Čeština",
 		"code": "cs-CZ",
-		"status": false,
 		"orderBy": 4,
-		"accountId": "586a035810385d139c507af3"
+		"id": 4
 	},
 	{
 		"name": "Welsh",
 		"locale": "Cymraeg",
 		"code": "cy-GB",
-		"status": false,
 		"orderBy": 5,
-		"accountId": "586a035810385d139c507af3"
+		"id": 5
 	},
 	{
 		"name": "Danish",
 		"locale": "Dansk",
 		"code": "da-DK",
-		"status": false,
 		"orderBy": 6,
-		"accountId": "586a035810385d139c507af3"
+		"id": 6
 	},
 	{
 		"name": "German (Austria)",
 		"locale": "Deutsch (Österreich)",
 		"code": "de-AT",
-		"status": false,
 		"orderBy": 7,
-		"accountId": "586a035810385d139c507af3"
+		"id": 7
 	},
 	{
 		"name": "German (Switzerland)",
 		"locale": "Deutsch (Schweiz)",
 		"code": "de-CH",
-		"status": false,
 		"orderBy": 8,
-		"accountId": "586a035810385d139c507af3"
+		"id": 8
 	},
 	{
 		"name": "German (Germany)",
 		"locale": "Deutsch (Deutschland)",
 		"code": "de-DE",
-		"status": false,
 		"orderBy": 9,
-		"accountId": "586a035810385d139c507af3"
+		"id": 9
 	},
 	{
 		"name": "Greek",
 		"locale": "Ελληνικά",
 		"code": "el-GR",
-		"status": false,
 		"orderBy": 10,
-		"accountId": "586a035810385d139c507af3"
+		"id": 10
 	},
 	{
 		"name": "English (UK)",
 		"locale": "English (UK)",
 		"code": "en-GB",
-		"status": false,
 		"orderBy": 11,
-		"accountId": "586a035810385d139c507af3"
+		"id": 11
 	},
 	{
 		"name": "English (US)",
 		"locale": "English (US)",
 		"code": "en-US",
-		"status": false,
 		"orderBy": 12,
-		"accountId": "586a035810385d139c507af3"
+		"id": 12
 	},
 	{
 		"name": "Spanish (Chile)",
 		"locale": "Español (Chile)",
 		"code": "es-CL",
-		"status": false,
 		"orderBy": 13,
-		"accountId": "586a035810385d139c507af3"
+		"id": 13
 	},
 	{
 		"name": "Spanish (Spain)",
 		"locale": "Español (España)",
 		"code": "es-ES",
-		"status": false,
 		"orderBy": 14,
-		"accountId": "586a035810385d139c507af3"
+		"id": 14
 	},
 	{
 		"name": "Spanish (Mexico)",
 		"locale": "Español (México)",
 		"code": "es-MX",
-		"status": false,
 		"orderBy": 15,
-		"accountId": "586a035810385d139c507af3"
+		"id": 15
 	},
 	{
 		"name": "Estonian",
 		"locale": "Eesti",
 		"code": "et-EE",
-		"status": false,
 		"orderBy": 16,
-		"accountId": "586a035810385d139c507af3"
+		"id": 16
 	},
 	{
 		"name": "Basque",
 		"locale": "Euskara",
 		"code": "eu",
-		"status": false,
 		"orderBy": 17,
-		"accountId": "586a035810385d139c507af3"
+		"id": 17
 	},
 	{
 		"name": "Persian",
 		"locale": "فارسی",
 		"code": "fa-IR",
-		"status": false,
 		"orderBy": 18,
-		"accountId": "586a035810385d139c507af3"
+		"id": 18
 	},
 	{
 		"name": "Finnish",
 		"locale": "Suomi",
 		"code": "fi-FI",
-		"status": false,
 		"orderBy": 19,
-		"accountId": "586a035810385d139c507af3"
+		"id": 19
 	},
 	{
 		"name": "French (Canada)",
 		"locale": "Français (Canada)",
 		"code": "fr-CA",
-		"status": false,
 		"orderBy": 20,
-		"accountId": "586a035810385d139c507af3"
+		"id": 20
 	},
 	{
 		"name": "French (France)",
 		"locale": "Français (France)",
 		"code": "fr-FR",
-		"status": false,
 		"orderBy": 21,
-		"accountId": "586a035810385d139c507af3"
+		"id": 21
 	},
 	{
 		"name": "Hebrew",
 		"locale": "עברית",
 		"code": "he-IL",
-		"status": false,
 		"orderBy": 22,
-		"accountId": "586a035810385d139c507af3"
+		"id": 22
 	},
 	{
 		"name": "Croatian",
 		"locale": "Hrvatski",
 		"code": "hr-HR",
-		"status": false,
 		"orderBy": 23,
-		"accountId": "586a035810385d139c507af3"
+		"id": 23
 	},
 	{
 		"name": "Hungarian",
 		"locale": "Magyar",
 		"code": "hu-HU",
-		"status": false,
 		"orderBy": 24,
-		"accountId": "586a035810385d139c507af3"
+		"id": 24
 	},
 	{
 		"name": "Indonesian",
 		"locale": "Bahasa Indonesia",
 		"code": "id-ID",
-		"status": false,
 		"orderBy": 25,
-		"accountId": "586a035810385d139c507af3"
+		"id": 25
 	},
 	{
 		"name": "Icelandic",
 		"locale": "Íslenska",
 		"code": "is-IS",
-		"status": false,
 		"orderBy": 26,
-		"accountId": "586a035810385d139c507af3"
+		"id": 26
 	},
 	{
 		"name": "Italian",
 		"locale": "Italiano",
 		"code": "it-IT",
-		"status": false,
 		"orderBy": 27,
-		"accountId": "586a035810385d139c507af3"
+		"id": 27
 	},
 	{
 		"name": "Japanese",
 		"locale": "日本語",
 		"code": "ja-JP",
-		"status": false,
 		"orderBy": 28,
-		"accountId": "586a035810385d139c507af3"
+		"id": 28
 	},
 	{
 		"name": "Khmer",
 		"locale": "ភាសាខ្មែរ",
 		"code": "km-KH",
-		"status": false,
 		"orderBy": 29,
-		"accountId": "586a035810385d139c507af3"
+		"id": 29
 	},
 	{
 		"name": "Korean",
 		"locale": "한국어",
 		"code": "ko-KR",
-		"status": false,
 		"orderBy": 30,
-		"accountId": "586a035810385d139c507af3"
+		"id": 30
 	},
 	{
 		"name": "Lithuanian",
 		"locale": "Lietuvių",
 		"code": "lt-LT",
-		"status": false,
 		"orderBy": 31,
-		"accountId": "586a035810385d139c507af3"
+		"id": 31
 	},
 	{
 		"name": "Latvian",
 		"locale": "Latviešu",
 		"code": "lv-LV",
-		"status": false,
 		"orderBy": 32,
-		"accountId": "586a035810385d139c507af3"
+		"id": 32
 	},
 	{
 		"name": "Mongolian",
 		"locale": "Монгол",
 		"code": "mn-MN",
-		"status": false,
 		"orderBy": 33,
-		"accountId": "586a035810385d139c507af3"
+		"id": 33
 	},
 	{
 		"name": "Norwegian (Bokmål)",
 		"locale": "Norsk bokmål",
 		"code": "nb-NO",
-		"status": false,
 		"orderBy": 34,
-		"accountId": "586a035810385d139c507af3"
+		"id": 34
 	},
 	{
 		"name": "Dutch",
 		"locale": "Nederlands",
 		"code": "nl-NL",
-		"status": false,
 		"orderBy": 35,
-		"accountId": "586a035810385d139c507af3"
+		"id": 35
 	},
 	{
 		"name": "Norwegian (Nynorsk)",
 		"locale": "Norsk nynorsk",
 		"code": "nn-NO",
-		"status": false,
 		"orderBy": 36,
-		"accountId": "586a035810385d139c507af3"
+		"id": 36
 	},
 	{
 		"name": "Polish",
 		"locale": "Polski",
 		"code": "pl-PL",
-		"status": false,
 		"orderBy": 37,
-		"accountId": "586a035810385d139c507af3"
+		"id": 37
 	},
 	{
 		"name": "Portuguese (Brazil)",
 		"locale": "Português (Brasil)",
 		"code": "pt-BR",
-		"status": false,
 		"orderBy": 38,
-		"accountId": "586a035810385d139c507af3"
+		"id": 38
 	},
 	{
 		"name": "Portuguese (Portugal)",
 		"locale": "Português (Portugal)",
 		"code": "pt-PT",
-		"status": false,
 		"orderBy": 39,
-		"accountId": "586a035810385d139c507af3"
+		"id": 39
 	},
 	{
 		"name": "Romanian",
 		"locale": "Română",
 		"code": "ro-RO",
-		"status": false,
 		"orderBy": 40,
-		"accountId": "586a035810385d139c507af3"
+		"id": 40
 	},
 	{
 		"name": "Russian",
 		"locale": "Русский",
 		"code": "ru-RU",
-		"status": false,
 		"orderBy": 41,
-		"accountId": "586a035810385d139c507af3"
+		"id": 41
 	},
 	{
 		"name": "Slovak",
 		"locale": "Slovenčina",
 		"code": "sk-SK",
-		"status": false,
 		"orderBy": 42,
-		"accountId": "586a035810385d139c507af3"
+		"id": 42
 	},
 	{
 		"name": "Slovenian",
 		"locale": "Slovenščina",
 		"code": "sl-SI",
-		"status": false,
 		"orderBy": 43,
-		"accountId": "586a035810385d139c507af3"
+		"id": 43
 	},
 	{
 		"name": "Serbian",
 		"locale": "Српски / Srpski",
 		"code": "sr-RS",
-		"status": false,
 		"orderBy": 44,
-		"accountId": "586a035810385d139c507af3"
+		"id": 44
 	},
 	{
 		"name": "Swedish",
 		"locale": "Svenska",
 		"code": "sv-SE",
-		"status": false,
 		"orderBy": 45,
-		"accountId": "586a035810385d139c507af3"
+		"id": 45
 	},
 	{
 		"name": "Thai",
 		"locale": "ไทย",
 		"code": "th-TH",
-		"status": false,
 		"orderBy": 46,
-		"accountId": "586a035810385d139c507af3"
+		"id": 46
 	},
 	{
 		"name": "Turkish",
 		"locale": "Türkçe",
 		"code": "tr-TR",
-		"status": false,
 		"orderBy": 47,
-		"accountId": "586a035810385d139c507af3"
+		"id": 47
 	},
 	{
 		"name": "Ukrainian",
 		"locale": "Українська",
 		"code": "uk-UA",
-		"status": false,
 		"orderBy": 48,
-		"accountId": "586a035810385d139c507af3"
+		"id": 48
 	},
 	{
 		"name": "Vietnamese",
 		"locale": "Tiếng Việt",
 		"code": "vi-VN",
-		"status": false,
 		"orderBy": 49,
-		"accountId": "586a035810385d139c507af3"
+		"id": 49
 	},
 	{
 		"name": "Chinese (PRC)",
 		"locale": "中文 (中国大陆)",
 		"code": "zh-CN",
-		"status": false,
 		"orderBy": 50,
-		"accountId": "586a035810385d139c507af3"
+		"id": 50
 	},
 	{
 		"name": "Chinese (Taiwan)",
 		"locale": "中文 (台灣)",
 		"code": "zh-TW",
-		"status": false,
 		"orderBy": 51,
-		"accountId": "586a035810385d139c507af3"
+		"id": 51
 	}
 ]

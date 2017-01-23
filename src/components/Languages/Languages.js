@@ -3,15 +3,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import agent from '../../agent'
 import { Table } from 'reactstrap'
-import { Button, ButtonGroup } from 'reactstrap'
 
 const mapStateToProps = state => ({
-    languages: state.languages.languages || []
+    languages: state.languages.languages || [],
+    activeLanguages: state.languages.activeLanguages || []
 })
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
+    onLangsLoad: (payload) =>
         dispatch({ type: 'LANGS_PAGE_LOADED', payload }),
+    onActiveLangsLoad: (payload) =>
+        dispatch({ type: 'ACTIVE_LANGS_PAGE_LOADED', payload }),
     onUpdate: (payload) => {
         dispatch({ type: 'UPDATE_LANG', payload: agent.Languages.update(payload) })
     },
@@ -24,33 +26,29 @@ class Languages extends Component {
     constructor() {
         super();
         this.state = {
-            _id: '',
-            status: false
+            languages: [],
+            activeLanguages: []
         };
 
-        this.toggleStatus = field => ev => {
-            //const state = this.state;
-            //const newState = Object.assign({}, state, { [field]: ev.target.checked });
-            this.setState({ [field]: ev.target.checked });
-        }
-
-        this.updateLang = (id) => {
-            const newState = Object.assign({}, this.state, { 
-                _id: id 
-            });
-
-            this.setState(newState);
-            console.log(newState)
-            this.props.onUpdate(newState)
-            this.props.onLoad(agent.Languages.all())
+        this.toggleLang = (langId) => {
+            this.props.onUpdate(langId);
         }
     }
     componentWillMount() {
-        this.props.onLoad(agent.Languages.all())
-        this.deleteLang = id => {
-            this.props.onDelete(id)
-            this.props.onLoad(agent.Languages.all())
-        }
+        this.props.onLangsLoad(agent.Languages.all())
+        this.props.onActiveLangsLoad(agent.Languages.actives())
+
+        Object.assign(this.state, {
+            languages: this.props.languages,
+            activeLanguages: this.props.activeLanguages
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(Object.assign({}, this.state, {
+            languages: nextProps.languages,
+            activeLanguages: nextProps.activeLanguages
+        }));
     }
     render() {
         return <div>
@@ -61,22 +59,15 @@ class Languages extends Component {
                         <th>Language</th>
                         <th>Code</th>
                         <th>Status</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                        { this.props.languages.map(language => {
+                        { this.state.languages.map(language => {
                               return (
-                                  <tr key={language._id}>
+                                  <tr key={language.id}>
                                     <th scope='row'>{language.name}</th>
                                     <td>{language.code}</td>
-                                    <td>Status: <input type='checkbox' checked={language.status} onChange={this.toggleStatus('status')} name='status' id='status'></input></td>
-                                    <td>
-                                        <ButtonGroup>
-                                            <Button onClick={this.updateLang.bind(this, language._id)} className='btn btn-success'>Update</Button>{' '}
-                                            <Button onClick={this.deleteLang.bind(this, language._id)}  className='btn btn-danger'>Delete</Button>
-                                        </ButtonGroup>
-                                    </td>
+                                    <td>Status: <input type='checkbox' checked={this.state.activeLanguages.indexOf(language.id) !== - 1} onChange={this.toggleLang.bind(this, language.id)} name='status' id='status'></input></td>
                                   </tr>
                                 )}
                             )

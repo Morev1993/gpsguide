@@ -107,7 +107,7 @@ class Tour extends Component {
             if (field === 'uploadFiles') {
                 value = ev.target.files[0]
 
-                this.files[lang._id] = {
+                this.files[lang.id] = {
                     file: value,
                     langCode: lang.code
                 }
@@ -319,7 +319,7 @@ class Tour extends Component {
 
           let selectedLangs = this.props.langsActive
              .filter(lang => {
-                 if (this.state.languages.indexOf(lang._id) != -1) {
+                 if (this.state.languages.indexOf(lang.id) != -1) {
                      return lang
                  }
              })
@@ -342,7 +342,7 @@ class Tour extends Component {
                         <Input type='select' ref='languages' name='selectMulti' onChange={this.updateStateMultiSelect.bind(this, 'languages')}  id='exampleSelectMulti' multiple>
                             { this.props.langsActive.map(lang => {
                                 return (
-                                    <option selected={this.state.languages.indexOf(lang._id) != -1} key={lang._id} value={lang._id}>{lang.name}</option>
+                                    <option selected={this.state.languages.indexOf(lang.id) != -1} key={lang.id} value={lang.id}>{lang.name}</option>
                                     )
                                 })
                             }
@@ -508,7 +508,7 @@ class Tour extends Component {
                         { selectedLangs.map((lang, i) => {
                                 if (!this.state.files[i]) {
                                     return (
-                                        <div key={lang._id}>
+                                        <div key={lang.id}>
                                             <FormGroup row>
                                                 <Label for='uploadFile' sm={3}>{lang.name}</Label>
                                                 <Col sm={9}>
@@ -526,7 +526,7 @@ class Tour extends Component {
                                     )
                                 } else {
                                     return (
-                                        <FormGroup key={lang._id}  row>
+                                        <FormGroup key={lang.id}  row>
                                             <Label for='uploadFile' sm={2}>{lang.name}</Label>
                                             <Col sm={6}>
                                                 <video controls>

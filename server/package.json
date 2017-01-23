@@ -5,6 +5,10 @@
     "type": "git",
     "url": "git+https://Morevin@bitbucket.org/mtcllc/gpsguide.git"
   },
+  "scripts": {
+      "start": "node migrations/languages.js && nodemon server.js",
+      "prod": "node migrations/languages.js && pm2 start server.js"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",

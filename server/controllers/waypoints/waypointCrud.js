@@ -155,7 +155,7 @@ exports.createFiles = function(req, res, next) {
 	                    data: file
 	                });
 	            }).catch((err) => {
-	                return send(err);
+	                return next(err);
 	            });
             })
 

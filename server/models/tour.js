@@ -22,7 +22,7 @@ var TourSchema = new Schema({
         default: true
     },
     languages: {
-        type: [Schema.Types.ObjectId],
+        type: [Number],
         default: []
     }
 }, {

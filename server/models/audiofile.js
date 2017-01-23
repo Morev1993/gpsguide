@@ -16,7 +16,7 @@ var AudioFileSchema = new Schema({
         required: true
     },
     languageId: {
-        type: Schema.Types.ObjectId,
+        type: Number,
         required: true
     },
     tourId: {

@@ -55,9 +55,7 @@ module.exports = function(app) {
     //Language routes
     languagesRoutes.get('/languages', requireUserAuth, LanguageCrudCtrl.getAll);
     languagesRoutes.get('/languages/active', requireUserAuth, LanguageCrudCtrl.getActives);
-    languagesRoutes.get('/languages/:id', requireUserAuth, LanguageCrudCtrl.get);
-    languagesRoutes.put('/languages/:id', requireUserAuth, LanguageCrudCtrl.update);
-    languagesRoutes.delete('/languages/:id', requireUserAuth, LanguageCrudCtrl.delete);
+    languagesRoutes.post('/languages/:id', requireUserAuth, LanguageCrudCtrl.update);
 
     adminRoutes.use('/', languagesRoutes);
 

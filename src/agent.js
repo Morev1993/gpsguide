@@ -77,10 +77,8 @@ const Languages = {
         requests.get(`/languages/active`),
     get: id =>
         requests.get(`/languages/${id}`),
-    update: lang => {
-        console.log(lang)
-        let id = lang._id;
-        return requests.put(`/languages/${id}`, lang)
+    update: id => {
+        return requests.post(`/languages/${id}`)
     },
     delete: id =>
         requests.del(`/languages/${id}`)

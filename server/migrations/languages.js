@@ -11,7 +11,7 @@ Language.remove({}, function(err) {
 	if (err) throw err;
     console.log('collection dropped');
 
-	fs.readFile(__base + 'test-json/languages.json', (err, data) => {
+	fs.readFile(__base + 'data-langs/languages.json', (err, data) => {
   		if (err) throw err;
 
   		var arr = JSON.parse(data);
