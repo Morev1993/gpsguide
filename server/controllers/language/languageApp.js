@@ -1,5 +1,5 @@
 var Language = require(__base + 'models/language');
-var UserLanguage = require(__base + 'models/UserLanguage');
+var UserLanguage = require(__base + 'models/userLanguage');
 var mongoose = require('mongoose');
 
 exports.getActives = function(req, res, next) {
