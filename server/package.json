@@ -6,8 +6,8 @@
     "url": "git+https://Morevin@bitbucket.org/mtcllc/gpsguide.git"
   },
   "scripts": {
-      "start": "node migrations/languages.js && nodemon server.js",
-      "prod": "node migrations/languages.js && pm2 start server.js"
+    "start": "node migrations/languages.js && nodemon server.js",
+    "prod": "node migrations/languages.js && pm2 start server.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -15,6 +15,7 @@
     "crypto": "0.0.3",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.2.1",
+    "md5-file": "^3.1.1",
     "mkdirp": "^0.5.1",
     "mongoose": "^4.7.2",
     "morgan": "^1.7.0",

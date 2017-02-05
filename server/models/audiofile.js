@@ -23,6 +23,9 @@ var AudioFileSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    checksum: {
+        type: String
+    },
     path: {
         type: String,
         required: true

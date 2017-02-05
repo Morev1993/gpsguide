@@ -1,7 +1,8 @@
 var Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),
     mongoose = require('mongoose'),
-    config = require(__base + 'config/config');
+    config = require(__base + 'config/config'),
+    md5File = require('md5-file');
 
 exports.getAll = function(req, res) {
     var waysId = [];
@@ -29,6 +30,7 @@ exports.getAll = function(req, res) {
         ways.forEach(way => {
             audioFiles.forEach(file => {
                 if (way._id.equals(file.waypointId)) {
+                    file.checksum = md5File.sync(`${__base}${file.path}`);
                     file.path = `${config.url}/${file.path}`;
                     way.audiofiles.push(file);
                 }
@@ -57,6 +59,7 @@ exports.get = function(req, res) {
         way.audiofiles = audioFiles;
 
         way.audiofiles.forEach(file => {
+            file.checksum = md5File.sync(`${__base}${file.path}`);
             file.path = `${config.url}/${file.path}`;
         });
 
