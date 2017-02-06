@@ -1,3 +1,5 @@
+import { setCookie, deleteCookie } from '../cookie'
+
 const defaultState = {
     appName: 'Conduit',
     token: null
@@ -17,6 +19,9 @@ export default (state = defaultState, action) => {
                 redirectTo: null
             };
         case 'LOGIN':
+            setCookie('gps-session', true, {
+                expires: 3600
+            })
             return {
                 ...state,
                 redirectTo: action.error ? null : '/',
@@ -24,6 +29,7 @@ export default (state = defaultState, action) => {
                 currentUser: action.error ? null : action.payload.data
             };
         case 'LOGOUT':
+            deleteCookie('gps-session')
             return { ...state,
                 redirectTo: '/auth',
                 token: null,

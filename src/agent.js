@@ -1,5 +1,6 @@
 import superagentPromise from 'superagent-promise'
 import _superagent from 'superagent'
+import { setCookie } from './cookie'
 
 const superagent = superagentPromise(_superagent, global.Promise)
 
@@ -17,9 +18,13 @@ const responseBody = res => res.body;
 
 let token = null;
 const tokenPlugin = req => {
-  if (token) {
-    req.set('authorization', `${token}`);
-  }
+    if (token) {
+        setCookie('gps-session', true, {
+            expires: 3600
+        })
+
+        req.set('authorization', `${token}`)
+    }
 }
 
 const requests = {
@@ -34,8 +39,6 @@ const requests = {
 }
 
 const Auth = {
-    current: () =>
-        requests.get('/user'),
     login: (email, password) =>
         requests.post('/signin', { email, password })
 };

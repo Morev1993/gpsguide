@@ -3,6 +3,7 @@ import Header from '../components/Header/Header'
 import { connect } from 'react-redux'
 import agent from '../agent'
 import store from '../store'
+import { getCookie } from '../cookie'
 
 const mapStateToProps = state => ({
     appName: state.appName,
@@ -20,9 +21,11 @@ class App extends Component {
     componentWillMount() {
         const token = window.localStorage.getItem('jwt');
 
-        if (!token) {
-            store.dispatch({ type: 'LOGOUT' })
-        }
+        checkSession('gps-session', token);
+
+        setInterval(() => {
+            checkSession('gps-session', token);
+        }, 60000)
 
         agent.setToken(token);
       }
@@ -42,6 +45,12 @@ class App extends Component {
                 </div>
             </div>
         )
+    }
+}
+
+function checkSession(name, token) {
+    if (!getCookie(name) || !token) {
+        store.dispatch({ type: 'LOGOUT' })
     }
 }
 
