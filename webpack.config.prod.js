@@ -15,7 +15,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'app.[hash].js',
-		publicPath: ''
+		publicPath: '/'
 	},
 	module: {
 		preLoaders: [

@@ -13,7 +13,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'src'),
 		filename: 'app.js',
-		publicPath: ''
+		publicPath: '/'
 	},
 	module: {
 		preLoaders: [

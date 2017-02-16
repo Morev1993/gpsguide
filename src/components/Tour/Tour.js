@@ -365,7 +365,9 @@ class Tour extends Component {
                 { this.state.mapShowed ?
                 <FormGroup className='map'>
                     <GoogleMap
-                        bootstrapURLKeys={'AIzaSyBFVKi5ynE6HyuzGMfQMv5cQkOmHblGXQQ'}
+                        bootstrapURLKeys={{
+                            key: 'AIzaSyCOMNCPL5zmbgk2riCy7luNk-Z5zxmFGpQ'
+                        }}
                         center={this.props.center}
                         zoom={this.props.zoom}
                         hoverDistance={K_SIZE / 2}
