@@ -67,20 +67,47 @@ export default (state = {
                 errors: action.error ? action.payload.errors : null
             }
         case 'GET_FILES':
+            let selectedLangs = state.langsActive
+               .filter(lang => {
+                   if (state.tour.languages.indexOf(lang.id) != -1) {
+                       return lang
+                   }
+               })
+
+               if (selectedLangs.length) {
+                   for (let i = 0; i < selectedLangs.length; i++) {
+                       selectedLangs[i].file = null;
+                   }
+
+
+                   for (let i = 0; i < selectedLangs.length; i++) {
+                       for (let j = 0; j < action.payload.data.length; j++) {
+                           if (action.payload.data[j].languageId === selectedLangs[i].id) {
+                               selectedLangs[i].file = action.payload.data[j];
+                               break;
+                           }
+                       }
+                   }
+               }
+
+               console.log(selectedLangs);
+
+
             return {
                 ...state,
-                files: action.payload.data
+                files: selectedLangs
             }
         case 'DELETE_FILE':
-            deletedIndex
 
-            state.files.forEach(function(item, i) {
-                if (item._id === action.payload.data._id) {
-                    deletedIndex = i;
+            files = state.files.slice();
+
+            files.forEach(function(item) {
+                if (item.file instanceof Object) {
+                    if (item.file._id === action.payload.data._id) {
+                        item.file = null
+                    }
                 }
             })
-
-            files = [...state.files.slice(0, deletedIndex), ...state.files.slice(deletedIndex + 1)]
 
             return {
                 ...state,

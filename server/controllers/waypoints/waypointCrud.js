@@ -62,7 +62,6 @@ exports.create = function(req, res, next) {
 };
 
 exports.createFiles = function(req, res, next) {
-    console.log(config.url);
     var tourId = req.params.tourId;
     var waypointId = req.params.id;
 
@@ -117,7 +116,7 @@ exports.createFiles = function(req, res, next) {
 	        	langId: uploadFile.langId,
                 path: relativePath,
                 langCode: uploadFile.langCode
-	        })
+	        });
 
             if (errors.length == 0) {
                 var out = fs.createWriteStream(uploadFile.path);
@@ -183,6 +182,7 @@ exports.getFiles = function(req, res) {
         }
 
         files.forEach(file => {
+            console.log(`${config.url}/${file.path}`);
             file.path = `${config.url}/${file.path}`;
         });
 

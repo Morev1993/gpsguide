@@ -282,6 +282,7 @@ class Tour extends Component {
             console.log('need langs');
             return;
         }
+
         this.setState(newState)
         this.props.onFilesLoaded(newState)
     }
@@ -316,15 +317,6 @@ class Tour extends Component {
                 hover={this.props.hoverKey === _id} />
             );
           });
-
-          let selectedLangs = this.props.langsActive
-             .filter(lang => {
-                 if (this.state.languages.indexOf(lang.id) != -1) {
-                     return lang
-                 }
-             })
-
-
 
         return <div>
             <h2>{this.state.name}</h2>
@@ -505,42 +497,39 @@ class Tour extends Component {
                 <ModalHeader toggle={this.filesToggle.bind(this)}>Audio files</ModalHeader>
                 <ModalBody>
                     <ListErrors errors={this.props.errors}></ListErrors>
-                    <Form onSubmit={this.addFilesSubmit}>
-
-                        { selectedLangs.map((lang, i) => {
-                                if (!this.state.files[i]) {
-                                    return (
-                                        <div key={lang.id}>
+                        <Form onSubmit={this.addFilesSubmit}>
+                            { this.state.files.map((item, i) => {
+                                return (
+                                    <div key={item._id}>
+                                        { !item.file ?
                                             <FormGroup row>
-                                                <Label for='uploadFile' sm={3}>{lang.name}</Label>
+                                                <Label for='uploadFile' sm={3}>{item.name}</Label>
                                                 <Col sm={9}>
-                                                    <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', lang)} id='uploadFile' required/>
+                                                    <Input type='file' name='uploadFiles[]' onChange={this.updateWaypointState('uploadFiles', item)} id='uploadFile' required/>
                                                 </Col>
                                             </FormGroup>
-                                            { i === selectedLangs.length - 1 ?
-                                            <FormGroup row>
-                                                <Col className='t-R' sm={{ size: 12, offset: 0 }}>
-                                                    <Button className='btn btn-success'>Send</Button>
-                                                </Col>
-                                            </FormGroup>
-                                            : '' }
-                                        </div>
-                                    )
-                                } else {
-                                    return (
-                                        <FormGroup key={lang.id}  row>
-                                            <Label for='uploadFile' sm={2}>{lang.name}</Label>
+                                        :
+                                        <FormGroup row>
+                                            <Label for='uploadFile' sm={2}>{item.name}</Label>
                                             <Col sm={6}>
-                                                <video controls>
-                                                    <source src={this.state.files[i].path} type='audio/mp3'/>
-                                                </video>
+                                                <audio controls>
+                                                    <source src={item.file.path} type='audio/mp3'/>
+                                                </audio>
                                             </Col>
                                             <Col className='t-C' sm={4}>
-                                                <Button type='button' onClick={this.deleteFile.bind(this, this.state, this.state.files[i]._id)} color='danger'>Delete</Button>
+                                                <Button type='button' onClick={this.deleteFile.bind(this, this.state, item.file._id)} color='danger'>Delete</Button>
+                                            </Col>
+                                        </FormGroup> }
+
+                                        { i === this.state.files.length - 1 ?
+                                        <FormGroup row>
+                                            <Col className='t-R' sm={{ size: 12, offset: 0 }}>
+                                                <Button className='btn btn-success'>Send</Button>
                                             </Col>
                                         </FormGroup>
-                                    )
-                                }
+                                        : '' }
+                                    </div>
+                                )
                             })
                         }
                     </Form>
