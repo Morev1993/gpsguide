@@ -512,9 +512,7 @@ class Tour extends Component {
                                         <FormGroup row>
                                             <Label for='uploadFile' sm={2}>{item.name}</Label>
                                             <Col sm={6}>
-                                                <audio controls>
-                                                    <source src={item.file.path} type='audio/mp3'/>
-                                                </audio>
+                                                <audio controls src={item.file.path}></audio>
                                             </Col>
                                             <Col className='t-C' sm={4}>
                                                 <Button type='button' onClick={this.deleteFile.bind(this, this.state, item.file._id)} color='danger'>Delete</Button>
