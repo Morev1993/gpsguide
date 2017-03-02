@@ -47,7 +47,7 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "babel-runtime": "^6.3.19",
-    "bootstrap": "^4.0.0-alpha.5",
+    "bootstrap": "4.0.0-alpha.5",
     "google-map-react": "^0.22.0",
     "react": "^0.14.6",
     "react-addons-css-transition-group": "^15.4.1",
@@ -59,7 +59,7 @@
     "react-redux": "^4.4.6",
     "react-router": "^3.0.0",
     "react-select": "^1.0.0-rc.2",
-    "reactstrap": "^3.9.1",
+    "reactstrap": "3.9.1",
     "redux": "^3.6.0",
     "superagent": "^3.0.0",
     "superagent-promise": "^1.1.0"
