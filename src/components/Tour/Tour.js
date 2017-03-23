@@ -89,7 +89,8 @@ class Tour extends Component {
             waypoints: [],
             files: [],
             waypoint: {},
-            mapShowed: true
+            mapShowed: true,
+            draggable: true
         };
 
         this.files = {}
@@ -212,6 +213,35 @@ class Tour extends Component {
         }
 
         this.openCreateWaypointModal(lat, lng);
+    }
+
+    _onChildMouseUp = (hoverKey, childProps, mouse) => {
+        const newState = Object.assign({}, this.state, { draggable: true });
+        this.setState(newState);
+        
+        const waypoint = this.state.waypoints.filter((item) => {
+            if (item._id === hoverKey) {
+                return item;
+            }
+        });
+        this.props.onWaypointUpdate(waypoint[0])
+    }
+    _onChildMouseDown = (hoverKey, childProps, mouse) => {
+        const newState = Object.assign({}, this.state, { draggable: false });
+        this.setState(newState);
+    }
+    _onChildMouseMove = (hoverKey, childProps, mouse) => {
+        const newWaypoints = this.state.waypoints.map((item) => {
+            if (item._id === hoverKey) {
+                item.lat = mouse.lat;
+                item.lng = mouse.lng;
+            }
+
+            return item;
+        });
+
+        const newState = Object.assign({}, this.state, { waypoints: newWaypoints });
+        this.setState(newState);
     }
 
     openCreateWaypointModal(lat, lng) {
@@ -362,12 +392,15 @@ class Tour extends Component {
                         }}
                         center={this.props.center}
                         zoom={this.props.zoom}
+                        draggable={this.state.draggable}
                         hoverDistance={K_SIZE / 2}
                         onBoundsChange={this._onBoundsChange}
-                        onChildMouseDown={() => {}}
                         onClick={this._onClick}
                         onChildClick={this._onChildClick}
-                        onChildMouseLeave={this._onChildMouseLeave}>
+                        onChildMouseLeave={this._onChildMouseLeave}
+                        onChildMouseDown={this._onChildMouseDown}
+                        onChildMouseUp={this._onChildMouseUp}
+                        onChildMouseMove={this._onChildMouseMove}>
                         {waypoints}
                       </GoogleMap>
                 </FormGroup>
