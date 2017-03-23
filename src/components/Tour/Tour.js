@@ -215,10 +215,10 @@ class Tour extends Component {
         this.openCreateWaypointModal(lat, lng);
     }
 
-    _onChildMouseUp = (hoverKey, childProps, mouse) => {
+    _onChildMouseUp = (hoverKey) => {
         const newState = Object.assign({}, this.state, { draggable: true });
         this.setState(newState);
-        
+
         const waypoint = this.state.waypoints.filter((item) => {
             if (item._id === hoverKey) {
                 return item;
@@ -226,7 +226,7 @@ class Tour extends Component {
         });
         this.props.onWaypointUpdate(waypoint[0])
     }
-    _onChildMouseDown = (hoverKey, childProps, mouse) => {
+    _onChildMouseDown = () => {
         const newState = Object.assign({}, this.state, { draggable: false });
         this.setState(newState);
     }
