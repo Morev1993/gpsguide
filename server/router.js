@@ -66,6 +66,7 @@ module.exports = function(app) {
     toursRoutes.get('/tours/:id', requireUserAuth, TourCrudCtrl.get);
     toursRoutes.put('/tours/:id', requireUserAuth, TourCrudCtrl.update);
     toursRoutes.delete('/tours/:id', requireUserAuth, TourCrudCtrl.delete);
+    toursRoutes.get('/tours/down/:id', requireUserAuth, TourCrudCtrl.getToursId);
 
     adminRoutes.use('/', toursRoutes);
 

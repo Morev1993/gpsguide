@@ -50,6 +50,8 @@ const Tours = {
         requests.get(`/tours`),
     get: id =>
         requests.get(`/tours/${id}`),
+    getToursDown: (id) =>
+        requests.get(`/tours/down/${id}`),
     update: (tour) => {
         let id = tour._id
         return requests.put(`/tours/${id}`, tour)

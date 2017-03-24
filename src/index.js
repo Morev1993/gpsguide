@@ -13,6 +13,8 @@ import Tour from './components/Tour/Tour'
 import Dashboard from './components/Dashboard/Dashboard'
 import Devices from './components/Devices/Devices'
 import Device from './components/Device/Device'
+import DeviceEdit from './components/Device/DeviceEdit'
+import DeviceTours from './components/Device/DeviceTours'
 import Languages from './components/Languages/Languages'
 import NotFound from './components/NotFound/NotFound'
 import store from './store'
@@ -26,7 +28,11 @@ render(
                 <Route path='tours' component={Tours} />
                 <Route path='tours/:id' component={Tour} />
                 <Route path='tours/:id/edit' component={Tour} />
-                <Route path='devices/:id' component={Device} />
+                <Route path='devices/:id' component={Device}>
+                    <IndexRoute component={DeviceEdit} />
+                    <Route path='' component={DeviceEdit} />
+                    <Route path='tours' component={DeviceTours} />
+                </Route>
                 <Route path='devices' component={Devices} />
                 <Route path='languages' component={Languages} />
                 <Route path='*' component={NotFound} />

@@ -2,7 +2,8 @@ var Tour = require(__base + 'models/tour'),
     deleteFolderRecursive = require(__base + 'helpers'),
     Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),
-    deleteFolderRecursive = require(__base + 'helpers').deleteFolderRecursive;
+    deleteFolderRecursive = require(__base + 'helpers').deleteFolderRecursive,
+    TourDevice = require(__base + 'models/TourDevice');
 
 exports.create = function(req, res, next) {
     var accountId = req.user._id;
@@ -60,6 +61,22 @@ exports.get = function(req, res) {
         res.json({
             success: true,
             data: tour
+        });
+    });
+};
+
+exports.getToursId = function(req, res) {
+    console.log(req);
+    TourDevice.find({
+        accountId: req.user.accountId
+    }, function(err, tours) {
+        if (err) {
+            return res.send(err);
+        }
+
+        res.json({
+            success: true,
+            data: tours
         });
     });
 };

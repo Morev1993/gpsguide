@@ -122,7 +122,9 @@ class Devices extends Component {
                     { this.props.devices.map(device => {
                         return (
                             <tr key={device._id}>
-                                <th scope='row'><Link to={`/devices/${device._id}`}>{device.name}</Link></th>
+                                <th scope='row'>
+                                    <Link to={`/devices/${device._id}`} params={{ name: device.name }}>{device.name}</Link>
+                                </th>
                                 <td>Code: {device.authCode}</td>
                                 <td><small>{new Date(device.createdAt).toDateString()}</small></td>
                                 <td><Button color='danger' onClick={this.deleteDevice.bind(this, device._id)}>Delete</Button></td>
