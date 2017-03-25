@@ -4,7 +4,7 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory, IndexRedirect } from 'react-router'
 
 import App from './containers/App'
 import Auth from './components/Auth/Auth'
@@ -30,7 +30,8 @@ render(
                 <Route path='tours/:id/edit' component={Tour} />
                 <Route path='devices/:id' component={Device}>
                     <IndexRoute component={DeviceEdit} />
-                    <Route path='' component={DeviceEdit} />
+                    <IndexRedirect to='edit' />
+                    <Route path='edit' component={DeviceEdit} />
                     <Route path='tours' component={DeviceTours} />
                 </Route>
                 <Route path='devices' component={Devices} />

@@ -63,6 +63,8 @@ exports.login = function(req, res, next) {
         } else if (device.deviceId === deviceId) {
             var deviceInfo = setDeviceInfo(device);
 
+            console.log(device);
+
             res.status(201).json({
                 success: true,
                 token: `JWT ${generateToken(deviceInfo)}`,

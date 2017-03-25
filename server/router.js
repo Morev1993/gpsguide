@@ -67,6 +67,7 @@ module.exports = function(app) {
     toursRoutes.put('/tours/:id', requireUserAuth, TourCrudCtrl.update);
     toursRoutes.delete('/tours/:id', requireUserAuth, TourCrudCtrl.delete);
     toursRoutes.get('/tours/down/:id', requireUserAuth, TourCrudCtrl.getToursId);
+    toursRoutes.put('/tours/down/:deviceId/:id', requireUserAuth, TourCrudCtrl.updateDeviceTour);
 
     adminRoutes.use('/', toursRoutes);
 

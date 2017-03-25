@@ -17,8 +17,6 @@ export default (state = {
                 activeLanguages.push(lang.id);
             })
 
-            console.log(activeLanguages);
-
             return {
                 ...state,
                 activeLanguages: activeLanguages

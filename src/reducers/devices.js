@@ -1,7 +1,8 @@
 'use strict';
 
 export default (state = {
-    devices: []
+    devices: [],
+    disabledTours: []
 }, action) => {
     switch (action.type) {
         case 'DEVICES_PAGE_LOADED':
@@ -21,6 +22,40 @@ export default (state = {
                 inProgress: null,
                 errors: action.error ? action.payload.errors : null
             }
+        case 'DISABLED_TOURS_DEVICE_LOADED':
+            disabledTours = []
+
+            action.payload.data.forEach(tour => {
+                disabledTours.push(tour.tourId)
+            })
+
+            return {
+                ...state,
+                disabledTours: disabledTours
+            }
+
+            case 'UPDATE_DEVICE_TOUR':
+                let disabledTours = []
+                if (action.payload.data.result && action.payload.data.result.ok === 1) {
+                    let deletedIndex
+
+                    state.disabledTours.forEach(function(item, i) {
+                        if (item === action.payload.data.id) {
+                            deletedIndex = i
+                        }
+                    })
+
+                    disabledTours = [...state.disabledTours.slice(0, deletedIndex),
+                        ...state.disabledTours.slice(deletedIndex + 1)]
+                } else {
+                    disabledTours = [...state.disabledTours, action.payload.data.tourId]
+                }
+
+            return {
+                disabledTours,
+                inProgress: null,
+                errors: action.error ? action.payload.errors : null
+            }
         case 'CREATE_DEVICE':
             let devices
             if (!action.error) {
@@ -28,8 +63,6 @@ export default (state = {
             } else {
                 devices = state.devices
             }
-
-            console.log(action)
 
             return {
                 devices,

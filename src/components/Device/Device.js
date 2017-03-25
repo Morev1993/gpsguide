@@ -11,12 +11,11 @@ class Device extends Component {
         super();
     }
 	render() {
-        console.log(this.props);
 		return <div>
             <h2>
                 <p>Device</p>
-                <Link to={`/devices/${this.props.routeParams.id}`}>edit</Link>{' '}
-                <Link to={`/devices/${this.props.routeParams.id}/tours`}>tours</Link>
+                <Link to={`/devices/${this.props.routeParams.id}/edit`} activeClassName='active'>edit</Link>{' '}
+                <Link to={`/devices/${this.props.routeParams.id}/tours`} activeClassName='active'>tours</Link>
             </h2>
             {this.props.children}
 		</div>

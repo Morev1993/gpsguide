@@ -38,16 +38,16 @@ class Header extends Component {
                         <Link className='nav-link' to='/'>Dashboard</Link>
                       </NavItem>
                       <NavItem>
-                        <Link className='nav-link' to='/tours'>Tours</Link>
+                        <Link className='nav-link' to='/tours' activeClassName='active'>Tours</Link>
                       </NavItem>
                       <NavItem>
-                        <Link className='nav-link' to='/devices'>Devices</Link>
+                        <Link className='nav-link' to='/devices' activeClassName='active'>Devices</Link>
                       </NavItem>
                       <NavItem>
-                        <Link className='nav-link' to='/languages'>Languages</Link>
+                        <Link className='nav-link' to='/languages' activeClassName='active'>Languages</Link>
                       </NavItem>
                       <NavItem className='float-xs-right'>
-                        <button className='btn btn-danger' onClick={this.props.onClickLogout}>Logout</button> 
+                        <button className='btn btn-danger' onClick={this.props.onClickLogout}>Logout</button>
                       </NavItem>
                     </Nav>
                   </Collapse>

@@ -89,10 +89,6 @@ export default (state = {
                        }
                    }
                }
-
-               console.log(selectedLangs);
-
-
             return {
                 ...state,
                 files: selectedLangs

@@ -3,7 +3,7 @@ var Tour = require(__base + 'models/tour'),
     Waypoint = require(__base + 'models/waypoint'),
     AudioFile = require(__base + 'models/audiofile'),
     deleteFolderRecursive = require(__base + 'helpers').deleteFolderRecursive,
-    TourDevice = require(__base + 'models/TourDevice');
+    TourDevice = require(__base + 'models/tourDevice');
 
 exports.create = function(req, res, next) {
     var accountId = req.user._id;
@@ -66,9 +66,8 @@ exports.get = function(req, res) {
 };
 
 exports.getToursId = function(req, res) {
-    console.log(req);
     TourDevice.find({
-        accountId: req.user.accountId
+        deviceId: req.params.id
     }, function(err, tours) {
         if (err) {
             return res.send(err);
@@ -79,6 +78,49 @@ exports.getToursId = function(req, res) {
             data: tours
         });
     });
+};
+
+exports.updateDeviceTour = function(req, res, next) {
+	var deviceId = req.params.deviceId;
+	var tourId = req.params.id;
+
+    TourDevice.findOne({
+        deviceId: deviceId,
+		tourId: tourId
+    }).then((tour) => {
+        console.log(tour)
+		if (!tour) {
+			var tourDevice = new TourDevice({
+				deviceId,
+				tourId
+			});
+
+			return tourDevice.save();
+		} else {
+			return TourDevice.remove({
+		        deviceId: deviceId,
+				tourId: tourId
+		    });
+		}
+
+	}).then((tour) => {
+		if (tour.result && tour.result.ok === 1) {
+			res.json({
+	            success: true,
+	            data: {
+					result: tour.result,
+					id: tourId
+				}
+	        });
+		} else {
+			res.json({
+	            success: true,
+	            data: tour
+	        });
+		}
+	}).catch(err => {
+		return next(err);
+	})
 };
 
 

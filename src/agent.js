@@ -50,11 +50,14 @@ const Tours = {
         requests.get(`/tours`),
     get: id =>
         requests.get(`/tours/${id}`),
-    getToursDown: (id) =>
+    getDisabledTours: (id) =>
         requests.get(`/tours/down/${id}`),
     update: (tour) => {
         let id = tour._id
         return requests.put(`/tours/${id}`, tour)
+    },
+    updateDeviceTour: (params) => {
+        return requests.put(`/tours/down/${params.deviceId}/${params.tourId}`)
     },
     delete: id =>
         requests.del(`/tours/${id}`)

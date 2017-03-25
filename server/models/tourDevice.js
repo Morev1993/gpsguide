@@ -9,7 +9,7 @@ var TourDeviceSchema = new Schema({
 		type: Schema.Types.ObjectId,
         required: true
     },
-	tourDownId: {
+	tourId: {
         type: Schema.Types.ObjectId,
         required: true
     }

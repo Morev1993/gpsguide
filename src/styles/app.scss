@@ -72,3 +72,13 @@ h1, h2 {
 .nobr {
     white-space: nowrap
 }
+
+a {
+	&.active {
+		color: #000;
+		cursor: default;
+		&:hover, &:focus {
+			text-decoration: none;
+		}
+	}
+}

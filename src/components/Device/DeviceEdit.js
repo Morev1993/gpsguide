@@ -73,7 +73,6 @@ class DeviceEdit extends Component {
         }));
       }
 	render() {
-        console.log(this.props);
 		return <div>
             <p><small>{new Date(this.props.device.createdAt).toDateString()}</small></p>
             <Form onSubmit={this.updateDevice}>
