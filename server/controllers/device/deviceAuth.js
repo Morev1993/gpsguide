@@ -1,7 +1,8 @@
 var jwt = require('jsonwebtoken'),
     Device = require(__base + 'models/device'),
     config = require(__base + 'config/config'),
-    setDeviceInfo = require(__base + 'helpers').setDeviceInfo;
+    setDeviceInfo = require(__base + 'helpers').setDeviceInfo,
+    co = require('co');
 
 // Generate JWT
 // TO-DO Add issuer and audience
@@ -43,52 +44,62 @@ exports.login = function(req, res, next) {
         });
     }
 
-    Device.findOne({
-        authCode
-    }).then(device => {
-        if (!device) {
-            res.status(422).send({
-	            error: 'Wrong auth code.'
-	        });
-            return Promise.reject();
-        }
+    co(function *() {
+        var newDevice = yield* addNewDevice(res, authCode, model, version, deviceId);
 
-        if (!device.deviceId) {
-            device.device = model || device.device;
-            device.version = version || device.version;
-            device.status = true;
-            device.deviceId = deviceId;
-
-            return device.save();
-        } else if (device.deviceId === deviceId) {
-            var deviceInfo = setDeviceInfo(device);
-
-            console.log(device);
+        if (newDevice) {
+            var deviceInfo = setDeviceInfo(newDevice);
 
             res.status(201).json({
                 success: true,
                 token: `JWT ${generateToken(deviceInfo)}`,
-                data: device
+                data: newDevice
             });
-
-            return Promise.reject();
-        } else {
-            res.status(422).send({
-                error: 'Wrong device id.'
-            });
-
-            return Promise.reject();
         }
-    }).then(device => {
-        var deviceInfo = setDeviceInfo(device);
 
-        res.status(201).json({
-            success: true,
-            token: `JWT ${generateToken(deviceInfo)}`,
-            data: device
-        });
-	}).catch(err => {
-		return next(err);
-	})
+        return;
+
+    }).catch(err => {
+        console.log(err);
+    });
 
 };
+
+function* addNewDevice(res, authCode, model, version, deviceId) {
+    var device = yield Device.findOne({ authCode });
+
+    if (!device) {
+        res.status(422).send({
+            error: 'Wrong auth code.'
+        });
+        return;
+    }
+
+    if (device && !device.deviceId) {
+        var deviceWithCurrentId = yield Device.findOne({ deviceId });
+
+        if (deviceWithCurrentId) {
+            res.status(422).send({
+                error: 'That device id is already in use.'
+            });
+            return;
+        }
+
+        device.device = model || device.device;
+        device.version = version || device.version;
+        device.status = true;
+        device.deviceId = deviceId;
+
+        return yield device.save();
+    }
+
+    if (device.deviceId === deviceId) {
+        return device;
+    } else {
+        res.status(422).send({
+            error: 'Wrong device id.'
+        });
+    }
+
+    return;
+}
