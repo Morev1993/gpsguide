@@ -15,8 +15,8 @@ function setCookie(name, value, options) {
         d.setTime(d.getTime() + expires * 1000);
         expires = options.expires = d;
     }
-    if (expires && expires.toUTCString) {
-        options.expires = expires.toUTCString();
+    if (expires && expires.toString) {
+        options.expires = expires.toString();
     }
 
     value = encodeURIComponent(value);
