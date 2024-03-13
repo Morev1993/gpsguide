@@ -1,4 +1,4 @@
-#GPSGuide
+#GPSGuide - commersial project for https://miamitourcompany.com/
 
 ### react-redux, react-router, webpack - frontend
 
